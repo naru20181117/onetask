@@ -184,3 +184,6 @@ Naming/MethodParameterName:
 #クラス内のクラスなどを定義する際の形式を指定しない
 Style/ClassAndModuleChildren:
   Enabled: false
+#　バグを直す
+Style:
+  Enabled: false
