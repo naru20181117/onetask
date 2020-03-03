@@ -1,0 +1,186 @@
+inherit_from: .rubocop_todo.yml
+require: rubocop-rails
+AllCops:
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'Capfile'
+    - 'Guardfile'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'scripts/**/*'
+    - 'lib/tasks/**/*'
+    - 'misc/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - 'config.ru'
+    - 'spec/**/*'
+    - 'node_modules/**/*'
+# デフォルトtrue
+Rails:
+  Enabled: true
+# メソッド名に set_ または get_ の使用を許可
+Naming/AccessorMethodName:
+  Enabled: false
+# 配列の値位置チェックを行わない
+Layout/ArrayAlignment:
+  Enabled: false
+# ハッシュのキー・バリュー値位置チェックを行わない
+Layout/HashAlignment:
+  Enabled: false
+# メソッドの引数を改行した場合のインデントチェックを行わない
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: space
+  SupportedStyles:
+    - space
+  EnforcedStyleForEmptyBraces: no_space
+#パラメーターのインデントチェックを行わない
+Layout/ParameterAlignment:
+  Enabled: false
+# 日本語でのコメントを許可
+Style/AsciiComments:
+  Enabled: false
+# %Qよりも%を使用する警告を表示しない
+Style/BarePercentLiterals:
+  Enabled: false
+# %xの使用を許可
+Style/CommandLiteral:
+  Enabled: false
+# クラスにコメントは不要
+Style/Documentation:
+  Enabled: false
+# 書式付き文字列の統一チェックを行わない
+Style/FormatString:
+  Enabled: false
+# condition 内の処理が 1 行以上の場合にガード節の使用チェックを行わない
+Style/GuardClause:
+  Enabled: false
+# 1行で書くべき if / unless のチェックを行わない
+Style/IfUnlessModifier:
+  Enabled: false
+# 配列の要素を改行した場合のインデントチェックを行わない
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+# ハッシュの要素を改行した場合のインデントチェックを行わない
+Layout/FirstHashElementIndentation:
+  Enabled: false
+# 無限ループでのwhile/untilを許可
+Style/InfiniteLoop:
+  Enabled: false
+# 複数行での「lambda」で「->」による省略記法を許可
+Style/Lambda:
+  Enabled: false
+# lambaやprocの呼び出し方法チェックを行わない
+Style/LambdaCall:
+  Enabled: false
+# 行末での文字連結方法チェックを行わない
+Style/LineEndConcatenation:
+  Enabled: false
+# nilでないことの判定方法チェックを行わない
+Style/NonNilCheck:
+  Enabled: false
+# メソッド引数に初期値がある場合に引数の順番チェックを行わない
+Style/OptionalArguments:
+  Enabled: false
+# パーセントリテラルの区切り文字での()チェックを行わない
+Style/PercentLiteralDelimiters:
+  Enabled: false
+# %Q内で文字列展開がない場合に警告
+Style/PercentQLiterals:
+  Enabled: false
+# failでのインスタンス生成のチェックを行わない
+Style/RaiseArgs:
+  Enabled: false
+# %rの使用方法チェックを行わない
+Style/RegexpLiteral:
+  Enabled: false
+# 命令文や式の区切り文字に;を許可
+Style/Semicolon:
+  Enabled: false
+# reduceの引数は|a, e|であるかのチェックを行わない
+Style/SingleLineBlockParams:
+  Enabled: false
+# 一行メソッドの使用を許可
+Style/SingleLineMethods:
+  Enabled: false
+# 文字列のsingle-quotedチェックを行わない
+Style/StringLiterals:
+  Enabled: false
+# ファイルの末尾に空行が入っているかチェック
+Layout/TrailingEmptyLines:
+  EnforcedStyle: final_newline
+# メソッドの引数が複数行の場合は末尾にカンマを入れる
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+# 配列が複数行の場合は末尾にカンマを入れる
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+# ハッシュが複数行の場合は末尾にカンマを入れる
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+# %W内での式展開チェックを行わない
+Style/RedundantCapitalW:
+  Enabled: false
+# %Q内で'と"双方が含まれているかのチェックを行わない
+Style/RedundantPercentQ:
+  Enabled: false
+#代入(A)、メソッドの呼び出し(B)、条件式(C)、それぞれ二乗の和の平方根を30まで許可する
+# |ABC| = sqrt((A*A)+(B*B)+(C*C))
+#デフォルト値は15
+Metrics/AbcSize:
+  Max: 35
+# ネストの段数を4段までに制限する
+Metrics/BlockNesting:
+  Max: 4
+# クラスの行数を180行までに制限する
+Metrics/ClassLength:
+  Max: 180
+# モジュールの行数を180行までに制限する
+Metrics/ModuleLength:
+  Max: 180
+# 循環的複雑度チェックは行わない
+Metrics/CyclomaticComplexity:
+  Max: 10
+# 1行あたりの文字数が 120 文字を超えた場合警告
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - "db/migrate/*.rb"
+# メソッドの行数を20行までに制限する
+Metrics/MethodLength:
+  Max: 20
+# メソッドの引数の数を5つまでに制限する
+Metrics/ParameterLists:
+  Max: 5
+# Perceived複雑度のチェックを行わない
+Metrics/PerceivedComplexity:
+  Enabled: false
+# rescue でエラーを指定していないのを許す
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+# find_by_xxxxのメソッドを許可
+Rails/DynamicFindBy:
+  Enabled: false
+# Kernel.#format のスタイルを自由にする（名前付きでも無名でもOK）
+#   - OK例1: format('%s', 'Hello')
+#   - OK例2: format('%{greeting}', greeting: 'Hello')
+Style/FormatStringToken:
+  Enabled: false
+# デフォルトfalse
+# collectよりmap、detectよりfind、find_allよりselect、
+# injectよりreduce、lengthよりsizeを使用する
+Style/CollectionMethods:
+  Enabled: true
+# シンボル配列の定義では%iを使用する
+Style/SymbolArray:
+  Enabled: true
+# inverse_ofオプションの有無のチェックを行わない
+Rails/InverseOf:
+  Enabled: false
+# メソッドの引数の変数名の長さを指定する
+Naming/MethodParameterName:
+  Enabled: false
+#クラス内のクラスなどを定義する際の形式を指定しない
+Style/ClassAndModuleChildren:
+  Enabled: false
