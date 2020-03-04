@@ -7,19 +7,49 @@ Things you may want to cover:
 
 * Ruby version
 ruby 2.7.0
-* System dependencies
 
-* Configuration
+## Userモデル
+| カラム名 | データ型
+| :---: | :---: |
+| id | integer |
+| user_id | string |
+| admin | boolean |
+| email | string |
+| password | string |
 
-* Database creation
 
-* Database initialization
+## Taskモデル
+| カラム名 | データ型
+| :---: | :---: |
+| id | integer |
+| user_id | integer |
+| name | string |
+| end_time | datetime |
+| priority | integer |
+| status | integer |
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## Tasks-Labelsモデル
+| カラム名 | データ型
+| :---: | :---: |
+| id | integer |
+| label_id | integer |
+| task_id | integer |
 
-* Deployment instructions
+## Labelモデル
+| カラム名 | データ型
+| :---: | :---: |
+| id | integer |
+| name | string |
+
+## Milestoneモデル
+| カラム名 | データ型
+| :---: | :---: |
+| id | integer |
+| task_id | integer |
+| description | string |
+| status | integer |
+| priority | integer |
 
 Figma ー イメージ図
 
