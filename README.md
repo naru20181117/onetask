@@ -11,7 +11,7 @@ ruby 2.7.0
 ## Userモデル
 | カラム名 | データ型
 | :---: | :---: |
-| id | integer | 
+| id | integer |
 | user_id | string |
 | admin | boolean |
 | email | string |
@@ -21,7 +21,7 @@ ruby 2.7.0
 ## Taskモデル
 | カラム名 | データ型
 | :---: | :---: |
-| id | integer | 
+| id | integer |
 | user_id | integer |
 | name | string |
 | end_time | datetime |
@@ -32,21 +32,21 @@ ruby 2.7.0
 ## Tasks-Labelsモデル
 | カラム名 | データ型
 | :---: | :---: |
-| id | integer | 
+| id | integer |
 | label_id | integer |
-| task_id | integer | 
+| task_id | integer |
 
 ## Labelモデル
 | カラム名 | データ型
 | :---: | :---: |
-| id | integer | 
+| id | integer |
 | name | string |
 
 ## Milestoneモデル
 | カラム名 | データ型
 | :---: | :---: |
-| id | integer | 
-| task_id | integer | 
+| id | integer |
+| task_id | integer |
 | description | string |
 | status | integer |
 | priority | integer |
