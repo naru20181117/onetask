@@ -24,4 +24,4 @@ ruby 2.7.0
 Figma ー イメージ図
 
 
-[One-Task.pdf](/uploads/be3cf5c0a7fddb7d2dee6b29cdfb97ab/One-Task.pdf)
+![One-Task.pdf](/uploads/be3cf5c0a7fddb7d2dee6b29cdfb97ab/One-Task.pdf)
