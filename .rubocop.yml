@@ -15,6 +15,7 @@ AllCops:
     - 'vendor/**/*'
     - 'bin/**/*'
     - 'config.ru'
+    - 'spec/**/*'
     - 'node_modules/**/*'
 # デフォルトtrue
 Rails:
