@@ -24,4 +24,4 @@ ruby 2.7.0
 Figma ー イメージ図
 
 
-<iframe style="border: none;" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FRiY5euDubFML4tMBOSQJ4X%2FOne-Task%3Fnode-id%3D0%253A1" allowfullscreen></iframe>
+[One-Task.pdf](/uploads/be3cf5c0a7fddb7d2dee6b29cdfb97ab/One-Task.pdf)
