@@ -184,6 +184,12 @@ Naming/MethodParameterName:
 #クラス内のクラスなどを定義する際の形式を指定しない
 Style/ClassAndModuleChildren:
   Enabled: false
-#　バグを直す
-Style:
+#　ハッシュに対しての繰り返し
+Style/HashEachMethods:
+  Enabled: false
+# ハッシュのキーを変える
+Style/HashTransformKeys:
+  Enabled: false
+# ハッシュの値を変える
+Style/HashTransformValues:
   Enabled: false
