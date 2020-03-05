@@ -12,7 +12,6 @@ ruby 2.7.0
 | カラム名 | データ型
 | :---: | :---: |
 | id | integer |
-| user_id | string |
 | admin | boolean |
 | email | string |
 | password | string |
