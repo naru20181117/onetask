@@ -23,6 +23,7 @@ ruby 2.7.0
 | id | integer |
 | user_id | integer |
 | name | string |
+| memo | integer |
 | end_time | datetime |
 | priority | integer |
 | status | integer |
