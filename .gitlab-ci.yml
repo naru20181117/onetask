@@ -1,0 +1,55 @@
+.base_job_template: &base_job_template
+  image: ruby:2.7
+  tags:
+    - docker
+  variables:
+    RAILS_ENV: "test"
+    BUNDLE_CACHE: "vendor/bundle"
+  cache:
+    untracked: true
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - vendor/bundle
+      - node_modules
+
+.test_job_template: &test_job_template
+  <<: *base_job_template
+  services:
+    - postgres:12.1
+  stage: test
+  before_script:
+    - gem install bundler
+    - bundle config set path 'vendor/bundle'
+    - bundle install
+    - cp config/database.yml.sample.ci config/database.yml
+
+stages:
+  - test
+
+rubocop:
+  <<: *test_job_template
+  script:
+    - bundle exec rubocop
+
+# 以下は、slimlint を使う場合です。
+# 試してませんので誤りがある場合は各自で試してください。
+# slimlint:
+#   <<: *test_job_template
+#   script:
+#     - bundle exec slimlint
+
+# TODO: rspec 導入後にscript の最後に以下の2行を追加しえください。
+# ```
+# - bundle exec rails db:setup
+# - bundle exec rspec
+# ```
+rspec:
+  <<: *test_job_template
+  script:
+    - curl -sL curl -sL https://deb.nodesource.com/setup_10.x | bash -
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    - curl -sS -L https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+    - apt-get update -qq && apt-get install -y nodejs yarn google-chrome-stable
+    - yarn install
