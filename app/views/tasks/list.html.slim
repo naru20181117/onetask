@@ -1,0 +1,8 @@
+h1 Tasks#list
+p Find me in app/views/tasks/list.html.slim
+
+- @tasks.each do |task|
+  tr
+    td = task.name
+    td = task.memo
+    </br>
