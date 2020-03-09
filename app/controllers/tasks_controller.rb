@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-
   def new
     @task = Task.new
   end
@@ -14,5 +13,4 @@ class TasksController < ApplicationController
   def list
     @tasks = Task.all
   end
-
 end

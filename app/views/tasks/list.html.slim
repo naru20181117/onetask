@@ -3,6 +3,15 @@ p Find me in app/views/tasks/list.html.slim
 
 - @tasks.each do |task|
   tr
+    puts ID: 
+    td = task.id
+    </br>
+    puts Name: 
     td = task.name
+    </br>
+    puts Memo: 
     td = task.memo
+    </br>
+    td = link_to 'Show', task
+    </br>
     </br>
