@@ -3,6 +3,10 @@ p Find me in app/views/tasks/show.html.slim
 
 
 p Name:
-= @task.name
+  #{@task.name}
 p Memo:
-= @task.memo
+  #{@task.memo}
+p 作られた時間
+  #{@task.created_at}
+p アップデート時間
+  #{@task.updated_at}

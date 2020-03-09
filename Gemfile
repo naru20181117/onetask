@@ -60,6 +60,3 @@ gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 
 gem 'slim-rails'
-
-# erbファイルをslimファイルに変更する
-gem 'html2slim'

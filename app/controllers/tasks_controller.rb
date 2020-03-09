@@ -7,10 +7,9 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
-    # render :text => "id =#{params[:id]}"
   end
 
-  def list
+  def index
     @tasks = Task.all
   end
 end
