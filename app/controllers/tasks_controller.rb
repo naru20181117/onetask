@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       flash[:success] = "もっとタスクを増やしていこう！"
       redirect_to @task
     else
-      flash[:alert] = "Task名を入力して！!"
+      flash.now[:alert] = "Task名を入力して！!"
       render new_task_path
     end
   end
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
       flash[:success] = "Task変更完了！"
       redirect_to tasks_path
     else
-      flash[:alert] = "Task変更失敗"
+      flash.now[:alert] = "Task変更失敗"
       render edit_task_path
     end
   end
