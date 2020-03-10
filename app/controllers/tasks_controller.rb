@@ -7,17 +7,16 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    @task.save
   end
 
   def create
     @task = Task.new(task_params)
     if @task.save
-      logger.debug "task: #{@task.attributes.inspect}"
       flash[:success] = "もっとタスクを増やしていこう！"
       redirect_to @task
     else
       render 'new'
+      flash[:alert] = 'もっとタスクを増やしていこう!'
     end
   end
 
@@ -31,8 +30,12 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find_by(id: params[:id])
-    @task.update(task_params)
-    redirect_to :root
+    if @task.update(task_params)
+      flash[:success] = "Task変更完了！"
+      redirect_to :root
+    else
+      render action: :edit
+    end
   end
 
   private

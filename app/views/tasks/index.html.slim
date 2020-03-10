@@ -1,7 +1,4 @@
 h1 Tasks#index
-p Find me in app/views/tasks/index.html.slim
-
-
 - unless @tasks.empty?
     p
         table
@@ -15,7 +12,4 @@ p Find me in app/views/tasks/index.html.slim
                 </tr>
 - else
     p No items found.  Please add some inventory.
-
-
-
 = link_to 'New', new_task_path
