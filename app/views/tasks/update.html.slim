@@ -1,0 +1,14 @@
+- provide(:title, "Edit user")
+
+.taskeditPage
+    h1 Update your profile
+    .container
+        / = link_to 'Open', task/¥
+        p Name:
+        / | #{@task.all}
+        / p Memo:
+        / | #{@task.memo}
+        / p 作られた時間
+        / | #{@task.created_at}
+        / p アップデート時間
+        / | #{@task.updated_at}

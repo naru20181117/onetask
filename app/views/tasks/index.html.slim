@@ -11,6 +11,11 @@ p Find me in app/views/tasks/index.html.slim
                     <td>Name: #{task.name}</td>
                     <td>Memo: #{task.memo}</td>
                     <td>#{link_to 'Open', task}</td>
+                    <td>#{link_to 'Edit', edit_task_path(task.id)}</td>
                 </tr>
 - else
     p No items found.  Please add some inventory.
+
+
+
+= link_to 'New', new_task_path
