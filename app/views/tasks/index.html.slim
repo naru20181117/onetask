@@ -7,4 +7,5 @@ table
       td Memo: #{task.memo}
       td = link_to 'Open', task
       td = link_to 'Edit', edit_task_path(task.id)
+      td = button_to 'Delete', delete_task_path
 = link_to 'New', new_task_path
