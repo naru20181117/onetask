@@ -15,13 +15,17 @@
  */
 
 .notifications {
-color: green;
-text-align: center;
-background-color: lightgreen;
+        text-align: center;
 }
-.notifications notice {
-        background-color: lightBlue;
+.success{
+        color:rgb(0,128,0);
+        background-color: rgb(144,238,144);
 }
-.notifications alert {
-        background-color: alert_orange;
+.notice {
+        color: rgb(0,0,255);
+        background-color: rgb(173,216,230);
+}
+.alert {
+        color: rgb(255,0,0);
+        background-color: rgb(240,128,128);
 }

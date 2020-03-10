@@ -9,6 +9,13 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .notifications
-      - flash.each do |key, value|
-        = content_tag(:div, value, class: key)
+      - if flash[:success]
+        .success
+          = flash[:success]
+      - elsif flash[:notice]
+        .notice
+          = flash[:notice]
+      - elsif flash[:alert]
+        .alert
+          = flash[:alert]
     = yield

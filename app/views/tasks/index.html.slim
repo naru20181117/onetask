@@ -1,15 +1,11 @@
 h1 Tasks#index
-- unless @tasks.empty?
-    p
-        table
-            - @tasks.each do |task|
-                <tr>
-                    <td>ID: #{task.id}</td>
-                    <td>Name: #{task.name}</td>
-                    <td>Memo: #{task.memo}</td>
-                    <td>#{link_to 'Open', task}</td>
-                    <td>#{link_to 'Edit', edit_task_path(task.id)}</td>
-                </tr>
-- else
-    p No items found.  Please add some inventory.
+p
+    table
+        - @tasks.each do |task|
+            tr
+                td　ID: #{task.id}
+                td　Name: #{task.name}
+                td　Memo: #{task.memo}
+                td = link_to 'Open', task
+                td = link_to 'Edit', edit_task_path(task.id)
 = link_to 'New', new_task_path
