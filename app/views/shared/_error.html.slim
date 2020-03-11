@@ -1,0 +1,7 @@
+- if model.errors.any?
+  .errors
+    h3 The form contains #{pluralize(model.errors.count, "error")}
+    ul
+      - model.errors.full_messages.each do |msg|
+        li
+          = msg

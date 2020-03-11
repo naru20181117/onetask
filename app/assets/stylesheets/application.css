@@ -13,19 +13,16 @@
  *= require_tree .
  *= require_self
  */
-
 .notifications {
-  text-align: center;
-  .success{
-    color:rgb(0,128,0);
-    background-color: rgb(144,238,144);
-  }
-  .notice {
-    color: rgb(0,0,255);
-    background-color: rgb(173,216,230);
-  }
-  .alert {
-    color: rgb(255,0,0);
-    background-color: rgb(240,128,128);
-  }
-}
+  text-align: center; }
+  .notifications .success {
+    color: green;
+    background-color: lightgreen; }
+  .notifications .notice {
+    color: blue;
+    background-color: lightblue; }
+  .notifications .alert {
+    color: red;
+    background-color: lightcoral; }
+
+/*# sourceMappingURL=application.css.map */

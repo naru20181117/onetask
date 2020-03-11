@@ -1,0 +1,13 @@
+h1 Tasks#show
+dl
+  dt Name:
+  dd
+    = @task.name
+  dt Memo:
+  dd
+    pre
+      = @task.memo
+  dt 作られた時間:
+  dd = @task.created_at
+  dt アップデート時間:
+  dd = @task.updated_at
