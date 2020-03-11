@@ -1,14 +1,4 @@
 - provide(:title, "Create user")
 .taskNewPage
   h1 Create your task
-  .container
-    = form_with(model: @task, local: true, class: 'list_header') do |f|
-      ul
-        li
-          = f.label :name
-          = f.text_field :name, placeholder: '20文字制限'
-        li
-          = f.label :memo
-          = f.text_area :memo
-        li
-          = f.submit "create"
+  = render 'layouts/form'

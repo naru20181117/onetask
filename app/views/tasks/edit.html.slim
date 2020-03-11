@@ -1,14 +1,4 @@
 - provide(:title, "Edit user")
 .taskEditPage
   h1 Update your profile
-  .container
-    = form_with(model: @task, local: true, class: 'list_header') do |f|
-      ul
-        li
-          = f.label :name
-          = f.text_field :name, maxlength: 20, placeholder: '20文字制限'
-        li
-          = f.label :memo
-          = f.text_area :memo
-        li
-          = f.submit "Submit"
+  = render 'layouts/form'
