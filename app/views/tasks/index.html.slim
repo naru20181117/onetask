@@ -1,10 +1,10 @@
 h1 Tasks#index
 table
-	- @tasks.each do |task|
-		tr
-			td ID: #{task.id}
-			td Name: #{task.name}
-			td Memo: #{task.memo}
-			td = link_to 'Open', task
-			td = link_to 'Edit', edit_task_path(task.id)
+  - @tasks.each do |task|
+    tr
+      td ID: #{task.id}
+      td Name: #{task.name}
+      td Memo: #{task.memo}
+      td = link_to 'Open', task
+      td = link_to 'Edit', edit_task_path(task.id)
 = link_to 'New', new_task_path
