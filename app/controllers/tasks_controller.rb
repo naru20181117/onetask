@@ -31,8 +31,8 @@ class TasksController < ApplicationController
       flash[:success] = "Task変更完了！"
       redirect_to tasks_path
     else
-      flash.now[:alert] = "Task変更失敗"
       redirect_to edit_task_path
+      flash[:alert] = "Task変更失敗"
     end
   end
 
