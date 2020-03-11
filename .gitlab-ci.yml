@@ -1,5 +1,5 @@
 .base_job_template: &base_job_template
-  image: ruby:2.7
+  image: rubydev/ruby-chrome:2.7
   tags:
     - docker
   variables:
@@ -18,9 +18,10 @@
     - postgres:12.1
   stage: test
   before_script:
+    - "echo 'gem: --no-rdoc --no-ri' > ~/.gemrc"
     - gem install bundler
     - bundle config set path 'vendor/bundle'
-    - bundle install
+    - bundle install -j2
     - cp config/database.yml.sample.ci config/database.yml
 
 stages:
@@ -46,10 +47,4 @@ rubocop:
 rspec:
   <<: *test_job_template
   script:
-    - curl -sL curl -sL https://deb.nodesource.com/setup_10.x | bash -
-    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-    - curl -sS -L https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
-    - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
-    - apt-get update -qq && apt-get install -y nodejs yarn google-chrome-stable
     - yarn install
