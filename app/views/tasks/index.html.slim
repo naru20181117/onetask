@@ -1,11 +1,14 @@
 h1 Tasks#index
 table
+  tr
+    td ID
+    td Name
+    td Memo
   - @tasks.each do |task|
     tr
-      td ID: #{task.id}
-      td Name: #{task.name}
-      td Memo: #{task.memo}
+      td = task.id
+      td = task.name
+      td = simple_format(task.memo)
       td = link_to 'Open', task
       td = link_to 'Edit', edit_task_path(task.id)
       td = button_to 'Delete', task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
-= link_to 'New', new_task_path

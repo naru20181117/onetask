@@ -1,3 +1,8 @@
+@import "header";
+@import "flash";
+@import "tasks";
+@import "custom";
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -14,18 +19,3 @@
  *= require_self
  */
 
-.notifications {
-  text-align: center;
-  .success{
-    color:rgb(0,128,0);
-    background-color: rgb(144,238,144);
-  }
-  .notice {
-    color: rgb(0,0,255);
-    background-color: rgb(173,216,230);
-  }
-  .alert {
-    color: rgb(255,0,0);
-    background-color: rgb(240,128,128);
-  }
-}

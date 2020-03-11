@@ -18,7 +18,7 @@ class TasksController < ApplicationController
       redirect_to @task
     else
       flash.now[:alert] = "Task名を確認して！!"
-      render 'new'
+      render action: :new
     end
   end
 
@@ -31,8 +31,8 @@ class TasksController < ApplicationController
       flash[:success] = "Task変更完了！"
       redirect_to tasks_path
     else
-      redirect_to edit_task_path
       flash[:alert] = "Task変更失敗"
+      render action: :edit
     end
   end
 
