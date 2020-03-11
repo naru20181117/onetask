@@ -1,12 +1,14 @@
 - provide(:title, "Edit user")
 .taskeditPage
-    h1 Update your profile
-    .container
-        .list_header = form_for @task do |f|
-            ul
-                li
-                    = f.text_field :name, maxlength: 20, placeholder: '20文字制限'
-                li
-                    = f.text_area :memo
-                li
-                    = f.submit "Submit"
+	h1 Update your profile
+	.container
+    = form_with(model: @task, local: true, class: 'list_header') do |f|
+      ul
+        li
+          = f.label :name
+          = f.text_field :name, maxlength: 20, placeholder: '20文字制限'
+        li
+          = f.label :memo
+          = f.text_area :memo
+        li
+          = f.submit "Submit"

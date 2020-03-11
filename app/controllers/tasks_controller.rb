@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_list
+  before_action :set_task, only: %i(show edit update)
 
   def index
     @tasks = Task.all
@@ -17,8 +17,8 @@ class TasksController < ApplicationController
       flash[:success] = "もっとタスクを増やしていこう！"
       redirect_to @task
     else
-      flash.now[:alert] = "Task名を入力して！!"
-      render new_task_path
+      flash.now[:alert] = "Task名を確認して！!"
+      render 'new'
     end
   end
 
@@ -27,13 +27,12 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    @task = Task.find_by(id: params[:id])
     if @task.update(task_params)
       flash[:success] = "Task変更完了！"
       redirect_to tasks_path
     else
       flash.now[:alert] = "Task変更失敗"
-      render edit_task_path
+      render 'edit'
     end
   end
 
@@ -43,7 +42,7 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name, :memo)
   end
 
-  def set_list
+  def set_task
     @task = Task.find_by(id: params[:id])
   end
 end
