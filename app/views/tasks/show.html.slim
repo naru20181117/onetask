@@ -5,8 +5,7 @@ dl
     = @task.name
   dt Memo:
   dd
-    pre
-      = @task.memo
+    = simple_format(@task.memo)
   dt 作られた時間:
   dd = @task.created_at
   dt アップデート時間:
