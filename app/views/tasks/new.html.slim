@@ -1,2 +1,4 @@
-h1 Tasks#new
-p Find me in app/views/tasks/new.html.slim
+- provide(:title, "Create user")
+.taskNewPage
+  h1 Create your task
+  = render 'layouts/form'

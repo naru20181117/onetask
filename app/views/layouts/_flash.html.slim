@@ -1,0 +1,10 @@
+.notifications
+  - if flash[:success]
+    .success
+      = flash[:success]
+  - elsif flash[:notice]
+    .notice
+      = flash[:notice]
+  - elsif flash[:alert]
+    .alert
+      = flash[:alert]

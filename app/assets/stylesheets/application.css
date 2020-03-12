@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+.notifications {
+  text-align: center;
+}
+.success{
+  color: #008000;
+  background-color: #90EE90;
+}
+.notice {
+  color: #0000ff;
+  background-color: #ADD8E6;
+}
+.alert {
+  color: #FF0000;
+  background-color: #F08080;
+}

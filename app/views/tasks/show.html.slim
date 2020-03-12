@@ -1,12 +1,12 @@
 h1 Tasks#show
-p Find me in app/views/tasks/show.html.slim
-
-
-p Name:
-  #{@task.name}
-p Memo:
-  #{@task.memo}
-p 作られた時間
-  #{@task.created_at}
-p アップデート時間
-  #{@task.updated_at}
+dl
+  dt Name:
+  dd
+    = @task.name
+  dt Memo:
+  dd
+    = simple_format(@task.memo)
+  dt 作られた時間:
+  dd = @task.created_at
+  dt アップデート時間:
+  dd = @task.updated_at
