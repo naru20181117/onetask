@@ -7,7 +7,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    = render 'layouts/header'
-    = render 'layouts/flash'
+  body class = "body_reset"
+    == render 'layouts/header'
+    == render 'layouts/flash'
     = yield

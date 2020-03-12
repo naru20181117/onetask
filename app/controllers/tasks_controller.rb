@@ -18,7 +18,7 @@ class TasksController < ApplicationController
       redirect_to @task
     else
       flash.now[:alert] = "Task名を確認して！!"
-      render action: :new
+      render :new
     end
   end
 
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     else
       flash[:alert] = "Task変更失敗"
-      render action: :edit
+      render :edit
     end
   end
 
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.destroy
     flash[:notice] = 'Deleted the task'
-    redirect_to tasks_path
+    render 'edit'
   end
 
   private
