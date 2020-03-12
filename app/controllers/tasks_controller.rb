@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_task, only: %i(show edit update)
+  before_action :set_task, only: %i(show edit update destroy)
 
   def index
     @tasks = Task.all
@@ -37,10 +37,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
     flash[:notice] = 'Deleted the task'
-    render 'edit'
+    redirect_to tasks_path
   end
 
   private

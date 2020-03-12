@@ -1,6 +1,11 @@
-.body_reset {
+body {
+  margin: 0;
   overflow: visible;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  .container{
+    margin: 16px;
+  }
+
 }
