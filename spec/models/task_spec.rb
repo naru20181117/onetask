@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require './spec/rails_helper.rb'
-
 RSpec.describe Task do
   describe 'set_task' do
     it "is valid with a name, memo" do

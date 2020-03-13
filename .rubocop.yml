@@ -192,3 +192,7 @@ Style/HashTransformKeys:
 # ハッシュの値を変える
 Style/HashTransformValues:
   Enabled: false
+# ブロックの長さを許容する
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
