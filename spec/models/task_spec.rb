@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './spec/rails_helper.rb'
 
 RSpec.describe Task do
@@ -5,7 +7,7 @@ RSpec.describe Task do
     it "is valid with a name, memo" do
       @task = Task.new(
         name: 'タスクの名前',
-        memo: 'Task1'
+        memo: 'Task1',
       )
       expect(@task).to be_valid
     end
