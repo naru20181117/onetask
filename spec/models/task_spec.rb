@@ -2,18 +2,18 @@
 
 require './spec/rails_helper.rb'
 RSpec.describe Task do
-  describe 'set_task' do
+  describe 'valid_task' do
+    let!(:task) { build :task }
     it "is valid with a name, memo" do
-      @task = Task.new(
-        name: 'タスクの名前',
-        memo: 'Task1',
-      )
-      expect(@task).to be_valid
+      expect(task).to be_valid
     end
+  end
 
-    it "is invalid without a first_name" do
-      @task = Task.new(name: nil)
-      expect(@task.valid?).to eq(false)
+  describe 'invalid_task' do
+    let!(:task) { build :task, name: nil }
+    it "is invalid with a wrong name" do
+      expect(task).to be_invalid
+      expect(task.errors[:name]).to include("can't be blank")
     end
   end
 end

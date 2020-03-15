@@ -155,6 +155,10 @@ Metrics/ParameterLists:
 # Perceived複雑度のチェックを行わない
 Metrics/PerceivedComplexity:
   Enabled: false
+# ブロックの長さを許容する
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
 # rescue でエラーを指定していないのを許す
 Style/RescueStandardError:
   EnforcedStyle: implicit
@@ -192,7 +196,4 @@ Style/HashTransformKeys:
 # ハッシュの値を変える
 Style/HashTransformValues:
   Enabled: false
-# ブロックの長さを許容する
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
+
