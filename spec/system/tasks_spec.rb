@@ -19,6 +19,7 @@ RSpec.describe "Tasks", type: :system do
           click_button "Submit"
           expect(page).to have_content("Your Task")
           expect(page).to have_content("My Task")
+          expect(page).to have_selector '.success', text: "もっとタスクを増やしていこう！"
         end
       end
       context 'disable' do
@@ -26,8 +27,8 @@ RSpec.describe "Tasks", type: :system do
           visit new_task_path
           fill_in "Name", with: ""
           click_button "Submit"
-          expect(page).to have_content("Task名を確認して！!")
           expect(page).to have_content("Name can't be blank")
+          expect(page).to have_selector '.alert', text: "Task名を確認して！"
         end
       end
     end
@@ -40,6 +41,7 @@ RSpec.describe "Tasks", type: :system do
         click_button "Submit"
         expect(page).to have_content("Tasks Table")
         expect(page).to have_content("Edited_Task")
+        expect(page).to have_selector '.success', text: "Task変更完了！"
       end
 
       it "disables me to edit task" do
@@ -47,8 +49,8 @@ RSpec.describe "Tasks", type: :system do
         fill_in "Name", with: ""
         click_button "Submit"
         expect(page).to have_content("Update Your Task")
-        expect(page).to have_content("Task変更失敗")
         expect(page).to have_content("error")
+        expect(page).to have_selector '.alert', text: "Task変更失敗"
       end
     end
 
@@ -58,8 +60,8 @@ RSpec.describe "Tasks", type: :system do
         visit tasks_path
         click_button "Delete"
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content("Deleted the task")
         expect(page).not_to have_content("hoge")
+        expect(page).to have_selector '.notice', text: "Deleted the task"
       end
     end
   end
