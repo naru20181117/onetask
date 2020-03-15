@@ -59,6 +59,7 @@ RSpec.describe "Tasks", type: :system do
         click_button "Delete"
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content("Deleted the task")
+        expect(page).not_to have_content("hoge")
       end
     end
   end
