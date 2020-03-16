@@ -27,7 +27,7 @@ RSpec.describe "Tasks", type: :system do
       end
       context "create new task with name" do
         it "enable to create one" do
-          fill_in "Name", with: "My Task"
+          fill_in "タスク名", with: "My Task"
           click_button "Submit"
           expect(current_path).to eq task_path(Task.ids)
           expect(page).to have_content("Your Task")
@@ -37,9 +37,9 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'create new task with name nil' do
         it "disable to create any" do
-          fill_in "Name", with: ""
+          fill_in "タスク名", with: ""
           click_button "Submit"
-          expect(page).to have_content("Name can't be blank")
+          expect(page).to have_content("タスク名を入力してください")
           expect(page).to have_selector '.alert', text: "Task名を確認して！"
         end
       end
@@ -53,7 +53,7 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'edit name with valid words' do
         it "enables me to edit task" do
-          fill_in "Name", with: "Edited_Task"
+          fill_in "タスク名", with: "Edited_Task"
           click_button "Submit"
           expect(page).to have_content("Tasks Table")
           expect(page).to have_content("Edited_Task")
@@ -62,7 +62,7 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'edit name without name' do
         it "disables me to edit task" do
-          fill_in "Name", with: ""
+          fill_in "タスク名", with: ""
           click_button "Submit"
           expect(page).to have_content("Update Your Task")
           expect(page).to have_content("error")

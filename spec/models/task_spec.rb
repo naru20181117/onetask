@@ -23,7 +23,7 @@ RSpec.describe Task do
       let(:task) { build :task, name: nil }
       it "is invalid" do
         is_expected.to be_invalid
-        expect(task.errors[:name]).to include("can't be blank")
+        expect(task.errors[:name]).to include("を入力してください")
       end
     end
     context "when the memo has more than 100 letters" do
