@@ -5,20 +5,31 @@ RSpec.describe "Tasks", type: :system do
   describe 'crud' do
     describe '#index' do
       context 'click the home button' do
+        before do
+          create :task
+          create :task, name: "second_task"
+        end
         it "enables me to see home" do
           visit new_task_path
           click_link "One Task"
+          expect(current_path).to eq root_path
           expect(page).to have_content("Tasks Table")
+          expect(page).to have_content("hoge")
+          expect(page).to have_content("second_task")
         end
       end
     end
 
     describe '#new' do
+      before do
+        visit tasks_path
+        click_link "New"
+      end
       context "create new task with name" do
         it "enable to create one" do
-          visit new_task_path
           fill_in "Name", with: "My Task"
           click_button "Submit"
+          expect(current_path).to eq task_path(Task.ids)
           expect(page).to have_content("Your Task")
           expect(page).to have_content("My Task")
           expect(page).to have_selector '.success', text: "もっとタスクを増やしていこう！"
@@ -26,7 +37,6 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'create new task with name nil' do
         it "disable to create any" do
-          visit new_task_path
           fill_in "Name", with: ""
           click_button "Submit"
           expect(page).to have_content("Name can't be blank")
@@ -36,10 +46,13 @@ RSpec.describe "Tasks", type: :system do
     end
 
     describe '#edit' do
-      let(:task) { create :task }
+      let!(:task) { create :task }
+      before do
+        visit tasks_path
+        click_link "Edit"
+      end
       context 'edit name with valid words' do
         it "enables me to edit task" do
-          visit edit_task_path(task)
           fill_in "Name", with: "Edited_Task"
           click_button "Submit"
           expect(page).to have_content("Tasks Table")
@@ -49,13 +62,12 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'edit name without name' do
         it "disables me to edit task" do
-          visit edit_task_path(task)
           fill_in "Name", with: ""
           click_button "Submit"
           expect(page).to have_content("Update Your Task")
           expect(page).to have_content("error")
           expect(page).to have_selector '.alert', text: "Task変更失敗"
-          expect(task.name).to have_content("hoge")
+          expect(task.name).to eq "hoge"
         end
       end
     end
@@ -65,6 +77,7 @@ RSpec.describe "Tasks", type: :system do
         let!(:task) { create :task }
         it "enables me to destroy task" do
           visit tasks_path
+          expect(Task.count).to eq 1
           click_button "Delete"
           page.driver.browser.switch_to.alert.accept
           expect(page).not_to have_content("hoge")
@@ -74,14 +87,4 @@ RSpec.describe "Tasks", type: :system do
       end
     end
   end
-  # describe 'order' do
-  #   it 'arrange the tasks order by desc' do
-  #     let!(:task) { create :task }
-  #     let!(:task_arrange) { create :task_arrange }
-  #     visit tasks_path
-  #     task_list = all('.task_list')
-  #     expect(task_list[0]).tp have_content 'hoge2'
-  #     expect(task_list[1]).tp have_content 'hoge'
-  #   end
-  # end
 end

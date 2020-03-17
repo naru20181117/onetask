@@ -22,7 +22,7 @@ RSpec.describe Task do
     context 'when the name is nil' do
       let(:task) { build :task, name: nil }
       it "is invalid" do
-        expect(task).to be_invalid
+        is_expected.to be_invalid
         expect(task.errors[:name]).to include("can't be blank")
       end
     end
