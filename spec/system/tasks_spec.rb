@@ -74,4 +74,14 @@ RSpec.describe "Tasks", type: :system do
       end
     end
   end
+  # describe 'order' do
+  #   it 'arrange the tasks order by desc' do
+  #     let!(:task) { create :task }
+  #     let!(:task_arrange) { create :task_arrange }
+  #     visit tasks_path
+  #     task_list = all('.task_list')
+  #     expect(task_list[0]).tp have_content 'hoge2'
+  #     expect(task_list[1]).tp have_content 'hoge'
+  #   end
+  # end
 end
