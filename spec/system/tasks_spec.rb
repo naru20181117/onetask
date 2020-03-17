@@ -69,6 +69,24 @@ RSpec.describe "Tasks", type: :system do
           expect(page).to have_selector '.alert', text: "Task変更失敗"
           expect(task.name).to eq "hoge"
         end
+        let!(:task) { create :task }
+        it "enables me to edit task" do
+          visit edit_task_path(task)
+          fill_in "タスク名", with: "Edited_Task"
+          click_button "Submit"
+          expect(page).to have_content("Tasks Table")
+          expect(page).to have_content("Edited_Task")
+          expect(page).to have_selector '.success', text: "Task変更完了！"
+        end
+
+        it "disables me to edit task" do
+          visit edit_task_path(task)
+          fill_in "タスク名", with: ""
+          click_button "Submit"
+          expect(page).to have_content("Update Your Task")
+          expect(page).to have_content("error")
+          expect(page).to have_selector '.alert', text: "Task変更失敗"
+        end
       end
     end
 
@@ -85,6 +103,20 @@ RSpec.describe "Tasks", type: :system do
           expect(Task.count).to eq 0
         end
       end
+    end
+  end
+  describe 'order' do
+    before do
+      create :task, id: 1, name: 'new1'
+      create :task, id: 2, name: 'new2', created_at: Time.current + 2.hours
+      create :task, id: 3, name: 'new3', created_at: Time.current + 1.hour
+      visit tasks_path
+    end
+    it 'arrange the tasks order by desc' do
+      task_list = all('.task_line')
+      expect(task_list[0]).to have_content("new2")
+      expect(task_list[1]).to have_content("new3")
+      expect(task_list[2]).not_to have_content("new3")
     end
   end
 end
