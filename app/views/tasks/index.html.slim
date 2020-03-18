@@ -5,7 +5,7 @@ table
     td = Task.human_attribute_name(:name)
     td = Task.human_attribute_name(:memo)
   - @tasks.each do |task|
-    tr class="task_line"
+    tr.task_line
       td = task.id
       td = task.name
       td = simple_format(task.memo)
