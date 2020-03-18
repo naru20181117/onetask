@@ -1,9 +1,9 @@
 h1 Your Task
 dl
-  dt タスク名:
+  dt #{Task.human_attribute_name(:name)}:
   dd
     = @task.name
-  dt メモ:
+  dt #{Task.human_attribute_name(:memo)}:
   dd
     = simple_format(@task.memo)
   dt 作られた時間:

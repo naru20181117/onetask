@@ -2,8 +2,8 @@ h1 Tasks Table
 table
   tr
     td ID
-    td タスク名
-    td メモ
+    td = Task.human_attribute_name(:name)
+    td = Task.human_attribute_name(:memo)
   - @tasks.each do |task|
     tr
       td = task.id
