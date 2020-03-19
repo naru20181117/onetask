@@ -89,11 +89,9 @@ RSpec.describe "Tasks", type: :system do
   end
 
   describe 'order' do
-    let!(:tasks) { create_list :task, 3 }
+    before { create_list :task, 3 }
     context 'set arrangement of tasks' do
-      before do
-        visit tasks_path
-      end
+      before { visit tasks_path }
       it 'arrange the tasks order by desc' do
         task_list = all('.task_line')
         expect(task_list.map(&:text)).to eq Task.order(created_at: :desc).map(&:name)
