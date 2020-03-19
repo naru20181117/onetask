@@ -46,7 +46,7 @@ RSpec.describe "Tasks", type: :system do
     end
 
     describe '#edit' do
-      let!(:task) { create :task }
+      let!(:task) { create :task, name: "hoge" }
       before do
         visit tasks_path
         click_link "Edit"
@@ -89,17 +89,15 @@ RSpec.describe "Tasks", type: :system do
   end
 
   describe 'order' do
-    before do
-      create :task, id: 1, name: 'new1'
-      create :task, id: 2, name: 'new2', created_at: Time.current + 2.hours
-      create :task, id: 3, name: 'new3', created_at: Time.current + 1.hour
-      visit tasks_path
-    end
-    it 'arrange the tasks order by desc' do
-      task_list = all('.task_line')
-      expect(task_list[0]).to have_content("new2")
-      expect(task_list[1]).to have_content("new3")
-      expect(task_list[2]).not_to have_content("new3")
+    let!(:tasks) { create_list :task, 3 }
+    context 'set arrangement of tasks' do
+      before do
+        visit tasks_path
+      end
+      it 'arrange the tasks order by desc' do
+        task_list = all('.task_line')
+        expect(task_list.map(&:text)).to eq Task.order(created_at: :desc).map(&:name)
+      end
     end
   end
 end

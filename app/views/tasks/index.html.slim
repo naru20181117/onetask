@@ -5,9 +5,10 @@ table
     td = Task.human_attribute_name(:name)
     td = Task.human_attribute_name(:memo)
   - @tasks.each do |task|
-    tr.task_line
+    tr
       td = task.id
-      td = task.name
+      td.task_line
+        = task.name
       td = simple_format(task.memo)
       td = link_to 'Open', task
       td = link_to 'Edit', edit_task_path(task.id)
