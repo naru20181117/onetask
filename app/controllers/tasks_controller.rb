@@ -50,7 +50,7 @@ class TasksController < ApplicationController
       flash[:success] = "もっとタスクを増やしていこう！"
       redirect_to @task
     else
-      flash.now[:alert] = "Task名を確認して！!"
+      flash.now[:alert] = "Task作成失敗"
       render :new
     end
   end

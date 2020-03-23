@@ -31,4 +31,27 @@ RSpec.describe Task do
       it { is_expected.to be_invalid }
     end
   end
+
+  describe 'valid_end_time' do
+    context "when the end_time is after today" do
+      let(:task) { build :task, end_time: Time.zone.tomorrow }
+      it { is_expected.to be_valid }
+    end
+  end
+  describe 'invalid_end_time' do
+    context "when the end_time is before or just today" do
+      let(:task) { build :task, end_time: Time.zone.today }
+      it "is invalid" do
+        is_expected.to be_invalid
+        expect(task.errors[:end_time]).to include("は明日以降のタスクを選択してください")
+      end
+    end
+    context 'when the end_tume is nil' do
+      let(:task) { build :task, end_time: nil }
+      it "is invalid" do
+        is_expected.to be_invalid
+        expect(task.errors[:end_time]).to include("を入力してください")
+      end
+    end
+  end
 end

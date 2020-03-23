@@ -79,6 +79,10 @@ Style/LineEndConcatenation:
 # nilでないことの判定方法チェックを行わない
 Style/NonNilCheck:
   Enabled: false
+# 括弧内の空白を許容する
+# another parenthesized method call.
+Style/NestedParenthesizedCalls:
+  Enabled: false
 # メソッド引数に初期値がある場合に引数の順番チェックを行わない
 Style/OptionalArguments:
   Enabled: false

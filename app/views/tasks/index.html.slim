@@ -4,9 +4,9 @@ table
     th ID
     th = Task.human_attribute_name(:name)
     th = Task.human_attribute_name(:memo)
-    th.pointer onclick='window.location="#{sort_tasks_path(end_time: @end_time_num)}"' role="link"
+    th.end_pointer onclick='window.location="#{sort_tasks_path(end_time: @end_time_num)}"' role="link"
       = @end_time
-    th.pointer onclick='window.location="#{sort_tasks_path(created_at: @created_at_num)}"' role="link"
+    th.create_pointer onclick='window.location="#{sort_tasks_path(created_at: @created_at_num)}"' role="link"
       = @created_at
   - @tasks.each do |task|
     tr
@@ -14,7 +14,8 @@ table
       td.task_name
         = task.name
       td = simple_format(task.memo)
-      td = l task.end_time, format: :short
+      td.task_end_time
+        = l task.end_time, format: :short
       td = link_to 'Open', task
       td = link_to 'Edit', edit_task_path(task.id)
       td = button_to 'Delete', task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}

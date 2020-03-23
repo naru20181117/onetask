@@ -28,7 +28,7 @@ RSpec.describe "Tasks", type: :system do
       context "create new task with name" do
         it "enable to create one" do
           fill_in "タスク名", with: "My Task"
-          fill_in "終了期限", with: Time.current + 1.day
+          fill_in "終了期限", with: Time.zone.tomorrow
           click_button "Submit"
           expect(current_path).to eq task_path(Task.ids)
           expect(page).to have_content("Your Task")
@@ -41,7 +41,7 @@ RSpec.describe "Tasks", type: :system do
           fill_in "タスク名", with: ""
           click_button "Submit"
           expect(page).to have_content("タスク名を入力してください")
-          expect(page).to have_selector '.alert', text: "Task名を確認して！"
+          expect(page).to have_selector '.alert', text: "Task作成失敗"
         end
       end
     end
@@ -96,6 +96,47 @@ RSpec.describe "Tasks", type: :system do
       it 'arrange the tasks order by desc' do
         task_name = all('.task_name')
         expect(task_name.map(&:text)).to eq Task.order(created_at: :desc).map(&:name)
+      end
+    end
+  end
+
+  describe 'end_time' do
+    describe 'validation of end_time' do
+      before do
+        visit tasks_path
+        click_link "New"
+      end
+      context 'the end_time is before Today' do
+        it 'is invalid and show error' do
+          expect(Task.count).to eq 0
+          fill_in "タスク名", with: "My Task"
+          fill_in "終了期限", with: Date.yesterday
+          click_button "Submit"
+          expect(page).to have_content("は明日以降のタスクを選択してください")
+          expect(Task.count).to eq 0
+        end
+      end
+      context 'the end_time is after Today' do
+        it 'is valid' do
+          expect(Task.count).to eq 0
+          fill_in "タスク名", with: "My Task"
+          fill_in "終了期限", with: Date.tomorrow
+          click_button "Submit"
+          expect(page).to have_content(I18n.l Time.zone.today)
+          expect(Task.count).to eq 1
+        end
+      end
+    end
+    describe 'order by end_time' do
+      before { create_list :task, 3 }
+      it 'arrange the end_time order by desc' do
+        visit tasks_path
+        find('.end_pointer').click
+        task_end_list = all('.task_end_time')
+        end_time_array = Task.order(end_time: :desc).map(&:end_time)
+        (0..2).each do |num|
+          expect(task_end_list.map(&:text)[num]).to eq I18n.l end_time_array[num], format: :short
+        end
       end
     end
   end
