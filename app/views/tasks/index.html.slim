@@ -1,10 +1,14 @@
 h1 Tasks Table
 table
-  tr
-    td ID
-    td = Task.human_attribute_name(:name)
-    td = Task.human_attribute_name(:memo)
-    td = Task.human_attribute_name(:end_time)
+  tr.task_item
+    th ID
+    th = Task.human_attribute_name(:name)
+    th = Task.human_attribute_name(:memo)
+    th.pointer onclick='window.location="#{sort_tasks_path(created_at: @created_at_num)}"' role="link"
+      = @created_at
+    th.pointer onclick='window.location="#{sort_tasks_path(end_time: @end_time_num)}"' role="link"
+      = @end_time
+      / = Task.human_attribute_name(:end_time)
   - @tasks.each do |task|
     tr
       td = task.id
