@@ -6,3 +6,7 @@ ja:
       task:
         name: タスク名
         memo: メモ
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short:  '%b%d'

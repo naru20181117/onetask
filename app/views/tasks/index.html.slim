@@ -7,7 +7,7 @@ table
   - @tasks.each do |task|
     tr
       td = task.id
-      td.task_line
+      td.task_name
         = task.name
       td = simple_format(task.memo)
       td = link_to 'Open', task

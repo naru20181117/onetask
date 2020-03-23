@@ -7,6 +7,6 @@ dl
   dd
     = simple_format(@task.memo)
   dt 作られた時間:
-  dd = @task.created_at.to_s(:show)
+  dd = l @task.created_at
   dt アップデート時間:
-  dd = @task.updated_at.to_s(:show)
+  dd = l @task.updated_at
