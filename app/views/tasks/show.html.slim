@@ -7,7 +7,7 @@ dl
   dd
     = simple_format(@task.memo)
   dt #{Task.human_attribute_name(:end_time)}:
-  dd = @task.end_time.to_s(:show)
+  dd = l @task.end_time
   dt 作られた時間:
   dd = l @task.created_at
   dt アップデート時間:

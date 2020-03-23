@@ -28,6 +28,7 @@ RSpec.describe "Tasks", type: :system do
       context "create new task with name" do
         it "enable to create one" do
           fill_in "タスク名", with: "My Task"
+          fill_in "終了期限", with: Time.current + 1.day
           click_button "Submit"
           expect(current_path).to eq task_path(Task.ids)
           expect(page).to have_content("Your Task")
