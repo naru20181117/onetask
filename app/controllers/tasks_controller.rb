@@ -2,7 +2,6 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
-  before_action :basic_auth, if: :production?
 
   def index
     @tasks = Task.order(created_at: :desc)
@@ -51,15 +50,5 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
-  end
-
-  def production?
-    Rails.env.production?
-  end
-
-  def basic_auth
-    authenticate_or_request_with_http_basic do |name, password|
-      name == ENV['BASIC_AUTH_NAME'] && password == ENV['BASIC_AUTH_PASSWORD']
-    end
   end
 end

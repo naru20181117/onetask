@@ -25,7 +25,6 @@ $ rake assets:precompile RAILS_ENV=production
 ```
 ### Deploy your changes
 ```
-$ git add .
 $ git commit -am "make it better"
 $ git push heroku master
 ```
