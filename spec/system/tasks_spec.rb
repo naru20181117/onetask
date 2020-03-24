@@ -46,7 +46,7 @@ RSpec.describe "Tasks", type: :system do
     end
 
     describe '#edit' do
-      let!(:task) { create :task }
+      let!(:task) { create :task, name: "hoge" }
       before do
         visit tasks_path
         click_link "Edit"
@@ -84,6 +84,17 @@ RSpec.describe "Tasks", type: :system do
           expect(page).to have_selector '.notice', text: "Deleted the task"
           expect(Task.count).to eq 0
         end
+      end
+    end
+  end
+
+  describe 'order' do
+    before { create_list :task, 3 }
+    context 'set arrangement of tasks' do
+      before { visit tasks_path }
+      it 'arrange the tasks order by desc' do
+        task_name = all('.task_name')
+        expect(task_name.map(&:text)).to eq Task.order(created_at: :desc).map(&:name)
       end
     end
   end

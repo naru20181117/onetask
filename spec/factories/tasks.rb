@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :task do
-    name { "hoge" }
-    memo { "example_memo" }
+    sequence(:name) { |n| "hoge#{n}" }
+    sequence(:created_at) { |n| Time.current + n.hours }
   end
 end

@@ -6,3 +6,6 @@ ja:
       task:
         name: タスク名
         memo: メモ
+        end_time: 終了期限
+
+
