@@ -12,3 +12,5 @@ dl
   dd = l @task.created_at
   dt アップデート時間:
   dd = l @task.updated_at
+  dt #{Task.human_attribute_name(:status)}:
+  dd = @task.status
