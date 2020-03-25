@@ -10,22 +10,20 @@ Things you may want to cover:
 - Rails 6.0.2.1
 - PostgreSQL 12.2
 
-### Install the Heroku CLI
+### Heroku login
 ```
 $ heroku login
 ```
-### Clone the repository
+### Pull the repository
 ```
-$ heroku git:clone -a onetask1
-$ cd onetask1
+$ git pull origin/master
 ```
-### conduct preconpile
+### Precompile assets
 ```
 $ rake assets:precompile RAILS_ENV=production
 ```
-### Deploy your changes
+### Deploy your app
 ```
-$ git commit -am "make it better"
 $ git push heroku master
 ```
 ### Set your DB on Heroku
