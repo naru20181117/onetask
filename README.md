@@ -6,7 +6,30 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-ruby 2.7.0
+- Ruby 2.7.0
+- Rails 6.0.2.1
+- PostgreSQL 12.2
+
+### Heroku login
+```
+$ heroku login
+```
+### Pull the repository
+```
+$ git pull origin/master
+```
+### Precompile assets
+```
+$ rake assets:precompile RAILS_ENV=production
+```
+### Deploy your app
+```
+$ git push heroku master
+```
+### Set your DB on Heroku
+```
+heroku run rails db:migrate
+```
 
 ## Userモデル
 | カラム名 | データ型
