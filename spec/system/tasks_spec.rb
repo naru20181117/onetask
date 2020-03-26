@@ -55,6 +55,7 @@ RSpec.describe "Tasks", type: :system do
       context 'edit name with valid words' do
         it "enables me to edit task" do
           fill_in "タスク名", with: "Edited_Task"
+          fill_in "終了期限", with: Time.zone.tomorrow
           click_button "Submit"
           expect(page).to have_content("Tasks Table")
           expect(page).to have_content("Edited_Task")
@@ -110,7 +111,7 @@ RSpec.describe "Tasks", type: :system do
         it 'is invalid and show error' do
           expect(Task.count).to eq 0
           fill_in "タスク名", with: "My Task"
-          fill_in "終了期限", with: Date.yesterday
+          fill_in "終了期限", with: Time.zone.yesterday
           click_button "Submit"
           expect(page).to have_content("は明日以降のタスクを選択してください")
           expect(Task.count).to eq 0
@@ -120,7 +121,7 @@ RSpec.describe "Tasks", type: :system do
         it 'is valid' do
           expect(Task.count).to eq 0
           fill_in "タスク名", with: "My Task"
-          fill_in "終了期限", with: Date.tomorrow
+          fill_in "終了期限", with: Time.zone.tomorrow
           click_button "Submit"
           expect(page).to have_content(I18n.l Time.zone.today)
           expect(Task.count).to eq 1

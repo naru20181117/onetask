@@ -2,37 +2,11 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
-  before_action :set_variable, only: %i(index sort)
+  before_action :set_variable, only: %i(index)
 
   def index
-    if params[:created_at].present?
-      @created_at_num = params[:created_at].to_i
-      if @created_at_num == 0
-        @tasks = Task.order(created_at: :DESC)
-        @created_at = '登録日時▼'
-        @created_at_num = 1
-      else
-        @tasks = Task.order(created_at: :ASC)
-        @created_at = '登録日時▲'
-        @created_at_num = 0
-      end
-      # @tasks = Task.desc_created_at
-    elsif params[:end_time].present?
-      @end_time_num = params[:end_time].to_i
-      if @end_time_num == 0
-        @tasks = Task.order(end_time: :DESC)
-        @end_time = '終了期限▼'
-        @end_time_num = 1
-      else
-        @tasks = Task.order(end_time: :ASC)
-        @end_time = '終了期限▲'
-        @end_time_num = 0
-      end
-      # @tasks = Task.desc_end_time
-    else
-      @tasks = Task.order(created_at: :desc)
-    end
-    render :index
+    @tasks = Task.select_desc(params[:created_at], params[:end_time])
+
   end
 
   def new
@@ -48,21 +22,6 @@ class TasksController < ApplicationController
       flash.now[:alert] = "Task作成失敗"
       render :new
     end
-  end
-
-  def sort
-    if params[:created_at].present?
-      @created_at_num = params[:created_at].to_i
-      Task.create_order
-      @tasks = Task.desc_created_at
-    elsif params[:end_time].present?
-      @end_time_num = params[:end_time].to_i
-      Task.end_order
-      @tasks = Task.desc_end_time
-    else
-      @tasks = Task.order(created_at: :desc)
-    end
-    render :index
   end
 
   def show; end
@@ -85,6 +44,11 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  def set_variable
+    @created_at_num = 0
+    @end_time_num = 0
+  end
+
   private
 
   def task_params
@@ -93,12 +57,5 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
-  end
-
-  def set_variable
-    @created_at = '登録日時△'
-    @end_time = '終了期限△'
-    @created_at_num = 0
-    @end_time_num = 0
   end
 end

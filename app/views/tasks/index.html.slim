@@ -5,9 +5,9 @@ table
     th = Task.human_attribute_name(:name)
     th = Task.human_attribute_name(:memo)
     th.end_pointer onclick='window.location="#{tasks_path(end_time: @end_time_num)}"' role="link"
-      = @end_time
+      = end_time_sub
     th.create_pointer onclick='window.location="#{tasks_path(created_at: @created_at_num)}"' role="link"
-      = @created_at
+      = created_at_sub
   - @tasks.each do |task|
     tr
       td = task.id
