@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_03_22_074839) do
     t.string "memo", limit: 100
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "end_time", default: "2020-03-25 00:00:00", null: false
+    t.datetime "end_time", default: -> { "now()" }, null: false
   end
 
 end

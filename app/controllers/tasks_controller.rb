@@ -5,13 +5,9 @@ class TasksController < ApplicationController
   before_action :set_variable, only: %i(index sort)
 
   def index
-    @tasks = Task.order(created_at: :desc)
-  end
-
-  def sort
     if params[:created_at].present?
       @created_at_num = params[:created_at].to_i
-      if @created_at_num.zero?
+      if @created_at_num == 0
         @tasks = Task.order(created_at: :DESC)
         @created_at = '登録日時▼'
         @created_at_num = 1
@@ -20,11 +16,10 @@ class TasksController < ApplicationController
         @created_at = '登録日時▲'
         @created_at_num = 0
       end
-
+      # @tasks = Task.desc_created_at
     elsif params[:end_time].present?
       @end_time_num = params[:end_time].to_i
-
-      if @end_time_num.zero?
+      if @end_time_num == 0
         @tasks = Task.order(end_time: :DESC)
         @end_time = '終了期限▼'
         @end_time_num = 1
@@ -33,7 +28,7 @@ class TasksController < ApplicationController
         @end_time = '終了期限▲'
         @end_time_num = 0
       end
-
+      # @tasks = Task.desc_end_time
     else
       @tasks = Task.order(created_at: :desc)
     end
@@ -53,6 +48,21 @@ class TasksController < ApplicationController
       flash.now[:alert] = "Task作成失敗"
       render :new
     end
+  end
+
+  def sort
+    if params[:created_at].present?
+      @created_at_num = params[:created_at].to_i
+      Task.create_order
+      @tasks = Task.desc_created_at
+    elsif params[:end_time].present?
+      @end_time_num = params[:end_time].to_i
+      Task.end_order
+      @tasks = Task.desc_end_time
+    else
+      @tasks = Task.order(created_at: :desc)
+    end
+    render :index
   end
 
   def show; end
