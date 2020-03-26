@@ -106,11 +106,11 @@ RSpec.describe "Tasks", type: :system do
       before do
         visit tasks_path
         click_link "New"
+        fill_in "タスク名", with: "My Task"
       end
       context 'the end_time is before Today' do
         it 'is invalid and show error' do
           expect(Task.count).to eq 0
-          fill_in "タスク名", with: "My Task"
           fill_in "終了期限", with: Time.zone.yesterday
           click_button "Submit"
           expect(page).to have_content("は明日以降のタスクを選択してください")
@@ -120,7 +120,6 @@ RSpec.describe "Tasks", type: :system do
       context 'the end_time is after Today' do
         it 'is valid' do
           expect(Task.count).to eq 0
-          fill_in "タスク名", with: "My Task"
           fill_in "終了期限", with: Time.zone.tomorrow
           click_button "Submit"
           expect(page).to have_content(I18n.l Time.zone.today)

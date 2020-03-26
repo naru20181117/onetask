@@ -6,7 +6,6 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.select_desc(params[:created_at], params[:end_time])
-
   end
 
   def new
