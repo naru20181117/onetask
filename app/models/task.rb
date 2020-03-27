@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  after_initialize :set_default, if: :new_record?
   validates :name, length: { maximum: 20 }, presence: true
   validates :memo, length: { maximum: 100 }
   validates :end_time, presence: true
@@ -14,4 +15,10 @@ class Task < ApplicationRecord
   end
 
   include Order
+
+  private
+
+  def set_default
+    self.end_time ||= Time.zone.today
+  end
 end
