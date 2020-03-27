@@ -20,7 +20,11 @@ ActiveRecord::Schema.define(version: 2020_03_22_074839) do
     t.string "memo", limit: 100
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
     t.datetime "end_time", default: -> { "CURRENT_DATE" }
+=======
+    t.datetime "end_time", default: -> { "CURRENT_DATE" }, null: false
+>>>>>>> refs #15077 end_timeのdefault設定を変更
   end
 
 end
