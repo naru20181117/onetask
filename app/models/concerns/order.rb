@@ -5,11 +5,9 @@ module Order
 
   included do
     scope :select_desc, ->(created_at, end_time) do
-      if created_at.present?
-        order(created_at: :DESC)
-      elsif end_time.present?
+      if end_time.present?
         order(end_time: :DESC)
-      else
+      elsif created_at.present? || (end_time.nil? && created_at.nil?)
         order(created_at: :DESC)
       end
     end

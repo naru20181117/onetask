@@ -122,7 +122,7 @@ RSpec.describe "Tasks", type: :system do
           expect(Task.count).to eq 0
           fill_in "終了期限", with: Time.zone.tomorrow
           click_button "Submit"
-          expect(page).to have_content(I18n.l Time.zone.today)
+          expect(page).to have_content(Time.zone.tomorrow.strftime("%Y/%m/%d %H:%M:%S"))
           expect(Task.count).to eq 1
         end
       end
@@ -135,7 +135,7 @@ RSpec.describe "Tasks", type: :system do
         task_end_list = all('.task_end_time')
         end_time_array = Task.order(end_time: :desc).map(&:end_time)
         (0..2).each do |num|
-          expect(task_end_list.map(&:text)[num]).to eq I18n.l end_time_array[num], format: :short
+          expect(task_end_list.map(&:text)[num]).to eq end_time_array[num].strftime("%m/%d")
         end
       end
     end
