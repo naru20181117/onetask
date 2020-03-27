@@ -128,14 +128,16 @@ RSpec.describe "Tasks", type: :system do
       end
     end
     describe 'order by end_time' do
-      before { create_list :task, 3 }
-      it 'arrange the end_time order by desc' do
-        visit tasks_path
-        find('.end_pointer').click
-        task_end_list = all('.task_end_time')
-        end_time_array = Task.order(end_time: :desc).map(&:end_time)
-        (0..2).each do |num|
-          expect(task_end_list.map(&:text)[num]).to eq end_time_array[num].strftime("%m/%d")
+      context 'when click the sort pointer' do
+        before { create_list :task, 3 }
+        it 'arrange the end_time order by desc' do
+          visit tasks_path
+          find('.end_pointer').click
+          task_end_list = all('.task_end_time')
+          end_time_array = Task.order(end_time: :desc).map(&:end_time)
+          (0..2).each do |num|
+            expect(task_end_list.map(&:text)[num]).to eq end_time_array[num].strftime("%m/%d")
+          end
         end
       end
     end

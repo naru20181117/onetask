@@ -51,7 +51,7 @@ RSpec.describe Task do
       let(:task) { build :task, end_time: nil }
       it "is invalid" do
         expect(task).to be_invalid
-        is_expected.to end_with("を入力してください")
+        is_expected.to end_with("は明日以降のタスクを選択してください")
       end
     end
   end

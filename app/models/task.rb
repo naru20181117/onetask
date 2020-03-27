@@ -1,24 +1,16 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
-  after_initialize :set_default, if: :new_record?
   validates :name, length: { maximum: 20 }, presence: true
   validates :memo, length: { maximum: 100 }
-  validates :end_time, presence: true
 
   validate :date_not_before_today
 
   def date_not_before_today
-    unless end_time.nil?
-      errors.add(:end_time, "は明日以降のタスクを選択してください") if end_time < Time.zone.today
+    if end_time.nil? || (end_time.present? && end_time < Time.zone.today)
+      errors.add(:end_time, "は明日以降のタスクを選択してください")
     end
   end
 
   include Order
-
-  private
-
-  def set_default
-    self.end_time ||= Time.zone.today
-  end
 end
