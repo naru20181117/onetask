@@ -12,5 +12,17 @@ class Task < ApplicationRecord
     end
   end
 
+  scope :search, ->(model, content) do
+    if content.present?
+      if model == 'task'
+        where("name LIKE?", "%#{content}%")
+      elsif model == 'status'
+        where("status LIKE?", "%#{content}%")
+      end
+    else
+      where("name LIKE?", "%%")
+    end
+  end
+
   include Order
 end

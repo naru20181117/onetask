@@ -2,9 +2,15 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy done)
+  # before_action :set_variable, only: %i(index)
 
   def index
-    @tasks = Task.select_desc(sort_column)
+    @tasks = if params["search"].nil?
+               Task.select_desc(sort_column)
+             else
+               @tasks = Task.select_desc(sort_column)
+                            .search(params["search"]["model"], params["search"]["content"])
+             end
   end
 
   def new
