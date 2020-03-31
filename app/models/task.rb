@@ -19,8 +19,6 @@ class Task < ApplicationRecord
       elsif model == 'status'
         where("status LIKE?", "%#{content}%")
       end
-    else
-      where("name LIKE?", "%%")
     end
   end
 
