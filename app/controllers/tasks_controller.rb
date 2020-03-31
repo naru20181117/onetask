@@ -2,7 +2,6 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
-  before_action :set_variable, only: %i(index)
 
   def index
     @tasks = Task.select_desc(params[:created_at], params[:end_time])
@@ -41,11 +40,6 @@ class TasksController < ApplicationController
     @task.destroy
     flash[:notice] = 'Deleted the task'
     redirect_to tasks_path
-  end
-
-  def set_variable
-    @created_at_num = 0
-    @end_time_num = 0
   end
 
   private
