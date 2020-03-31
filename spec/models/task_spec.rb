@@ -55,4 +55,12 @@ RSpec.describe Task do
       end
     end
   end
+  describe 'valid_status' do
+    context "when the status is nil" do
+      let(:task) { build :task }
+      it "is set to the default" do
+        expect(task.status).to eq "Not yet"
+      end
+    end
+  end
 end

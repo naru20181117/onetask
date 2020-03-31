@@ -142,4 +142,54 @@ RSpec.describe "Tasks", type: :system do
       end
     end
   end
+  describe 'status' do
+    describe 'edit status' do
+      let!(:task) { create :task }
+      before { visit tasks_path }
+      context 'when click the Done button' do
+        it 'change the status Done' do
+          expect(task.status).to eq "Not yet"
+          click_button "Done"
+          expect(current_path).to eq tasks_path
+          expect(page).to have_selector '.task_status', text: "Done"
+        end
+      end
+      context 'edit name with select' do
+        it "enables me to edit status" do
+          click_link "Edit"
+          select "WIP", from: 'task[status]'
+          expect(page).to have_select('task[status]', selected: 'WIP')
+          click_button "Submit"
+          expect(page).to have_content 'WIP'
+          expect(page).not_to have_content "Not yet"
+          expect(page).to have_selector '.task_status', text: "WIP"
+        end
+      end
+    end
+    describe 'validation of search method' do
+      before do
+        visit tasks_path
+        create :task, name: "first_task", status: "Not yet"
+        create :task, name: "second_task", status: "WIP"
+      end
+      context 'when search task name' do
+        it 'is valid to search properly' do
+          fill_in 'search[content]', with: "first_task"
+          select "Task", from: 'search[model]'
+          click_button "検索"
+          expect(page).to have_content 'first_task'
+          expect(page).not_to have_content 'second_task'
+        end
+      end
+      context 'when search Status properly' do
+        it 'is valid to search properly' do
+          fill_in 'search[content]', with: "Not yet"
+          select "Status", from: 'search[model]'
+          click_button "検索"
+          expect(page).to have_content 'Not yet'
+          expect(page).not_to have_content 'WIP'
+        end
+      end
+    end
+  end
 end
