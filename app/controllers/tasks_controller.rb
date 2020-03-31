@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
 
   def index
-    @tasks = Task.select_desc(params[:created_at], params[:end_time])
+    @tasks = Task.select_desc(sort_column)
   end
 
   def new
@@ -50,5 +50,9 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def sort_column
+    %w[created_at end_time].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
   end
 end

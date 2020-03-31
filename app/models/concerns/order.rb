@@ -4,12 +4,8 @@ module Order
   extend ActiveSupport::Concern
 
   included do
-    scope :select_desc, ->(created_at, end_time) do
-      if end_time.present?
-        order(end_time: :DESC)
-      elsif created_at.present? || (end_time.nil? && created_at.nil?)
-        order(created_at: :DESC)
-      end
+    scope :select_desc, ->(sort_column) do
+      order("#{sort_column} DESC")
     end
   end
 end
