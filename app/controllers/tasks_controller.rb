@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
 
   def index
-    @tasks = Task.order(created_at: :desc)
+    @tasks = Task.select_desc(sort_column)
   end
 
   def new
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       flash[:success] = "もっとタスクを増やしていこう！"
       redirect_to @task
     else
-      flash.now[:alert] = "Task名を確認して！!"
+      flash.now[:alert] = "Task作成失敗"
       render :new
     end
   end
@@ -45,10 +45,14 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :memo)
+    params.require(:task).permit(:name, :memo, :end_time)
   end
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def sort_column
+    %w[created_at end_time].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
   end
 end

@@ -23,12 +23,36 @@ RSpec.describe Task do
       let(:task) { build :task, name: nil }
       it "is invalid" do
         is_expected.to be_invalid
-        expect(task.errors[:name]).to include("を入力してください")
+        expect(task.errors[:name]).to end_with("を入力してください")
       end
     end
     context "when the memo has more than 100 letters" do
       let(:task) { build :task, memo: "a" * 101 }
       it { is_expected.to be_invalid }
+    end
+  end
+
+  describe 'valid_end_time' do
+    context "when the end_time is after today" do
+      let(:task) { build :task, end_time: Time.zone.tomorrow }
+      it { is_expected.to be_valid }
+    end
+  end
+  describe 'invalid_end_time' do
+    subject { task.errors[:end_time] }
+    context "when the end_time is before or just today" do
+      let(:task) { build :task, end_time: Time.zone.today }
+      it "is invalid" do
+        expect(task).to be_invalid
+        is_expected.to end_with("は明日以降のタスクを選択してください")
+      end
+    end
+    context 'when the end_tume is nil' do
+      let(:task) { build :task, end_time: nil }
+      it "is invalid" do
+        expect(task).to be_invalid
+        is_expected.to end_with("は明日以降のタスクを選択してください")
+      end
     end
   end
 end

@@ -9,4 +9,7 @@
         = f.label :memo
         = f.text_area :memo
       li
+        = f.label :end_time
+        = f.date_field :end_time, value: Time.zone.today
+      li
         = f.submit "Submit"

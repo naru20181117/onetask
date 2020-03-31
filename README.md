@@ -47,7 +47,7 @@ heroku run rails db:migrate
 | user_id | integer |
 | name | string |
 | memo | integer |
-| end_time | datetime |
+| end_time | date |
 | priority | integer |
 | status | integer |
 

@@ -79,6 +79,10 @@ Style/LineEndConcatenation:
 # nilでないことの判定方法チェックを行わない
 Style/NonNilCheck:
   Enabled: false
+# 括弧内の空白を許容する
+# another parenthesized method call.
+Style/NestedParenthesizedCalls:
+  Enabled: false
 # メソッド引数に初期値がある場合に引数の順番チェックを行わない
 Style/OptionalArguments:
   Enabled: false
@@ -148,7 +152,7 @@ Layout/LineLength:
     - "db/migrate/*.rb"
 # メソッドの行数を20行までに制限する
 Metrics/MethodLength:
-  Max: 20
+  Max: 30
 # メソッドの引数の数を5つまでに制限する
 Metrics/ParameterLists:
   Max: 5
