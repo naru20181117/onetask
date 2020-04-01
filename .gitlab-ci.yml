@@ -39,12 +39,10 @@ rubocop:
 #   script:
 #     - bundle exec slimlint
 
-# TODO: rspec 導入後にscript の最後に以下の2行を追加しえください。
-# ```
-# - bundle exec rails db:setup
-# - bundle exec rspec
-# ```
 rspec:
   <<: *test_job_template
   script:
     - yarn install
+    - bundle exec rails db:setup
+    - bundle exec rspec
+
