@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_031140) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "end_time", default: -> { "CURRENT_DATE" }
-    t.string "status", default: "Not yet"
+    t.integer "status", limit: 2, default: 0
   end
 
 end

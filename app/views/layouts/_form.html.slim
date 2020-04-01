@@ -14,6 +14,6 @@ w.container
       li
         = f.label :status
           status_menu
-        = f.select :status, ["Not yet", "WIP", "Done"]
+        = f.select :status, Task.statuses.keys.to_a
       li
         = f.submit "Submit"

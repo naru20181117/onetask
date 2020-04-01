@@ -5,13 +5,10 @@ body {
   -moz-appearance: none;
   appearance: none;
   .container{
-    margin: 16px;
+    margin: 8px 16px;
   }
 }
 .container{
-  .search_form {
-    text-align: right;
-  }
   .task_item{
     text-align: left;
   }

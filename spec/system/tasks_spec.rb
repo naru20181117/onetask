@@ -148,7 +148,7 @@ RSpec.describe "Tasks", type: :system do
       before { visit tasks_path }
       context 'when click the Done button' do
         it 'change the status Done' do
-          expect(task.status).to eq "Not yet"
+          expect(task.status).to eq "Untouched"
           click_button "Done"
           expect(current_path).to eq tasks_path
           expect(page).to have_selector '.task_status', text: "Done"
@@ -169,13 +169,12 @@ RSpec.describe "Tasks", type: :system do
     describe 'validation of search method' do
       before do
         visit tasks_path
-        create :task, name: "first_task", status: "Not yet"
+        create :task, name: "first_task", status: "Untouched"
         create :task, name: "second_task", status: "WIP"
       end
       context 'when search task name' do
         it 'is valid to search properly' do
           fill_in 'search[content]', with: "first_task"
-          select "Task", from: 'search[model]'
           click_button "検索"
           expect(page).to have_content 'first_task'
           expect(page).not_to have_content 'second_task'
@@ -183,11 +182,20 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'when search Status properly' do
         it 'is valid to search properly' do
-          fill_in 'search[content]', with: "Not yet"
-          select "Status", from: 'search[model]'
+          select "Untoouched", from: 'search[status]'
           click_button "検索"
-          expect(page).to have_content 'Not yet'
-          expect(page).not_to have_content 'WIP'
+          expect(page).to have_selector '.task_status', text: 'Untouched'
+          expect(page).not_to have_selector '.task_status', text: 'WIP'
+        end
+      end
+      context 'when search task name and Status properly' do
+        before { create :task, name: "first_task[A]", status: "Done" }
+        it 'is valid to search them properly' do
+          fill_in 'search[content]', with: "first_task"
+          select "Untoouched", from: 'search[status]'
+          click_button "検索"
+          expect(page).to have_selector '.task_name', text: 'first_task'
+          expect(page).not_to have_selector '.task_name', text: 'first_task[A]'
         end
       end
     end

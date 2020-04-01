@@ -1,5 +1,5 @@
 .search_form
-  = form_tag(tasks_path, method: :get) do
-    = text_field_tag 'search[content]', '', placeholder: "検索"
-    = select_tag 'search[model]', options_for_select({"Task"=>"task", "Status"=>"status"})
-    = submit_tag '検索', class:"btn btn-primary"
+  ul = form_tag(tasks_path, method: :get) do
+    li = text_field_tag 'search[content]', '', placeholder: "検索"
+    li = select_tag 'search[status]', options_for_select({"Choose Sstatus"=>"","Untoouched"=>"0", "WIP"=>"1", "Done"=>"2"})
+    li = submit_tag '検索', class:"btn btn-primary"

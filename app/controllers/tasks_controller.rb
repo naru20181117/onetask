@@ -7,8 +7,9 @@ class TasksController < ApplicationController
     @tasks = if params["search"].nil?
                Task.select_desc(sort_column)
              else
-               @tasks = Task.select_desc(sort_column)
-                            .search(params["search"]["model"], params["search"]["content"])
+               Task.select_desc(sort_column)
+                   .search_task(params["search"]["content"])
+                   .search_status(params["search"]["status"])
              end
   end
 

@@ -12,13 +12,19 @@ class Task < ApplicationRecord
     end
   end
 
-  scope :search, ->(model, content) do
+  enum status: {
+    Untouched: 0, WIP: 1, Done: 2
+  }
+
+  scope :search_task, ->(content) do
     if content.present?
-      if model == 'task'
-        where("name LIKE?", "%#{content}%")
-      elsif model == 'status'
-        where("status LIKE?", "%#{content}%")
-      end
+      where("name LIKE?", "%#{content}%")
+    end
+  end
+
+  scope :search_status, ->(status) do
+    if status.present?
+      where(status: status)
     end
   end
 
