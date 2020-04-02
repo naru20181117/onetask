@@ -148,29 +148,29 @@ RSpec.describe "Tasks", type: :system do
       before { visit tasks_path }
       context 'when click the Done button' do
         it 'change the status Done' do
-          expect(task.status).to eq "Untouched"
+          expect(task.status).to eq "untouched"
           click_button "Done"
           expect(current_path).to eq tasks_path
-          expect(page).to have_selector '.task_status', text: "Done"
+          expect(page).to have_selector '.task_status', text: "done"
         end
       end
       context 'edit name with select' do
         it "enables me to edit status" do
           click_link "Edit"
-          select "WIP", from: 'task[status]'
-          expect(page).to have_select('task[status]', selected: 'WIP')
+          select "wip", from: 'task[status]'
+          expect(page).to have_select('task[status]', selected: 'wip')
           click_button "Submit"
-          expect(page).to have_content 'WIP'
-          expect(page).not_to have_content "Not yet"
-          expect(page).to have_selector '.task_status', text: "WIP"
+          expect(page).to have_content 'wip'
+          expect(page).not_to have_content "not yet"
+          expect(page).to have_selector '.task_status', text: "wip"
         end
       end
     end
     describe 'validation of search method' do
       before do
         visit tasks_path
-        create :task, name: "first_task", status: "Untouched"
-        create :task, name: "second_task", status: "WIP"
+        create :task, name: "first_task", status: "untouched"
+        create :task, name: "second_task", status: "wip"
       end
       context 'when search task name' do
         it 'is valid to search properly' do
@@ -182,17 +182,17 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'when search Status properly' do
         it 'is valid to search properly' do
-          select "Untoouched", from: 'search[status]'
+          select "Untouched", from: 'search[status]'
           click_button "検索"
-          expect(page).to have_selector '.task_status', text: 'Untouched'
-          expect(page).not_to have_selector '.task_status', text: 'WIP'
+          expect(page).to have_selector '.task_status', text: 'untouched'
+          expect(page).not_to have_selector '.task_status', text: 'wip'
         end
       end
       context 'when search task name and Status properly' do
-        before { create :task, name: "first_task[A]", status: "Done" }
+        before { create :task, name: "first_task[A]", status: "done" }
         it 'is valid to search them properly' do
           fill_in 'search[content]', with: "first_task"
-          select "Untoouched", from: 'search[status]'
+          select "Untouched", from: 'search[status]'
           click_button "検索"
           expect(page).to have_selector '.task_name', text: 'first_task'
           expect(page).not_to have_selector '.task_name', text: 'first_task[A]'

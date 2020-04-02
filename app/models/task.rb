@@ -13,7 +13,7 @@ class Task < ApplicationRecord
   end
 
   enum status: {
-    Untouched: 0, WIP: 1, Done: 2
+    untouched: 0, wip: 1, done: 2
   }
 
   scope :search_task, ->(content) do

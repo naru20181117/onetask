@@ -4,7 +4,6 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy done)
 
   def index
-    # params.require(:task).permit(:name, :status)
     @tasks = if params["search"].nil?
                Task.select_desc(sort_column)
              else
@@ -50,7 +49,7 @@ class TasksController < ApplicationController
   end
 
   def done
-    @task.update(status: 'Done')
+    @task.done!
     redirect_to tasks_path
   end
 
