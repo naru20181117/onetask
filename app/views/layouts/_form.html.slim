@@ -16,4 +16,8 @@
           status_menu
         = f.select :status, Task.statuses.keys.to_a
       li
+        = f.label :priority
+          priority_menu
+        = f.select :priority, Task.priorities.keys.to_a
+      li
         = f.submit "Submit"
