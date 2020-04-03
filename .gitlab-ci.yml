@@ -1,5 +1,4 @@
 .base_job_template: &base_job_definition
-  image: circleci/ruby:2.7-buster-node-browsers
   image: circleci/ruby:2.7.0-buster-node-browsers
   tags:
     - docker
