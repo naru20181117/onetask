@@ -32,5 +32,11 @@ class Task < ApplicationRecord
     end
   end
 
+  scope :search_priority, ->(priority) do
+    if priority.present?
+      where(priority: priority)
+    end
+  end
+
   include Order
 end

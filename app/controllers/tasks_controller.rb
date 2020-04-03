@@ -11,6 +11,7 @@ class TasksController < ApplicationController
                Task.select_desc(sort_column)
                    .search_task(content_params)
                    .search_status(status_params)
+                   .search_priority(priority_params)
              end
   end
 
@@ -78,5 +79,9 @@ class TasksController < ApplicationController
 
   def status_params
     params["search"].permit!["status"]
+  end
+
+  def priority_params
+    params["search"].permit(:priority)["priority"]
   end
 end
