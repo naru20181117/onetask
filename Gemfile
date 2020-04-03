@@ -65,3 +65,5 @@ gem 'rubocop-rails', require: false
 gem 'slim-rails'
 
 gem 'rails-i18n'
+
+gem 'kaminari'
