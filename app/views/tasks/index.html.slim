@@ -18,8 +18,6 @@ table
         = l task.end_time, format: :short
       td.task_status
         = task.status
-      td.task_priority
-        = task.priority
       td = link_to 'Open', task
       td = link_to 'Edit', edit_task_path(task.id)
       td = button_to 'Delete', task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}

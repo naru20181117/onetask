@@ -16,10 +16,6 @@ class Task < ApplicationRecord
     untouched: 0, wip: 1, done: 2
   }
 
-  enum priority: {
-    low: 0, medium: 1, high: 2
-  }
-
   scope :search_task, ->(content) do
     if content.present?
       where("name LIKE?", "%#{content}%")
@@ -29,12 +25,6 @@ class Task < ApplicationRecord
   scope :search_status, ->(status) do
     if status.present?
       where(status: status)
-    end
-  end
-
-  scope :search_priority, ->(priority) do
-    if priority.present?
-      where(priority: priority)
     end
   end
 
