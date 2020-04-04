@@ -169,8 +169,8 @@ RSpec.describe "Tasks", type: :system do
     describe 'validation of search method' do
       before do
         visit tasks_path
-        create :task, name: "first_task", status: "untouched", priority: "low"
-        create :task, name: "second_task", status: "wip", priority: "high"
+        create :task, name: "first_task", status: "untouched"
+        create :task, name: "second_task", status: "wip"
       end
       context 'when search task name' do
         it 'is valid to search properly' do
@@ -188,26 +188,13 @@ RSpec.describe "Tasks", type: :system do
           expect(page).not_to have_selector '.task_status', text: 'wip'
         end
       end
-      context 'when search Priority properly' do
-        it 'is valid to search properly' do
-          select "High", from: 'search[priority]'
-          click_button "検索"
-          expect(page).to have_selector '.task_priority', text: 'high'
-          expect(page).not_to have_selector '.task_priority', text: 'low'
-        end
-      end
-      context 'when search task name and Status and Priority properly' do
-        before do
-          create :task, name: "first_task[A]", status: "done", priority: "medium"
-          create :task, name: "first_task[B]", status: "done", priority: "high"
-        end
+      context 'when search task name and Status properly' do
+        before { create :task, name: "first_task[A]", status: "done" }
         it 'is valid to search them properly' do
           fill_in 'search[content]', with: "first_task"
-          select "Done", from: 'search[status]'
-          select "High", from: 'search[priority]'
+          select "Untouched", from: 'search[status]'
           click_button "検索"
-          expect(page).to have_selector '.task_name', text: 'first_task[B]'
-          expect(page).not_to have_selector '.task_name', text: 'second_task'
+          expect(page).to have_selector '.task_name', text: 'first_task'
           expect(page).not_to have_selector '.task_name', text: 'first_task[A]'
         end
       end
