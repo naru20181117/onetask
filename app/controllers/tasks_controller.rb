@@ -68,7 +68,7 @@ class TasksController < ApplicationController
   end
 
   def sort_column
-    %w[created_at end_time].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
+    %w[created_at end_time priority].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
   end
 
   def content_params
