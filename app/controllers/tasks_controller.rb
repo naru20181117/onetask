@@ -10,9 +10,9 @@ class TasksController < ApplicationController
                    .page(params[:page]).per(6)
              else
                Task.select_desc(sort_column)
-                   .page(params[:page]).per(6).padding(3)
                    .search_task(content_params)
                    .search_status(status_params)
+                   .page(params[:page]).per(6)
              end
   end
 
@@ -59,7 +59,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :memo, :end_time, :status)
+    params.require(:task).permit(:name, :memo, :end_time, :status, :priority)
   end
 
   def search_params

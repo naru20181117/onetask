@@ -230,5 +230,16 @@ RSpec.describe "Tasks", type: :system do
         end
       end
     end
+    describe 'validation of pagination method' do
+      before do
+        create_list :task, 15
+        visit tasks_path
+      end
+      context 'when you can see the pagination' do
+        it 'can be seen the page less than 6 itmes' do
+          expect(all('.task_name').count).to eq 6
+        end
+      end
+    end
   end
 end
