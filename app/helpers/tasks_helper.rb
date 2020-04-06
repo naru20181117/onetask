@@ -8,4 +8,12 @@ module TasksHelper
   def end_time_sub
     params[:sort_column] == "end_time" ? '終了期限▼' : '終了期限△'
   end
+
+  def search_content_params
+    params["search"].present? ? params["search"]["content"] : nil
+  end
+
+  def search_status_params
+    params["search"].present? ? params["search"]["status"] : nil
+  end
 end
