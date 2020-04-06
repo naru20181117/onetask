@@ -16,6 +16,9 @@ table
       td = simple_format(task.memo)
       td.task_end_time
         = l task.end_time, format: :short
+      td.task_status
+        = task.status
       td = link_to 'Open', task
       td = link_to 'Edit', edit_task_path(task.id)
       td = button_to 'Delete', task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
+      td = button_to 'Done', done_path(task), method: :post

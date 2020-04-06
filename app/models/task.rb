@@ -12,5 +12,21 @@ class Task < ApplicationRecord
     end
   end
 
+  enum status: {
+    untouched: 0, wip: 1, done: 2
+  }
+
+  scope :search_task, ->(content) do
+    if content.present?
+      where("name LIKE?", "%#{content}%")
+    end
+  end
+
+  scope :search_status, ->(status) do
+    if status.present?
+      where(status: status)
+    end
+  end
+
   include Order
 end

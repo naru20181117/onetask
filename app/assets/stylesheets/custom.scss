@@ -5,6 +5,11 @@ body {
   -moz-appearance: none;
   appearance: none;
   .container{
-    margin: 16px;
+    margin: 8px 16px;
+  }
+}
+.container{
+  .task_item{
+    text-align: left;
   }
 }

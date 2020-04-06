@@ -7,4 +7,6 @@ ja:
         name: タスク名
         memo: メモ
         end_time: 終了期限
+        created_at: 作成時
+        status: ステータス
 

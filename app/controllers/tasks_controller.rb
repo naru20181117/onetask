@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_task, only: %i(show edit update destroy)
+  before_action :set_task, only: %i(show edit update destroy done)
 
   def index
-    @tasks = Task.select_desc(sort_column)
+    @tasks = if params["search"].nil?
+               Task.select_desc(sort_column)
+             else
+               Task.select_desc(sort_column)
+                   .search_task(content_params)
+                   .search_status(status_params)
+             end
   end
 
   def new
@@ -42,10 +48,19 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  def done
+    @task.done!
+    redirect_to tasks_path
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:name, :memo, :end_time)
+    params.require(:task).permit(:name, :memo, :end_time, :status)
+  end
+
+  def search_params
+    params.require(:task).permit(:name, :status)
   end
 
   def set_task
@@ -54,5 +69,13 @@ class TasksController < ApplicationController
 
   def sort_column
     %w[created_at end_time].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
+  end
+
+  def content_params
+    params["search"].permit(:content)["content"]
+  end
+
+  def status_params
+    params["search"].permit(:status)["status"]
   end
 end

@@ -142,4 +142,62 @@ RSpec.describe "Tasks", type: :system do
       end
     end
   end
+  describe 'status' do
+    describe 'edit status' do
+      let!(:task) { create :task }
+      before { visit tasks_path }
+      context 'when click the Done button' do
+        it 'change the status Done' do
+          expect(task.status).to eq "untouched"
+          click_button "Done"
+          expect(current_path).to eq tasks_path
+          expect(page).to have_selector '.task_status', text: "done"
+        end
+      end
+      context 'edit name with select' do
+        it "enables me to edit status" do
+          click_link "Edit"
+          select "wip", from: 'task[status]'
+          expect(page).to have_select('task[status]', selected: 'wip')
+          click_button "Submit"
+          expect(page).to have_content 'wip'
+          expect(page).not_to have_content "not yet"
+          expect(page).to have_selector '.task_status', text: "wip"
+        end
+      end
+    end
+    describe 'validation of search method' do
+      before do
+        visit tasks_path
+        create :task, name: "first_task", status: "untouched"
+        create :task, name: "second_task", status: "wip"
+      end
+      context 'when search task name' do
+        it 'is valid to search properly' do
+          fill_in 'search[content]', with: "first_task"
+          click_button "検索"
+          expect(page).to have_content 'first_task'
+          expect(page).not_to have_content 'second_task'
+        end
+      end
+      context 'when search Status properly' do
+        it 'is valid to search properly' do
+          select "Untouched", from: 'search[status]'
+          click_button "検索"
+          expect(page).to have_selector '.task_status', text: 'untouched'
+          expect(page).not_to have_selector '.task_status', text: 'wip'
+        end
+      end
+      context 'when search task name and Status properly' do
+        before { create :task, name: "first_task[A]", status: "done" }
+        it 'is valid to search them properly' do
+          fill_in 'search[content]', with: "first_task"
+          select "Untouched", from: 'search[status]'
+          click_button "検索"
+          expect(page).to have_selector '.task_name', text: 'first_task'
+          expect(page).not_to have_selector '.task_name', text: 'first_task[A]'
+        end
+      end
+    end
+  end
 end
