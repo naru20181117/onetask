@@ -2,6 +2,7 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy done)
+  # before_action :params_permit, only: %i(index)
 
   def index
     @tasks = if params["search"].nil?
