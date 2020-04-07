@@ -72,10 +72,10 @@ class TasksController < ApplicationController
   end
 
   def content_params
-    params["search"].permit(:content)["content"]
+    params["search"].permit!["content"]
   end
 
   def status_params
-    params["search"].permit(:status)["status"]
+    params["search"].permit!["status"]
   end
 end
