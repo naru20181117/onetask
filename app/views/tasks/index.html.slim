@@ -8,6 +8,8 @@ table
       = end_time_sub
     th.create_pointer onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
       = created_at_sub
+    th.priority_pointer onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
+      = priority_sub
   - @tasks.each do |task|
     tr
       td = task.id
@@ -18,6 +20,8 @@ table
         = l task.end_time, format: :short
       td.task_status
         = task.status
+      td.task_priority
+        = task.priority
       td = link_to 'Open', task
       td = link_to 'Edit', edit_task_path(task.id)
       td = button_to 'Delete', task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}

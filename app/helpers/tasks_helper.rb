@@ -9,6 +9,10 @@ module TasksHelper
     params[:sort_column] == "end_time" ? '終了期限▼' : '終了期限△'
   end
 
+  def priority_sub
+    params[:sort_column] == "priority" ? '優先度▼' : '優先度△'
+  end
+
   def search_content_params
     params["search"].present? ? params["search"]["content"] : nil
   end

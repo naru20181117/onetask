@@ -199,5 +199,20 @@ RSpec.describe "Tasks", type: :system do
         end
       end
     end
+    describe 'validation of priority method' do
+      context 'when click the sort pointer' do
+        before do
+          visit tasks_path
+          create :task, priority: "low"
+          create :task, priority: "medium"
+          create :task, priority: "high"
+        end
+        it 'arrange the priority order by desc' do
+          find('.priority_pointer').click
+          task_priority = all('.task_priority')
+          expect(task_priority.map(&:text)).to eq Task.order(priority: :desc).map(&:priority)
+        end
+      end
+    end
   end
 end

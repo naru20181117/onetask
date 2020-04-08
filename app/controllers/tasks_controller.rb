@@ -56,7 +56,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :memo, :end_time, :status)
+    params.require(:task).permit(:name, :memo, :end_time, :status, :priority)
   end
 
   def search_params
@@ -68,14 +68,14 @@ class TasksController < ApplicationController
   end
 
   def sort_column
-    %w[created_at end_time].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
+    %w[created_at end_time priority].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
   end
 
   def content_params
-    params["search"].permit(:content)["content"]
+    params["search"].permit!["content"]
   end
 
   def status_params
-    params["search"].permit(:status)["status"]
+    params["search"].permit!["status"]
   end
 end
