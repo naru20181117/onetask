@@ -1,6 +1,6 @@
 h1 Tasks Table
-table
-  tr.task_item
+table class = "table table-hover"
+  tr class = "task_item  bg-white"
     th ID
     th = Task.human_attribute_name(:name)
     th = Task.human_attribute_name(:memo)
@@ -11,7 +11,7 @@ table
     th.priority_pointer onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
       = priority_sub
   - @tasks.each do |task|
-    tr
+    tr class="shadow-sm p-3 mb-5 rounded"
       td = task.id
       td.task_name
         = task.name
