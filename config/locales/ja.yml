@@ -3,3 +3,10 @@ ja:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
       short:  "%m/%d"
+  views:
+    pagination:
+      first: <i class="fa fa-angle-double-left"></i>
+      last: <i class="fa fa-angle-double-right"></i>
+      previous: <i class="fa fa-angle-left"></i>
+      next: <i class="fa fa-angle-right"></i>
+      truncate: "..."
