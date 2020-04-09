@@ -1,5 +1,5 @@
-.base_job_template: &base_job_definition
-  image: circleci/ruby:2.7.0-buster-node-browsers
+.base_job_template: &base_job_template
+  image: rubydev/ruby-chrome:2.7
   tags:
     - docker
   variables:
@@ -8,22 +8,20 @@
   cache:
     untracked: true
     key: "$CI_COMMIT_REF_SLUG"
-    key:
-      files:
-        - Gemfile.lock
-        - package.json
-      prefix: "$CI_COMMIT_REF_SLUG"
     paths:
       - vendor/bundle
       - node_modules
 
 .test_job_template: &test_job_template
-  <<: *base_job_definition
+  <<: *base_job_template
   services:
     - postgres:12.1
   stage: test
   before_script:
-    - bundle install --path vendor/bundle
+    - "echo 'gem: --no-rdoc --no-ri' > ~/.gemrc"
+    - gem install bundler
+    - bundle config set path 'vendor/bundle'
+    - bundle install -j4
     - cp config/database.yml.sample.ci config/database.yml
 
 stages:
@@ -31,9 +29,17 @@ stages:
 
 rubocop:
   <<: *test_job_template
-  script: bundle exec rubocop
-  allow_failure: true
+  script:
+    - bundle exec rubocop
 
+# 以下は、slimlint を使う場合です。
+# 試してませんので誤りがある場合は各自で試してください。
+# slimlint:
+#   <<: *test_job_template
+#   script:
+#     - bundle exec slimlint
+
+# TODO: rspec 導入後に最後に `- bundle exec rspec` を追加してください。
 rspec:
   <<: *test_job_template
   script:
