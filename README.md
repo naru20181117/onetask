@@ -28,11 +28,11 @@ $ git push heroku master
 ```
 ### Set your DB on Heroku
 ```
-heroku run rails db:migrate
+$ heroku run rails db:migrate
 ```
 ### Set your seed on Heroku
 ```
-heroku run rake db:seed
+$ heroku run rails db:seed
 ```
 
 

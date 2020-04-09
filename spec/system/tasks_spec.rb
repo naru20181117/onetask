@@ -223,7 +223,6 @@ RSpec.describe "Tasks", type: :system do
           create :task, priority: "high"
         end
         it 'arrange the priority order by desc' do
-          visit tasks_path
           find('.priority_pointer').click
           task_priority = all('.task_priority')
           expect(task_priority.map(&:text)).to eq Task.order(priority: :desc).map(&:priority)
