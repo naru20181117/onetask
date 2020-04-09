@@ -6,12 +6,12 @@ class TasksController < ApplicationController
   def index
     @tasks = if params["search"].nil?
                Task.select_desc(sort_column)
-                   .page(params[:page]).per(6)
+                   .page(params[:page])
              else
                Task.select_desc(sort_column)
                    .search_task(content_params)
                    .search_status(status_params)
-                   .page(params[:page]).per(6)
+                   .page(params[:page])
              end
   end
 
