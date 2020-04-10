@@ -74,20 +74,20 @@ RSpec.describe "Tasks", type: :system do
       end
     end
 
-    # describe '#destroy' do
-    #   context 'click the delete button' do
-    #     let!(:task) { create :task }
-    #     it "enables me to destroy task" do
-    #       visit tasks_path
-    #       expect(Task.count).to eq 1
-    #       find('.fa.fa-trash').click
-    #       page.driver.browser.switch_to.alert.accept
-    #       expect(page).not_to have_content("hoge")
-    #       expect(page).to have_selector '.notice', text: "Deleted the task"
-    #       expect(Task.count).to eq 0
-    #     end
-    #   end
-    # end
+    describe '#destroy' do
+      context 'click the delete button' do
+        let!(:task) { create :task }
+        it "enables me to destroy task" do
+          visit tasks_path
+          expect(Task.count).to eq 1
+          find('.fa.fa-trash').click
+          page.driver.browser.switch_to.alert.accept
+          expect(page).not_to have_content("hoge")
+          expect(page).to have_selector '.notice', text: "Deleted the task"
+          expect(Task.count).to eq 0
+        end
+      end
+    end
   end
 
   describe 'order' do

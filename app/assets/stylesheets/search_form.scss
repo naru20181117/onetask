@@ -1,12 +1,9 @@
 .search_form {
-  text-align: right;
-  .form-row {
-    margin: 0;
-    margin-left: auto;
-    .form{
-      margin-left: 100px;
-    }
+  .form-group{
+    margin: 3px;
+    text-align: right;
   }
-  .form-group {
-  }
+}
+form .btn{
+  margin-top: 5px;
 }
