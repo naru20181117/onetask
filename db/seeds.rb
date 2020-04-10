@@ -1,15 +1,9 @@
 # frozen_string_literal: true
 
-table_names = %w(
+environment = Rails.env
+path = Rails.root.join("db/seeds", environment, "seeds.rb")
 
-)
-
-table_names.each do |table_name|
-  environment = Rails.env
-
-  path = Rails.root.join("db/seeds", environment, table_name + ".rb")
-  if File.exist?(path)
-    puts "#{table_name}..."
-    require path
-  end
+if File.exist?(path)
+  require path
 end
+puts "#{path}..."
