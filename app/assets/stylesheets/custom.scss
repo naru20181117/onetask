@@ -16,19 +16,11 @@ body {
     text-align: left;
   }
 }
-.table td {
-  padding: 20px;
-}
 .table{
   padding: 20px;
   td{
-    padding: 0;
-    .task_id{
-      padding: 0;
-    }
     a{
       height: 100%;
-      padding: 0;
       margin: 0 12px 12px 0;
     }
   }

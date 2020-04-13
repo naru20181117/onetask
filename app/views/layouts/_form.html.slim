@@ -1,4 +1,4 @@
-.form class="shadow p-5 rounded"
+.form.shadow.p-5.rounded
   = form_with(model: @task, local: true, class: 'form-group') do |f|
     == render 'shared/error', model: f.object
     .form-group
@@ -10,7 +10,6 @@
     .form-row
       .col-md-3
         = f.label :end_time
-          / i class="fa fa-calender fa-lg"
         = f.date_field :end_time, class: 'form-control'
       .col-md-3
         = f.label :status

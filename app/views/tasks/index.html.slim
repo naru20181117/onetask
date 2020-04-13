@@ -1,17 +1,19 @@
 h1 Tasks Table
-table class = "table table-hover"
-  tr class = "task_category bg-white"
+table.table.table-hover.table-sm
+  tr.task_category.bg-white
     th ID
     th = Task.human_attribute_name(:name)
     th = Task.human_attribute_name(:memo)
-    th.end_pointer onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
+    th.end_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
       = end_time_sub
-    th.create_pointer onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
-      = created_at_sub
-    th.priority_pointer onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
+    th = Task.human_attribute_name(:status)
+    th.priority_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
       = priority_sub
+    th
+    th.create_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
+      = created_at_sub
   - @tasks.each do |task|
-    tr class="task_category shadow-sm rounded"
+    tr.task_category.shadow-sm.rounded
       td.task_id
         = link_to task
           = task.id
@@ -26,8 +28,8 @@ table class = "table table-hover"
       td.task_priority
         = task.priority
       td = link_to edit_task_path(task.id)
-        i class="fa fa-edit fa-2x"
+        i.fa.fa-edit.fa-2x
       td = link_to task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
-        i class="fa fa-trash fa-2x"
-      td = button_to 'Done', done_path(task), method: :post
+        i.fa.fa-trash.fa-2x
+      td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
 = paginate @tasks
