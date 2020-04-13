@@ -28,8 +28,13 @@ $ git push heroku master
 ```
 ### Set your DB on Heroku
 ```
-heroku run rails db:migrate
+$ heroku run rails db:migrate
 ```
+### Set your seed on Heroku
+```
+$ heroku run rails db:seed
+```
+
 
 ## Userモデル
 | カラム名 | データ型

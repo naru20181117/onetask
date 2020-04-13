@@ -71,4 +71,12 @@ RSpec.describe Task do
       end
     end
   end
+  describe 'valid_priority' do
+    context "when the priority is nil" do
+      let(:task) { build :task }
+      it "is set to the default" do
+        expect(task.priority).to eq "low"
+      end
+    end
+  end
 end
