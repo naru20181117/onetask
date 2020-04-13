@@ -67,3 +67,7 @@ gem 'slim-rails'
 gem 'rails-i18n'
 
 gem 'kaminari'
+
+gem 'bootstrap', '~> 4.3.1'
+
+gem 'jquery-rails'

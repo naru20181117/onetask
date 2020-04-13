@@ -1,5 +1,9 @@
 .search_form
-  ul = form_tag(tasks_path, method: :get) do
-    li = search_field_tag('search[content]', search_content_params, placeholder: "検索")
-    li = select_tag 'search[status]', options_for_select({"- Choose Status -"=>"","Untouched"=>"0", "WIP"=>"1", "Done"=>"2"}, search_status_params)
-    li = submit_tag '検索', class:"btn btn-primary"
+  .float-right
+    .form-row = form_tag(tasks_path, method: :get) do
+      .form-group
+        = search_field_tag('search[content]', search_content_params, placeholder: "検索")
+      .form-group
+        = select_tag 'search[status]', options_for_select({"- Choose Status -"=>"","Untouched"=>"0", "WIP"=>"1", "Done"=>"2"}, search_status_params)
+      .form-group
+        = submit_tag '検索', class:"btn btn-outline-warning"

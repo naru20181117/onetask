@@ -1,18 +1,18 @@
 h1 Your Task
-dl
-  dt #{Task.human_attribute_name(:name)}:
-  dd
-    = @task.name
-  dt #{Task.human_attribute_name(:memo)}:
-  dd
-    = simple_format(@task.memo)
-  dt #{Task.human_attribute_name(:end_time)}:
-  dd = l @task.end_time
-  dt 作られた時間:
-  dd = l @task.created_at
-  dt アップデート時間:
-  dd = l @task.updated_at
-  dt #{Task.human_attribute_name(:status)}:
-  dd = @task.status
-  dt #{Task.human_attribute_name(:priority)}:
-  dd = @task.priority
+table.table
+  tr
+    th = Task.human_attribute_name(:name)
+    th = Task.human_attribute_name(:memo)
+    th = Task.human_attribute_name(:end_time)
+    th = Task.human_attribute_name(:created_at)
+    th = Task.human_attribute_name(:updated_at)
+    th = Task.human_attribute_name(:status)
+    th = Task.human_attribute_name(:priority)
+  tr
+  th = @task.name
+  th = simple_format(@task.memo)
+  th = l @task.end_time
+  th = l @task.created_at
+  th = l @task.updated_at
+  th = @task.status
+  th = @task.priority

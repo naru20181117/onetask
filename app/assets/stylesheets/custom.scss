@@ -6,10 +6,36 @@ body {
   appearance: none;
   .container{
     margin: 8px 16px;
+    .h1{
+      margin-bottom: 2rem;
+    }
   }
 }
 .container{
   .task_item{
     text-align: left;
   }
+}
+.table{
+  padding: 20px;
+  td{
+    a{
+      height: 100%;
+      margin: 0 12px 12px 0;
+    }
+  }
+}
+.pagination{
+  justify-content: center;
+}
+.pagination>li>a {
+  border: none;
+  color: #696969;
+}
+.pagination>.active>a {
+  background: #93c9ff;
+  border-radius: 15px;
+}
+.pagination>li>a:hover {
+  border-radius: 15px;
 }

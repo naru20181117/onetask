@@ -50,7 +50,7 @@ RSpec.describe "Tasks", type: :system do
       let!(:task) { create :task, name: "hoge" }
       before do
         visit tasks_path
-        click_link "Edit"
+        find('.fa.fa-edit').click
       end
       context 'edit name with valid words' do
         it "enables me to edit task" do
@@ -80,7 +80,7 @@ RSpec.describe "Tasks", type: :system do
         it "enables me to destroy task" do
           visit tasks_path
           expect(Task.count).to eq 1
-          click_button "Delete"
+          find('.fa.fa-trash').click
           page.driver.browser.switch_to.alert.accept
           expect(page).not_to have_content("hoge")
           expect(page).to have_selector '.notice', text: "Deleted the task"
@@ -156,7 +156,7 @@ RSpec.describe "Tasks", type: :system do
       end
       context 'edit name with select' do
         it "enables me to edit status" do
-          click_link "Edit"
+          find('.fa.fa-edit').click
           select "wip", from: 'task[status]'
           expect(page).to have_select('task[status]', selected: 'wip')
           click_button "Submit"
