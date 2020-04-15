@@ -20,8 +20,8 @@ RSpec.describe User, type: :model do
       let(:user) { build :user, email: nil }
       it { is_expected.to be_invalid }
     end
-    context "when the password_digest is nil" do
-      let(:user) { build :user, password_digest: nil }
+    context "when the password is nil" do
+      let(:user) { build :user, password: nil }
       it { is_expected.to be_invalid }
     end
   end
