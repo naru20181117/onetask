@@ -1,19 +1,19 @@
-h1 Sessions Login
-
-.form.shadow.p-5.rounded
-  = form_with(scope: :session, model: @user, local: true, class: 'form-group') do |f|
-    / == render 'shared/error', model: f.object
-    .form-group
-      = f.label :name
-      = f.text_field :name, class: 'form-control col-md-9' , placeholder: 'ユーザー名'
-    .form-group
-      = f.label :email
-      = f.text_area :email, class: 'form-control col-md-9', placeholder: '一意のメールアドレス'
-    .form-group
-      = f.label :password
-      = f.password_field :password, class: 'form-control col-md-9'
-    .form-group
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation, class: 'form-control col-md-9'
-    .form-group
-      = f.submit " 登録", class:"btn btn-outline-warning"
+- provide(:title, "User Login")
+.userLoginPage
+  .form.shadow.p-5.rounded
+    = form_with(scope: :session, model: @user, local: true, class: 'form-group') do |f|
+      / == render 'shared/error', model: f.object
+      .form-group
+        = f.label User.human_attribute_name(:name)
+        = f.text_field :name, class: 'form-control col-md-9' , placeholder: 'ユーザー名'
+      .form-group
+        = f.label User.human_attribute_name(:email)
+        = f.text_area :email, class: 'form-control col-md-9', placeholder: '一意のメールアドレス'
+      .form-group
+        = f.label User.human_attribute_name(:password)
+        = f.password_field :password, class: 'form-control col-md-9'
+      .form-group
+        = f.label  User.human_attribute_name(:password_confirmation)
+        = f.password_field :password_confirmation, class: 'form-control col-md-9'
+      .form-group
+        = f.submit " 登録", class:"btn btn-outline-warning"
