@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   post '/tasks/:id/done' => 'tasks#done', as: 'done'
   get '/login', to: 'sessions#new'
   get '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
 end

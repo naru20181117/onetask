@@ -1,7 +1,10 @@
 .header
-  nav
-    ul
-      li
-        = link_to 'One Task', root_path
-      li
-        = link_to 'New', new_task_path
+  ul
+    li
+      = link_to 'One Task', root_path
+    - if current_user
+      li= link_to 'New', new_task_path
+      li.nav-item= link_to 'ログアウト', logout_path, class: 'nav-link'
+    - else
+      li.nav-item= link_to 'ログイン', login_path, class: 'nav-link'
+
