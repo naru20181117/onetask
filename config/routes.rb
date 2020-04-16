@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :users
   post '/tasks/:id/done' => 'tasks#done', as: 'done'
   get '/login', to: 'sessions#new'
-  get '/login', to: 'sessions#create'
+  post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 end
