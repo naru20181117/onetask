@@ -20,7 +20,7 @@ RSpec.describe "Tasks", type: :system do
       end
     end
 
-    describe '#new' do
+    xdescribe '#new' do
       before do
         visit tasks_path
         click_link "New"
@@ -102,7 +102,8 @@ RSpec.describe "Tasks", type: :system do
   end
 
   describe 'end_time' do
-    describe 'validation of end_time' do
+    xdescribe 'validation of end_time' do
+      let!(:task) { create :task, name: "hoge" }
       before do
         visit tasks_path
         click_link "New"
