@@ -10,10 +10,3 @@ ja:
       previous: <i class="fa fa-angle-left"></i>
       next: <i class="fa fa-angle-right"></i>
       truncate: "..."
-  helpers:
-    label:
-      'session/user':
-        name: 名前
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: 確認用パスワード
