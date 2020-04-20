@@ -31,8 +31,8 @@ RSpec.configure do |config|
 
     # set screenshot settings
     config.after do |example|
-      if example.metadata[:type] == :feature and example.exception
-          page.save_screenshot 'screenshot/テスト失敗時スクリーンショット.png'
+      if example.metadata[:type] == :feature && example.exception
+        page.save_screenshot 'screenshot/テスト失敗時スクリーンショット.png'
       end
     end
   end

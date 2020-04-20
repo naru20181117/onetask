@@ -200,4 +200,15 @@ Style/HashTransformKeys:
 # ハッシュの値を変える
 Style/HashTransformValues:
   Enabled: false
-
+# 例外処理を避ける
+Lint/RaiseException:
+  Enabled: false
+# 指数関数の表記方法一貫させる
+Style/ExponentialNotation:
+  Enabled: false
+# スペースの有無を確認
+Layout/SpaceAroundMethodCallOperator :
+  Enabled: false
+# 期待しない上書きを抑制
+Lint/StructNewOverride:
+  Enabled: false
