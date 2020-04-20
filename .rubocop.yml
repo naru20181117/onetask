@@ -202,13 +202,13 @@ Style/HashTransformValues:
   Enabled: false
 # 例外処理を避ける
 Lint/RaiseException:
-  Enabled: false
+  Enabled: true
 # 指数関数の表記方法一貫させる
 Style/ExponentialNotation:
-  Enabled: false
+  Enabled: true
 # スペースの有無を確認
 Layout/SpaceAroundMethodCallOperator :
-  Enabled: false
+  Enabled: true
 # 期待しない上書きを抑制
 Lint/StructNewOverride:
-  Enabled: false
+  Enabled: true
