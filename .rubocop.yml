@@ -191,7 +191,7 @@ Naming/MethodParameterName:
 #クラス内のクラスなどを定義する際の形式を指定しない
 Style/ClassAndModuleChildren:
   Enabled: false
-#　ハッシュに対しての繰り返し
+# ハッシュに対しての繰り返し
 Style/HashEachMethods:
   Enabled: false
 # ハッシュのキーを変える

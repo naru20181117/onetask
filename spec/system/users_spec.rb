@@ -12,13 +12,13 @@ RSpec.describe "Users", type: :system do
     end
     context 'click the login button' do
       it "enables me to login" do
-        expect(current_path).to eq root_path
+        expect(current_path).to eq tasks_path
         expect(page).to have_content("New")
       end
     end
     context 'click the logout button' do
+      before { click_link "ログアウト" }
       it "enables me to logout" do
-        click_link "ログアウト"
         expect(current_path).to eq login_path
       end
     end
@@ -27,12 +27,13 @@ RSpec.describe "Users", type: :system do
   describe 'user tasks' do
     before do
       visit login_path
-      fill_in "session[email]", with: login_user.email
-      fill_in "session[password]", with: login_user.password
+      fill_in "メールアドレス", with: login_user.email
+      fill_in "パスワード", with: login_user.password
       click_button "Login"
     end
-    let(:user_a) { create :user, name: "userA", email: 'a@example.com' }
-    let(:user_b) { create :user, name: "userB", email: 'b@example.com' }
+
+    let(:user_a) { create :user, email: 'a@example.com' }
+    let(:user_b) { create :user, email: 'b@example.com' }
     context 'when login userA' do
       before do
         create :task, name: "taskA", user: user_a
