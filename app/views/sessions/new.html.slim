@@ -2,7 +2,6 @@
 .userLoginPage
   .form.shadow.p-5.rounded
     = form_with(scope: :session, model: @user, local: true, class: 'form-group') do |f|
-      / == render 'shared/error', model: f.object
       .form-group
         = f.label :email, 'メールアドレス'
         = f.text_field :email, class: 'form-control col-md-9', placeholder: '一意のメールアドレス'

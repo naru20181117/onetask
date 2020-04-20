@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.tasks.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = "もっとタスクを増やしていこう！"
       redirect_to @task
