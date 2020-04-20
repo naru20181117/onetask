@@ -4,12 +4,7 @@ require 'rails_helper'
 RSpec.describe "Tasks", type: :system do
   let(:user_a) { create :user, name: "userA", email: 'a@example.com' }
   describe 'crud' do
-    before do
-      visit login_path
-      fill_in "session[email]", with: login_user.email
-      fill_in "session[password]", with: login_user.password
-      click_button "Login"
-    end
+    before { sign_in }
     describe '#index' do
       context 'click the home button' do
         before do
@@ -125,12 +120,7 @@ RSpec.describe "Tasks", type: :system do
   end
 
   describe 'end_time' do
-    before do
-      visit login_path
-      fill_in "session[email]", with: login_user.email
-      fill_in "session[password]", with: login_user.password
-      click_button "Login"
-    end
+    before { sign_in }
     describe 'validation of end_time' do
       before do
         visit tasks_path
@@ -177,12 +167,7 @@ RSpec.describe "Tasks", type: :system do
   end
 
   describe 'status' do
-    before do
-      visit login_path
-      fill_in "session[email]", with: login_user.email
-      fill_in "session[password]", with: login_user.password
-      click_button "Login"
-    end
+    before { sign_in }
     describe 'edit status' do
       let(:login_user) { user_a }
       before do

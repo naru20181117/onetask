@@ -66,6 +66,8 @@ RSpec.configure do |config|
   # allow using factorybot without write Class name 'FactoryBot'
   config.include FactoryBot::Syntax::Methods
 
+  config.include Helpers::Authentication, type: :system
+
   # set headless chrome setting
   config.before(:each, type: :system) do
     driven_by :selenium, using: :headless_chrome, options: { args: ['no-sandbox'] }
