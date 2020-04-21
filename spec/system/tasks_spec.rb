@@ -3,6 +3,7 @@
 require 'rails_helper'
 RSpec.describe "Tasks", type: :system do
   let(:user_a) { create :user, name: "userA", email: 'a@example.com' }
+
   describe 'crud' do
     before { sign_in }
     describe '#index' do
@@ -31,6 +32,7 @@ RSpec.describe "Tasks", type: :system do
         click_link "New"
       end
       let(:login_user) { user_a }
+
       context "create new task with name" do
         it "enable to create one" do
           fill_in "タスク名", with: "My Task"
@@ -41,6 +43,7 @@ RSpec.describe "Tasks", type: :system do
           expect(page).to have_selector '.success', text: "もっとタスクを増やしていこう！"
         end
       end
+
       context 'create new task with name nil' do
         it "disable to create any" do
           visit tasks_path
@@ -70,6 +73,7 @@ RSpec.describe "Tasks", type: :system do
           expect(login_user.tasks.first.name).to have_content "hoge"
         end
       end
+
       context 'edit name with valid words' do
         it "enables me to edit task" do
           fill_in "タスク名", with: "Edited_Task"
@@ -128,6 +132,7 @@ RSpec.describe "Tasks", type: :system do
         fill_in "タスク名", with: "My Task"
       end
       let(:login_user) { user_a }
+
       context 'the end_time is before Today' do
         it 'let you can see the zero task' do
           expect(login_user.tasks.count).to eq 0
@@ -139,6 +144,7 @@ RSpec.describe "Tasks", type: :system do
           expect(login_user.tasks.count).to eq 0
         end
       end
+
       context 'the end_time is after Today' do
         it 'is valid' do
           expect(login_user.tasks.count).to eq 0
@@ -149,6 +155,7 @@ RSpec.describe "Tasks", type: :system do
         end
       end
     end
+
     describe 'order by end_time' do
       context 'when click the sort pointer' do
         before { create_list :task, 3, user: user_a }
@@ -174,6 +181,7 @@ RSpec.describe "Tasks", type: :system do
         create :task, status: "untouched", user: user_a
         visit tasks_path
       end
+
       context 'when click the Done button' do
         it 'change the status Done' do
           expect(page).to have_selector '.task_status', text: "untouched"
@@ -182,6 +190,7 @@ RSpec.describe "Tasks", type: :system do
           expect(page).to have_selector '.task_status', text: "done"
         end
       end
+
       context 'edit name with select' do
         it "enables me to edit status" do
           find('.fa.fa-edit').click
@@ -201,6 +210,7 @@ RSpec.describe "Tasks", type: :system do
         visit tasks_path
       end
       let(:login_user) { user_a }
+
       context 'when search task name' do
         before { create :task, name: "first_task", user: user_a }
         it 'is valid to search properly' do
@@ -210,6 +220,7 @@ RSpec.describe "Tasks", type: :system do
           expect(page).not_to have_content 'second_task'
         end
       end
+
       context 'when search Status properly' do
         it 'is valid to search properly' do
           select "Untouched", from: 'search[status]'
@@ -218,6 +229,7 @@ RSpec.describe "Tasks", type: :system do
           expect(page).not_to have_selector '.task_status', text: 'wip'
         end
       end
+
       context 'when search task name and Status properly' do
         before do
           create :task, name: "first_task", status: "untouched", user: user_a

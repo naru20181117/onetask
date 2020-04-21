@@ -4,7 +4,8 @@
   User.create!(
     name: "User#{n}",
     email: "example#{n}@example.com",
-    password_digest: "password#{n}"
+    password: "password",
+    password_confirmation: "password"
   )
 end
 
@@ -40,4 +41,3 @@ end
     user_id: 1
   )
 end
-

@@ -207,7 +207,7 @@ Lint/RaiseException:
 Style/ExponentialNotation:
   Enabled: true
 # スペースの有無を確認
-Layout/SpaceAroundMethodCallOperator :
+Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 # 期待しない上書きを抑制
 Lint/StructNewOverride:
