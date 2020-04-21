@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resourses :users
+  end
   root 'tasks#index'
   resources :tasks
   resources :users
