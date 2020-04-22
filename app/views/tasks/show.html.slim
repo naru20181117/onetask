@@ -1,18 +1,33 @@
 h1 Your Task
-table.table
+table.table.table-striped
   tr
     th = Task.human_attribute_name(:name)
-    th = Task.human_attribute_name(:memo)
-    th = Task.human_attribute_name(:end_time)
-    th = Task.human_attribute_name(:created_at)
-    th = Task.human_attribute_name(:updated_at)
-    th = Task.human_attribute_name(:status)
-    th = Task.human_attribute_name(:priority)
+    td = @task.name
   tr
-  th = @task.name
-  th = simple_format(@task.memo)
-  th = l @task.end_time
-  th = l @task.created_at
-  th = l @task.updated_at
-  th = @task.status
-  th = @task.priority
+    th = Task.human_attribute_name(:memo)
+    td = simple_format(@task.memo)
+  tr
+    th = Task.human_attribute_name(:end_time)
+    td = l @task.end_time
+  tr
+    th = Task.human_attribute_name(:created_at)
+    td = l @task.created_at
+  tr
+    th = Task.human_attribute_name(:updated_at)
+    td = l @task.updated_at
+  tr
+    th = Task.human_attribute_name(:status)
+    td = @task.status
+  tr
+    th = Task.human_attribute_name(:priority)
+    td = @task.priority
+
+.btn-group.d-flex.justify-content-center
+  .btn
+    = link_to edit_task_path(@task.id)
+      i.fa.fa-edit.fa-2x
+  .btn
+    = link_to @task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
+      i.fa.fa-trash.fa-2x
+  .btn
+    = button_to 'Done', done_path(@task), method: :post, class:"btn btn-outline-warning"
