@@ -1,2 +1,6 @@
-h1 Admin::Users#edit
-p Find me in app/views/admin/users/edit.html.slim
+- provide(:title,  "Edit User")
+h1 Edit User
+.nav.justfy-content-end
+  = link_to 'User all', admin_users_path, class: 'nav-link'
+.userEditPage
+== render partial: 'form', locals: { user: @user }
