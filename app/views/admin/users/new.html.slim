@@ -1,6 +1,4 @@
 - provide(:title, "Create User")
 h1 Create User
-.nav.justify-content-end
-  = link_to 'User all', admin_users_path, class: 'btn btn-outline-warning'
 .userCreatePage
   == render partial: 'form', locals: { user: @user }
