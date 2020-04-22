@@ -7,6 +7,7 @@ table.table.table-hover.table-sm
     th = User.human_attribute_name(:email)
     th = User.human_attribute_name(:admin)
     th = User.human_attribute_name(:created_at)
+    th タスク数
   - @users.each do |user|
     tr.user_category.shadow-sm.rounded
       td.user_id
@@ -18,9 +19,11 @@ table.table.table-hover.table-sm
       td.user_admin
         = user.admin? ? 'Admin' : 'Not admin'
       td = l user.created_at, format: :short
+      td = user.tasks.count
       td
-        = link_to edit_admin_user_path(user.id)
-          i.fa.fa-edit.fa-2x
-        = link_to [:admin, user], method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
-          i.fa.fa-trash.fa-2x
+        - if current_user.admin?
+          = link_to edit_admin_user_path(user.id)
+            i.fa.fa-edit.fa-2x
+          = link_to [:admin, user], method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
+            i.fa.fa-trash.fa-2x
 / = paginate @users
