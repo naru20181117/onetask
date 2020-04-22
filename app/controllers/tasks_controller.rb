@@ -5,13 +5,13 @@ class TasksController < ApplicationController
 
   def index
     @tasks = if params["search"].nil?
-               Task.select_desc(sort_column)
-                   .page(params[:page])
+               current_user.tasks.select_desc(sort_column)
+                           .page(params[:page])
              else
-               Task.select_desc(sort_column)
-                   .search_task(content_params)
-                   .search_status(status_params)
-                   .page(params[:page])
+               current_user.tasks.select_desc(sort_column)
+                           .search_task(content_params)
+                           .search_status(status_params)
+                           .page(params[:page])
              end
   end
 
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = "もっとタスクを増やしていこう！"
       redirect_to @task
@@ -66,7 +66,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def sort_column

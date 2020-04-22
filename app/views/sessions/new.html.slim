@@ -1,0 +1,12 @@
+- provide(:title, "User Login")
+.userLoginPage
+  .form.shadow.p-5.rounded
+    = form_with(scope: :session, model: @user, local: true, class: 'form-group') do |f|
+      .form-group
+        = f.label :email, 'メールアドレス'
+        = f.text_field :email, class: 'form-control col-md-9', placeholder: '一意のメールアドレス'
+      .form-group
+        = f.label :password, 'パスワード'
+        = f.password_field :password, class: 'form-control col-md-9'
+      .form-group
+        = f.submit 'Login', class:"btn btn-outline-warning"

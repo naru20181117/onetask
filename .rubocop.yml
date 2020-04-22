@@ -191,7 +191,7 @@ Naming/MethodParameterName:
 #クラス内のクラスなどを定義する際の形式を指定しない
 Style/ClassAndModuleChildren:
   Enabled: false
-#　ハッシュに対しての繰り返し
+# ハッシュに対しての繰り返し
 Style/HashEachMethods:
   Enabled: false
 # ハッシュのキーを変える
@@ -200,4 +200,15 @@ Style/HashTransformKeys:
 # ハッシュの値を変える
 Style/HashTransformValues:
   Enabled: false
-
+# 例外処理を避ける
+Lint/RaiseException:
+  Enabled: true
+# 指数関数の表記方法一貫させる
+Style/ExponentialNotation:
+  Enabled: true
+# スペースの有無を確認
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+# 期待しない上書きを抑制
+Lint/StructNewOverride:
+  Enabled: true
