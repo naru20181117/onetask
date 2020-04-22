@@ -1,7 +1,9 @@
 .header
   ul
-    li
-      = link_to 'One Task', root_path
+    ul
+      li.text-monospace.m-3
+        = "#{current_user.name} さん" if current_user.present?
+      li= link_to 'One Task', root_path
     - if current_user
       li= link_to 'New', new_task_path
       li

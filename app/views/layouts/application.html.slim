@@ -11,6 +11,6 @@ html
   body.body_reset
     == render 'layouts/header'
     == render 'layouts/flash'
+    == render 'shared/search_form' if current_user.present?
     .container
-      == render 'shared/search_form' if current_user.present?
       == yield
