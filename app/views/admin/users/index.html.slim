@@ -8,6 +8,8 @@ table.table.table-hover.table-sm
     th = User.human_attribute_name(:admin)
     th = User.human_attribute_name(:created_at)
     th タスク数
+    - if current_user.admin?
+      th 編集/削除
   - @users.each do |user|
     tr.user_category.shadow-sm.rounded
       td = link_to [:admin, user]
@@ -20,10 +22,10 @@ table.table.table-hover.table-sm
       td = l user.created_at, format: :short
       td.tasks_number
         = user.tasks.count
-      td
-        - if current_user.admin?
+      - if current_user.admin?
+        td
           = link_to edit_admin_user_path(user.id)
             i.fa.fa-edit.fa-2x
-          = link_to [:admin, user], method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
+          = link_to [:admin, user], method: :delete, data:{ confirm: "Are you sure you wanna delete 【#{user.name}】?"}
             i.fa.fa-trash.fa-2x
 

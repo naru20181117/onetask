@@ -15,7 +15,7 @@ table.table.table-hover.table-sm
   - @tasks.each do |task|
     tr.task_category.shadow-sm.rounded
       td.task_id
-        = link_to task
+        = link_to task do
           = task.id
       td.task_name
         = task.name
@@ -30,7 +30,7 @@ table.table.table-hover.table-sm
       td
         = link_to edit_task_path(task.id)
           i.fa.fa-edit.fa-2x
-        = link_to task, method: :delete, data:{ confirm: 'Are you sure you wanna delete this?'}
+        = link_to task, method: :delete, data:{ confirm: "Are you sure you wanna delete 【#{task.name}】?"}
           i.fa.fa-trash.fa-2x
       td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
 = paginate @tasks

@@ -27,7 +27,7 @@ RSpec.describe "Users", type: :system do
           create :task, user: login_user
           create :task, user: login_user
         end
-        it "enables me to see the User tasks numbfer" do
+        it "enables me to see the User tasks number" do
           visit admin_users_path
           expect(page).to have_selector '.tasks_number', text: '3'
           expect(current_path).to eq admin_users_path
@@ -51,20 +51,20 @@ RSpec.describe "Users", type: :system do
       context "create new User with name" do
         it "enable to create one" do
           fill_in "ユーザー名", with: "Created User"
-          fill_in "メールアドレス", with: "unique@mail.com"
+          fill_in "メールアドレス", with: "example@mail.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
           expect(current_path).to eq admin_users_path
           expect(page).to have_content("Users Table")
-          expect(page).to have_selector '.notice', text: "を登録しました。"
+          expect(page).to have_selector '.success', text: "を登録しました。"
         end
       end
 
       context 'create new User with name nil' do
         it "disable to create any" do
           fill_in "ユーザー名", with: ""
-          fill_in "メールアドレス", with: "unique1@mail.com"
+          fill_in "メールアドレス", with: "example1@mail.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
@@ -88,7 +88,7 @@ RSpec.describe "Users", type: :system do
       context 'create new User with password nil' do
         it "disable to create any" do
           fill_in "ユーザー名", with: "User Name"
-          fill_in "メールアドレス", with: "unique2@mail.com"
+          fill_in "メールアドレス", with: "example2@mail.com"
           fill_in "パスワード", with: ""
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
@@ -100,7 +100,7 @@ RSpec.describe "Users", type: :system do
       context 'create new User with password_confrimation nil' do
         it "disable to create any" do
           fill_in "ユーザー名", with: "User Name"
-          fill_in "メールアドレス", with: "unique3@mail.com"
+          fill_in "メールアドレス", with: "example3@mail.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: ""
           click_button "Submit"
@@ -130,7 +130,7 @@ RSpec.describe "Users", type: :system do
           click_button "Submit"
           expect(page).to have_content("User Page")
           expect(page).to have_content("Edited_User")
-          expect(page).to have_selector '.notice', text: "を更新しました。"
+          expect(page).to have_selector '.success', text: "を更新しました。"
         end
       end
     end
@@ -146,7 +146,7 @@ RSpec.describe "Users", type: :system do
           first('.fa.fa-trash').click
           page.driver.browser.switch_to.alert.accept
           expect(current_path).to eq admin_users_path
-          expect(page).not_to have_content("delete_user")
+          expect(page).to have_selector '.notice', text: "を削除しました。"
         end
       end
     end
