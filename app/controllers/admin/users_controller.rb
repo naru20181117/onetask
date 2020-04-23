@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
 
   def index
-    @users = User.includes(:tasks).all
+    @users = User.eager_load(:tasks).all.order(created_at: :desc)
   end
 
   def show; end
@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "ユーザー【#{@user.name}】を更新しました。"
     else
-      render :new
+      render :edit
     end
   end
 

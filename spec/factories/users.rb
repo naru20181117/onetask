@@ -5,5 +5,8 @@ FactoryBot.define do
     sequence(:name) { |n| "user#{n}" }
     sequence(:email) { |n| "example#{n}@example.com" }
     password { "password" }
+    password_confirmation { "password" }
+    admin { true }
+    sequence(:created_at) { |n| Time.current + n.hours }
   end
 end

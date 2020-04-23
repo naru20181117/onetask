@@ -13,7 +13,7 @@ ja:
         status: ステータス
         priority: 優先度
       user:
-        name: 名前
+        name: ユーザー名
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
