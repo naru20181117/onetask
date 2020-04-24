@@ -5,7 +5,7 @@ RSpec.describe "Users", type: :system do
   before { sign_in }
   let(:login_user) { create :user }
 
-  describe 'crud' do
+  describe '#crud' do
     before { visit admin_users_path }
     describe '#index' do
       context 'click the All user link' do
@@ -49,12 +49,18 @@ RSpec.describe "Users", type: :system do
     describe '#new' do
       before { click_link "新規登録" }
       context "create new User with name" do
-        it "enable to create one" do
+        subject do
           fill_in "ユーザー名", with: "Created User"
           fill_in "メールアドレス", with: "example@mail.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
+        end
+        it "enable to see changed user count" do
+          expect { subject }.to change { User.count }.from(1).to(2)
+        end
+        it "enable to create one" do
+          subject
           expect(current_path).to eq admin_users_path
           expect(page).to have_content("Users Table")
           expect(page).to have_selector '.success', text: "を登録しました。"
@@ -69,7 +75,11 @@ RSpec.describe "Users", type: :system do
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
           expect(page).to have_content("Create User")
-          expect(page).to have_content("ユーザー名を入力してください")
+          # expect(page).to have_selector '.error', text: "ユーザー名を入力してください"
+          within ".errors" do
+            error_message = page.find(".error").text
+            expect(error_message).to eq("ユーザー名を入力してください")
+          end
         end
       end
 
@@ -81,7 +91,7 @@ RSpec.describe "Users", type: :system do
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
           expect(page).to have_content("Create User")
-          expect(page).to have_content("メールアドレスを入力してください")
+          expect(page).to have_selector '.error', text: "メールアドレスを入力してください"
         end
       end
 
@@ -93,7 +103,7 @@ RSpec.describe "Users", type: :system do
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
           expect(page).to have_content("Create User")
-          expect(page).to have_content("パスワードを入力してください")
+          expect(page).to have_selector '.error', text: "パスワードを入力してください"
         end
       end
 
@@ -105,7 +115,7 @@ RSpec.describe "Users", type: :system do
           fill_in "確認用パスワード", with: ""
           click_button "Submit"
           expect(page).to have_content("Create User")
-          expect(page).to have_content("確認用パスワードとパスワードの入力が一致しません")
+          expect(page).to have_selector '.error', text: "確認用パスワードとパスワードの入力が一致しません"
         end
       end
     end
@@ -120,7 +130,7 @@ RSpec.describe "Users", type: :system do
           fill_in "ユーザー名", with: ""
           click_button "Submit"
           expect(page).to have_content("Edit User")
-          expect(page).to have_content("ユーザー名を入力してください")
+          expect(page).to have_selector '.error', text: "ユーザー名を入力してください"
         end
       end
 
