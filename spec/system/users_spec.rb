@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe "Users", type: :system do
   before { sign_in }
-  let(:login_user) { create :user }
+  let(:login_user) { create :user, email: "example@mail.com" }
 
   describe '#crud' do
     before { visit admin_users_path }
@@ -51,7 +51,7 @@ RSpec.describe "Users", type: :system do
       context "create new User with name" do
         subject do
           fill_in "ユーザー名", with: "Created User"
-          fill_in "メールアドレス", with: "example@mail.com"
+          fill_in "メールアドレス", with: "example0@mail.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
@@ -75,11 +75,7 @@ RSpec.describe "Users", type: :system do
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
           expect(page).to have_content("Create User")
-          # expect(page).to have_selector '.error', text: "ユーザー名を入力してください"
-          within ".errors" do
-            error_message = page.find(".error").text
-            expect(error_message).to eq("ユーザー名を入力してください")
-          end
+          expect(page).to have_selector '.error', text: "ユーザー名を入力してください"
         end
       end
 
@@ -92,6 +88,30 @@ RSpec.describe "Users", type: :system do
           click_button "Submit"
           expect(page).to have_content("Create User")
           expect(page).to have_selector '.error', text: "メールアドレスを入力してください"
+        end
+      end
+
+      context 'create new User with email nil' do
+        it "disable to create any" do
+          fill_in "ユーザー名", with: "User Name"
+          fill_in "メールアドレス", with: "example@mail.com"
+          fill_in "パスワード", with: "password"
+          fill_in "確認用パスワード", with: "password"
+          click_button "Submit"
+          expect(page).to have_content("Create User")
+          expect(page).to have_selector '.error', text: "メールアドレスはすでに存在します"
+        end
+      end
+
+      context 'create new User with invalid email form' do
+        it "disable to create any" do
+          fill_in "ユーザー名", with: "User Name"
+          fill_in "メールアドレス", with: "aaaaaa"
+          fill_in "パスワード", with: "password"
+          fill_in "確認用パスワード", with: "password"
+          click_button "Submit"
+          expect(page).to have_content("Create User")
+          expect(page).to have_selector '.error', text: "メールアドレスは不正な値です"
         end
       end
 
