@@ -5,7 +5,8 @@
     name: "User#{n}",
     email: "example#{n}@example.com",
     password: "password",
-    password_confirmation: "password"
+    password_confirmation: "password",
+    admin: true
   )
 end
 

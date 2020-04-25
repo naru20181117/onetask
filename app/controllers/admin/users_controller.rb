@@ -2,6 +2,7 @@
 
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
+  before_action :rescue403
 
   def index
     @users = User.eager_load(:tasks).order(created_at: :desc)
@@ -40,6 +41,11 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path, notice: "ユーザー【#{@user.name}】を削除しました。"
   end
 
+  class Forbidden < ActionController::ActionControllerError
+  end
+
+  rescue_from Forbidden, with: :rescue403
+
   private
 
   def user_params
@@ -48,5 +54,9 @@ class Admin::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def rescue403
+    render template: 'errors/forbidden', status: :forbidden
   end
 end
