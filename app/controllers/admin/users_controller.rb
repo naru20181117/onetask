@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
 
   def index
-    @users = User.preload(:tasks).order(created_at: :desc)
+    @users = User.eager_load(:tasks).order(created_at: :desc)
   end
 
   def show; end
