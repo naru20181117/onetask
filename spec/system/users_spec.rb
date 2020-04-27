@@ -4,7 +4,11 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   describe 'login method' do
     before { sign_in }
+<<<<<<< HEAD
     let(:login_user) { create :user, email: "example@example.com" }
+=======
+    let(:login_user) { create :user, email: "example@mail.com" }
+>>>>>>> 15697#Specの実装
     describe '#crud' do
       before { visit admin_users_path }
       describe '#index' do
