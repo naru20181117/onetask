@@ -37,8 +37,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: "ユーザー【#{@user.name}】を削除しました。"
+    @user.destroy ? flash[:notice] = "ユーザー【#{@user.name}】を削除しました。" : flash[:alert] = "少なくとも1つ、権限者アカウントが必要です"
+    redirect_to admin_users_path
   end
 
   class Forbidden < ActionController::ActionControllerError
@@ -49,7 +49,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation, :admin)
   end
 
   def set_user
@@ -57,6 +57,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def rescue403
-    render template: 'errors/forbidden', status: :forbidden
+    render template: 'errors/forbidden', status: :forbidden unless current_user.admin?
   end
 end
