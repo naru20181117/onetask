@@ -13,7 +13,7 @@ table.table.table-hover.table-sm
   - @users.each do |user|
     tr.user_category.shadow-sm.rounded
       td = link_to [:admin, user]
-          = user.id
+        = user.id
       td.user_name
         = user.name
       td = user.email
@@ -21,11 +21,10 @@ table.table.table-hover.table-sm
         = user.admin? ? 'Admin' : 'Not admin'
       td = l user.created_at, format: :short
       td.tasks_number
-        = user.tasks.count
+        = user.tasks.size
       - if current_user.admin?
         td
           = link_to edit_admin_user_path(user.id)
             i.fa.fa-edit.fa-2x
           = link_to [:admin, user], method: :delete, data:{ confirm: "Are you sure you wanna delete 【#{user.name}】?"}
             i.fa.fa-trash.fa-2x
-
