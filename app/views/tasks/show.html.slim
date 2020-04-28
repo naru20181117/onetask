@@ -21,6 +21,12 @@ table.table.table-striped
   tr
     th = Task.human_attribute_name(:priority)
     td = @task.priority
+  tr
+    th = Task.human_attribute_name(:label)
+    td
+      - @task.labels.each do |label|
+        .badge.badge-pill.badge-warning.mr-1
+          = label.name
 
 .btn-group.d-flex.justify-content-center
   .btn

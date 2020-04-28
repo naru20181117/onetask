@@ -42,3 +42,17 @@ end
     user_id: 1
   )
 end
+
+Label.create!(name: "HTML")
+
+Label.create!(name: "CSS")
+
+Label.create!(name: "JS")
+
+Label.create!(name: "Ruby")
+
+Label.create!(name: "Infra")
+
+Label.create!(name: "SQL")
+
+Label.create!(name: "etc")
