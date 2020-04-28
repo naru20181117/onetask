@@ -3,7 +3,7 @@
 require 'rails_helper'
 RSpec.describe "Users", type: :system do
   before { sign_in }
-  let(:login_user) { create :user, email: "example@mail.com" }
+  let(:login_user) { create :user, email: "example@example.com" }
 
   describe '#crud' do
     before { visit admin_users_path }
@@ -51,7 +51,7 @@ RSpec.describe "Users", type: :system do
       context "create new User with name" do
         subject do
           fill_in "ユーザー名", with: "Created User"
-          fill_in "メールアドレス", with: "example0@mail.com"
+          fill_in "メールアドレス", with: "example0@example.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
@@ -70,7 +70,7 @@ RSpec.describe "Users", type: :system do
       context 'create new User with name nil' do
         it "disable to create any" do
           fill_in "ユーザー名", with: ""
-          fill_in "メールアドレス", with: "example1@mail.com"
+          fill_in "メールアドレス", with: "example1@example.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
@@ -94,7 +94,7 @@ RSpec.describe "Users", type: :system do
       context 'create new User with email nil' do
         it "disable to create any" do
           fill_in "ユーザー名", with: "User Name"
-          fill_in "メールアドレス", with: "example@mail.com"
+          fill_in "メールアドレス", with: "example@example.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
@@ -118,7 +118,7 @@ RSpec.describe "Users", type: :system do
       context 'create new User with password nil' do
         it "disable to create any" do
           fill_in "ユーザー名", with: "User Name"
-          fill_in "メールアドレス", with: "example2@mail.com"
+          fill_in "メールアドレス", with: "example2@example.com"
           fill_in "パスワード", with: ""
           fill_in "確認用パスワード", with: "password"
           click_button "Submit"
@@ -130,7 +130,7 @@ RSpec.describe "Users", type: :system do
       context 'create new User with password_confrimation nil' do
         it "disable to create any" do
           fill_in "ユーザー名", with: "User Name"
-          fill_in "メールアドレス", with: "example3@mail.com"
+          fill_in "メールアドレス", with: "example3@example.com"
           fill_in "パスワード", with: "password"
           fill_in "確認用パスワード", with: ""
           click_button "Submit"
