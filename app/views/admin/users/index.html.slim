@@ -1,0 +1,30 @@
+h1 Users Table
+= link_to '新規登録', new_admin_user_path, class: 'btn btn-outline-warning'
+table.table.table-hover.table-sm
+  tr.user_category.bg-white
+    th ID
+    th = User.human_attribute_name(:name)
+    th = User.human_attribute_name(:email)
+    th = User.human_attribute_name(:admin)
+    th = User.human_attribute_name(:created_at)
+    th タスク数
+    - if current_user.admin?
+      th 編集/削除
+  - @users.each do |user|
+    tr.user_category.shadow-sm.rounded
+      td = link_to [:admin, user]
+        = user.id
+      td.user_name
+        = user.name
+      td = user.email
+      td.user_admin
+        = user.admin? ? 'Admin' : 'Not admin'
+      td = l user.created_at, format: :short
+      td.tasks_number
+        = user.tasks.size
+      - if current_user.admin?
+        td
+          = link_to edit_admin_user_path(user.id)
+            i.fa.fa-edit.fa-2x
+          = link_to [:admin, user], method: :delete, data:{ confirm: "Are you sure you wanna delete 【#{user.name}】?"}
+            i.fa.fa-trash.fa-2x

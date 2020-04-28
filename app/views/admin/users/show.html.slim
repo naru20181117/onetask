@@ -1,0 +1,54 @@
+- provide(:title, "User Page")
+h1 User Page
+
+table.table.table-striped
+  tbody
+    tr
+      th= User.human_attribute_name(:id)
+      td= @user.id
+    tr
+      th= User.human_attribute_name(:name)
+      td= @user.name
+    tr
+      th= User.human_attribute_name(:email)
+      td= @user.email
+    tr
+      th= User.human_attribute_name(:admin)
+      td= @user.admin? ? 'Admin' : 'Not admin'
+    tr
+      th= User.human_attribute_name(:created_at)
+      td= l @user.created_at
+    tr
+      th= User.human_attribute_name(:updated_at)
+      td= l @user.updated_at
+
+- if current_user.admin?
+  .nav.nav-pills.d-flex.justify-content-center
+    = link_to edit_admin_user_path(@user)
+      i.fa.fa-edit.fa-2x.btn.btn-outline-warning.rounded-circle
+    = link_to [:admin, @user], method: :delete, data:{ confirm: "Are you sure you wanna delete 【#{@user.name}】?"}
+      i.fa.fa-trash.fa-2x.btn.btn-outline-warning.rounded-circle
+
+- if @user.tasks.present?
+  table.table.table-hover.table-sm
+    tr.task_category.bg-white
+      th ID
+      th = Task.human_attribute_name(:name)
+      th = Task.human_attribute_name(:memo)
+      th = Task.human_attribute_name(:end_time)
+      th = Task.human_attribute_name(:status)
+      th = Task.human_attribute_name(:priority)
+    - @user.tasks.each do |task|
+      tr.task_category.shadow-sm.rounded
+        td.task_id
+          = link_to task do
+            = task.id
+        td.task_name
+          = task.name
+        td = simple_format(task.memo)
+        td.task_end_time
+          = l task.end_time, format: :short
+        td.task_status
+          = task.status
+        td.task_priority
+          = task.priority

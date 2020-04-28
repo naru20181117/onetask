@@ -1,0 +1,22 @@
+.form.shadow.p-5.rounded
+  = form_with( model: [:admin, @user], local: true, class: 'form-group') do |f|
+    == render 'shared/error', model: f.object
+    .form-group
+      = f.label :name, 'ユーザー名'
+      = f.text_field :name, class: 'form-control col-md-9', placeholder: 'ユーザー名'
+    .form-group
+      = f.label :email, 'メールアドレス'
+      = f.text_field :email, class: 'form-control col-md-9', placeholder: '一意のメールアドレス'
+    .form-check
+      = f.label :admin, class: 'form-check-label' do
+        = f.check_box :admin, class: 'form-check-input'
+        | 管理者権限
+    .form-group
+      = f.label :password, 'パスワード'
+      = f.password_field :password, class: 'form-control col-md-9'
+    .form-group
+      = f.label :password_confirmation, '確認用パスワード'
+      = f.password_field :password_confirmation, class: 'form-control col-md-9'
+    .form-group
+      = f.submit 'Submit', class:"btn btn-outline-warning"
+

@@ -9,10 +9,14 @@ ja:
         memo: メモ
         end_time: 終了期限
         created_at: 作成時
+        updated_at: 更新時
         status: ステータス
         priority: 優先度
       user:
-        name: 名前
+        name: ユーザー名
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+        admin: 管理者権限
+        created_at: 作成時
+        updated_at: 更新時
