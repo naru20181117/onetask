@@ -2,6 +2,7 @@
 
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
+  before_action :require_admin
 
   def index
     @users = User.eager_load(:tasks).order(created_at: :desc)
@@ -36,17 +37,25 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: "ユーザー【#{@user.name}】を削除しました。"
+    if @user.destroy
+      flash[:notice] = "ユーザー【#{@user.name}】を削除しました。"
+    else
+      flash[:alert] = @user.errors.full_messages[0]
+    end
+    redirect_to admin_users_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation, :admin)
   end
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def require_admin
+    raise Forbidden unless current_user.admin?
   end
 end

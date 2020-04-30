@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   before_action :login_required
 
+  class Forbidden < ActionController::ActionControllerError
+  end
+
+  rescue_from Forbidden, with: :rescue403
+
   if Rails.env.production?
     http_basic_authenticate_with name: ENV['BASIC_AUTH_NAME'], password: ENV['BASIC_AUTH_PASSWORD']
   end
@@ -16,5 +21,9 @@ class ApplicationController < ActionController::Base
 
   def login_required
     redirect_to login_path unless current_user
+  end
+
+  def rescue403
+    render template: 'errors/forbidden', status: :forbidden
   end
 end
