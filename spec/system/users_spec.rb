@@ -168,10 +168,10 @@ RSpec.describe "Users", type: :system do
       describe '#destroy' do
         before do
           create :user, name: "delete_user"
+          visit admin_users_path
         end
         context 'click the delete button' do
           it "enables me to destroy task" do
-            visit admin_users_path
             expect(page).to have_content("delete_user")
             first('.fa.fa-trash').click
             page.driver.browser.switch_to.alert.accept
@@ -200,22 +200,22 @@ RSpec.describe "Users", type: :system do
     before { sign_in }
     let(:login_user) { create :user, admin: false }
     context 'connet User index without admin right' do
+      before { visit admin_users_path }
       it 'makes you see the error page' do
-        visit admin_users_path
         expect(page).not_to have_content("Users Table")
         expect(page).to have_content("403 Forbidden")
       end
     end
     context 'connet User new without admin right' do
+      before { visit new_admin_user_path }
       it 'makes you see the error page' do
-        visit new_admin_user_path
         expect(page).not_to have_content("Users Table")
         expect(page).to have_content("403 Forbidden")
       end
     end
     context 'connet error page and click button' do
+      before { visit admin_users_path }
       it 'makes you see the tasks page' do
-        visit admin_users_path
         click_link 'Taskページへ戻る'
         expect(current_path).to eq tasks_path
         expect(page).to have_content("Tasks Table")

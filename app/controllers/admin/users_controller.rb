@@ -2,7 +2,7 @@
 
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
-  before_action :rescue403
+  before_action :require_admin
 
   def index
     @users = User.eager_load(:tasks).order(created_at: :desc)
@@ -37,14 +37,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy ? flash[:notice] = "ユーザー【#{@user.name}】を削除しました。" : flash[:alert] = "少なくとも1つ、権限者アカウントが必要です"
+    if @user.destroy
+      flash[:notice] = "ユーザー【#{@user.name}】を削除しました。"
+    else
+      flash[:alert] = @user.errors.full_messages[0]
+    end
     redirect_to admin_users_path
   end
-
-  class Forbidden < ActionController::ActionControllerError
-  end
-
-  rescue_from Forbidden, with: :rescue403
 
   private
 
@@ -56,7 +55,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def rescue403
-    render template: 'errors/forbidden', status: :forbidden unless current_user.admin?
+  def require_admin
+    raise Forbidden unless current_user.admin?
   end
 end
