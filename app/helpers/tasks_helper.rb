@@ -20,4 +20,8 @@ module TasksHelper
   def search_status_params
     params["search"].present? ? params["search"]["status"] : nil
   end
+
+  def search_label_params
+    params["search"].present? ? params["search"]["label"] : nil
+  end
 end

@@ -36,5 +36,12 @@ class Task < ApplicationRecord
     end
   end
 
+  scope :search_label, ->(label) do
+    if label.present?
+      tasks_id = Label.find(label).tasks.map(&:id)
+      where(id: tasks_id)
+    end
+  end
+
   include Order
 end

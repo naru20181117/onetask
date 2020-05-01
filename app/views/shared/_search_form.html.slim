@@ -6,4 +6,7 @@
       .form-group
         = select_tag 'search[status]', options_for_select({"- Choose Status -"=>"","Untouched"=>"0", "WIP"=>"1", "Done"=>"2"}, search_status_params)
       .form-group
+        = select_tag 'search[label]', options_for_select({"- Choose Label -"=>"","HTML"=>"1", "CSS"=>"2", "JS"=>"3", "Ruby"=>"4", "Infra"=>"5", "SQL"=>"6", "etc"=>"7"}, search_label_params)
+      .form-group
         = submit_tag '検索', class:"btn btn-outline-warning"
+
