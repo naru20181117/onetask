@@ -1,12 +1,11 @@
 .search_form
   .float-right
-    .form-row = form_tag(tasks_path, method: :get) do
+    .form-row = form_with url: tasks_path, method: :get, local: true do |f|
       .form-group
-        = search_field_tag('search[content]', search_content_params, placeholder: "検索")
+        = f.text_field('search[content]', placeholder: "検索")
       .form-group
-        = select_tag 'search[status]', options_for_select({"- Choose Status -"=>"","Untouched"=>"0", "WIP"=>"1", "Done"=>"2"}, search_status_params)
+        = f.select('search[status]', Task.statuses, { prompt: "- Choose Status -" })
       .form-group
-        = select_tag 'search[label]', options_for_select({"- Choose Label -"=>"","HTML"=>"1", "CSS"=>"2", "JS"=>"3", "Ruby"=>"4", "Infra"=>"5", "SQL"=>"6", "etc"=>"7"}, search_label_params)
+        = f.select('search[label]', Label.pluck(:name, :id), { prompt: "- Choose Label -" })
       .form-group
-        = submit_tag '検索', class:"btn btn-outline-warning"
-
+        = f.submit '検索', class:"btn btn-outline-warning"

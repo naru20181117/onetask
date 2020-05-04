@@ -12,16 +12,4 @@ module TasksHelper
   def priority_sub
     params[:sort_column] == "priority" ? '優先度▼' : '優先度△'
   end
-
-  def search_content_params
-    params["search"].present? ? params["search"]["content"] : nil
-  end
-
-  def search_status_params
-    params["search"].present? ? params["search"]["status"] : nil
-  end
-
-  def search_label_params
-    params["search"].present? ? params["search"]["label"] : nil
-  end
 end

@@ -38,8 +38,7 @@ class Task < ApplicationRecord
 
   scope :search_label, ->(label) do
     if label.present?
-      tasks_id = Label.find(label).tasks.map(&:id)
-      where(id: tasks_id)
+      joins(:labels).where('labels.id = ?', label)
     end
   end
 
