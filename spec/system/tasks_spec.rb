@@ -223,7 +223,7 @@ RSpec.describe "Tasks", type: :system do
 
       context 'when search Status properly' do
         it 'is valid to search properly' do
-          select "Untouched", from: 'search[status]'
+          select "untouched", from: 'search[status]'
           click_button "検索"
           expect(page).to have_selector '.task_status', text: 'untouched'
           expect(page).not_to have_selector '.task_status', text: 'wip'
@@ -237,7 +237,7 @@ RSpec.describe "Tasks", type: :system do
         end
         it 'is valid to search them properly' do
           fill_in 'search[content]', with: "first_task"
-          select "Untouched", from: 'search[status]'
+          select "untouched", from: 'search[status]'
           click_button "検索"
           expect(page).to have_selector '.task_name', text: 'first_task'
           expect(page).not_to have_selector '.task_name', text: 'first_task[A]'

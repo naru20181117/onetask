@@ -43,16 +43,12 @@ end
   )
 end
 
-Label.create!(name: "HTML")
-
-Label.create!(name: "CSS")
-
-Label.create!(name: "JS")
-
-Label.create!(name: "Ruby")
-
-Label.create!(name: "Infra")
-
-Label.create!(name: "SQL")
-
-Label.create!(name: "etc")
+Label.create([
+  { name: "HTML" },
+  { name: "CSS" },
+  { name: "JS" },
+  { name: "Ruby" },
+  { name: "Infra" },
+  { name: "SQL" },
+  { name: "etc" }
+])
