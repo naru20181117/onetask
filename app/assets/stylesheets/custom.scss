@@ -4,38 +4,51 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  .container{
+
+  .container {
     margin: 8px 16px;
-    .h1{
+
+    h1 {
       margin-bottom: 2rem;
     }
   }
 }
-.container{
-  .task_item{
+
+.container {
+  h1 {
+    margin: 40px 0;
+  }
+
+  .task_item {
     text-align: left;
   }
 }
-.table{
+
+.table {
   padding: 20px;
-  td{
-    a{
+
+  td {
+    a {
       height: 100%;
       margin: 0 12px 12px 0;
     }
   }
 }
-.pagination{
+
+.pagination {
   justify-content: center;
 }
+
 .pagination>li>a {
   border: none;
   color: #696969;
 }
+
 .pagination>.active>a {
   background: #93c9ff;
   border-radius: 15px;
 }
+
 .pagination>li>a:hover {
   border-radius: 15px;
 }

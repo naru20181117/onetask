@@ -9,7 +9,8 @@ table.table.table-hover.table-sm
     th = Task.human_attribute_name(:status)
     th.priority_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
       = priority_sub
-    th
+    th = Task.human_attribute_name(:label)
+    th 編集/削除
     th.create_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
       = created_at_sub
   - @tasks.each do |task|
@@ -27,6 +28,10 @@ table.table.table-hover.table-sm
         = task.status
       td.task_priority
         = task.priority
+      td
+        - task.labels.each do |label|
+          .badge.badge-pill.badge-warning.mr-1
+            = label.name
       td
         = link_to edit_task_path(task.id)
           i.fa.fa-edit.fa-2x

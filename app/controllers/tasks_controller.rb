@@ -5,13 +5,18 @@ class TasksController < ApplicationController
 
   def index
     @tasks = if params["search"].nil?
-               current_user.tasks.select_desc(sort_column)
-                           .page(params[:page])
+               Task.preload(:labels)
+                   .where(user: current_user)
+                   .select_desc(sort_column)
+                   .page(params[:page])
              else
-               current_user.tasks.select_desc(sort_column)
-                           .search_task(content_params)
-                           .search_status(status_params)
-                           .page(params[:page])
+               Task.preload(:labels)
+                   .where(user: current_user)
+                   .select_desc(sort_column)
+                   .search_task(content_params)
+                   .search_status(status_params)
+                   .search_label(label_params)
+                   .page(params[:page])
              end
   end
 
@@ -58,7 +63,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :memo, :end_time, :status, :priority)
+    params.require(:task).permit(:name, :memo, :end_time, :status, :priority, { label_ids: [] })
   end
 
   def search_params
@@ -79,5 +84,9 @@ class TasksController < ApplicationController
 
   def status_params
     params["search"].permit!["status"]
+  end
+
+  def label_params
+    params["search"].permit!["label"]
   end
 end

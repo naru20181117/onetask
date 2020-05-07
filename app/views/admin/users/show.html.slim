@@ -21,6 +21,7 @@ table.table.table-striped
     tr
       th= User.human_attribute_name(:updated_at)
       td= l @user.updated_at
+    tr
 
 - if current_user.admin?
   .nav.nav-pills.d-flex.justify-content-center
@@ -38,6 +39,7 @@ table.table.table-striped
       th = Task.human_attribute_name(:end_time)
       th = Task.human_attribute_name(:status)
       th = Task.human_attribute_name(:priority)
+      th = Task.human_attribute_name(:label)
     - @user.tasks.each do |task|
       tr.task_category.shadow-sm.rounded
         td.task_id
@@ -52,3 +54,8 @@ table.table.table-striped
           = task.status
         td.task_priority
           = task.priority
+        td
+          - task.labels.each do |label|
+            .badge.badge-pill.badge-warning.mr-1
+              = label.name
+

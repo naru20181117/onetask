@@ -12,6 +12,7 @@ ja:
         updated_at: 更新時
         status: ステータス
         priority: 優先度
+        label: ラベル
       user:
         name: ユーザー名
         email: メールアドレス

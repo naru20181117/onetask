@@ -1,6 +1,17 @@
 .form {
   margin-top: 5rem;
-  .btn{
+
+  .btn {
     margin-top: 15px;
+  }
+
+  .form-group {
+    .form-check-label {
+      margin: 10px 0;
+
+      label {
+        margin: 10px;
+      }
+    }
   }
 }

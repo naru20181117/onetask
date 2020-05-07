@@ -5,7 +5,8 @@
     name: "User#{n}",
     email: "example#{n}@example.com",
     password: "password",
-    password_confirmation: "password"
+    password_confirmation: "password",
+    admin: true
   )
 end
 
@@ -41,3 +42,13 @@ end
     user_id: 1
   )
 end
+
+Label.create([
+  { name: "HTML" },
+  { name: "CSS" },
+  { name: "JS" },
+  { name: "Ruby" },
+  { name: "Infra" },
+  { name: "SQL" },
+  { name: "etc" }
+])

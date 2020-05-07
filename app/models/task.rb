@@ -7,6 +7,8 @@ class Task < ApplicationRecord
   validate :date_not_before_today
 
   belongs_to :user
+  has_many :tasks_labels, dependent: :destroy
+  has_many :labels, through: :tasks_labels
 
   def date_not_before_today
     if end_time.nil? || (end_time.present? && end_time < Time.zone.today)
@@ -31,6 +33,12 @@ class Task < ApplicationRecord
   scope :search_status, ->(status) do
     if status.present?
       where(status: status)
+    end
+  end
+
+  scope :search_label, ->(label) do
+    if label.present?
+      joins(:labels).where('labels.id = ?', label)
     end
   end
 

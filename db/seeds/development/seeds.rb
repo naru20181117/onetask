@@ -42,3 +42,13 @@ end
     user_id: 1
   )
 end
+
+Label.create([
+  { name: "HTML" },
+  { name: "CSS" },
+  { name: "JS" },
+  { name: "Ruby" },
+  { name: "Infra" },
+  { name: "SQL" },
+  { name: "etc" }
+])
