@@ -2,12 +2,6 @@
 
 FactoryBot.define do
   factory :label do
-    name { "HTML" }
-    trait :label_css do
-      name { "CSS" }
-    end
-    trait :label_js do
-      name { "JS" }
-    end
+    sequence(:name) { |n| "label#{n}" }
   end
 end
