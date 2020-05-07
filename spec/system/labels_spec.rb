@@ -18,7 +18,7 @@ RSpec.describe "Labels", type: :system do
         fill_in "終了期限", with: Time.zone.tomorrow
         check "HTML"
         click_button "Submit"
-        expect(current_path).to eq task_path(login_user.tasks.map(&:id)[-1])
+        expect(current_path).to eq task_path(login_user.tasks.last)
         expect(page).to have_content("Your Task")
         expect(page).to have_selector '.badge', text: "HTML"
       end
@@ -27,7 +27,7 @@ RSpec.describe "Labels", type: :system do
 
   describe '#edit' do
     before do
-      create :label, :label_css
+      create :label, name: "CSS"
       find('.fa.fa-edit').click
     end
     context 'edit tasks label' do
@@ -44,8 +44,8 @@ RSpec.describe "Labels", type: :system do
   describe 'search label method' do
     let!(:task_css) { create :task, user: login_user }
     let!(:task_js) { create :task, user: login_user }
-    let(:css) { create :label, :label_css }
-    let(:js) { create :label, :label_js }
+    let(:css) { create :label, name: "CSS" }
+    let(:js) { create :label, name: "JS" }
     before do
       task_css.labels << css
       task_js.labels << js
