@@ -16,7 +16,7 @@ RSpec.describe "Errors", js: true, type: :system do
         allow_any_instance_of(SessionsController).to receive(:new).and_throw(Exception)
         visit login_path
       end
-      it 'shows 404 page' do
+      it 'shows 500 page' do
         expect(page).to have_content 'Internal　Server　Error'
       end
     end

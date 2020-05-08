@@ -3,6 +3,8 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
   before_action :login_required
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue404
+  rescue_from StandardError, with: :rescue500
 
   class Forbidden < ActionController::ActionControllerError
   end
@@ -25,5 +27,13 @@ class ApplicationController < ActionController::Base
 
   def rescue403
     render template: 'errors/forbidden', status: :forbidden
+  end
+
+  def rescue404
+    render file: 'public/404', status: :not_found, layout: false
+  end
+
+  def rescue500
+    render file: 'public/500', status: :internal_server_error, layout: false
   end
 end
