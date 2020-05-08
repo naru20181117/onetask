@@ -3,8 +3,8 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
   before_action :login_required
-  rescue_from ActiveRecord::RecordNotFound, with: :rescue404
   rescue_from StandardError, with: :rescue500
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue404
 
   class Forbidden < ActionController::ActionControllerError
   end
