@@ -49,7 +49,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: 'Deleted the task'
+    head :no_content
   end
 
   def done

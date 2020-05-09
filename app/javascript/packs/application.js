@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start();
-// require("turbolinks").start();
+require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 
@@ -16,8 +16,5 @@ require("custom/task");
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-
-import Rails from "rails-ujs";
-Rails.start();
 
 import "../stylesheets/application";
