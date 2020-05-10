@@ -55,7 +55,6 @@ table.table.table-striped
         td.task_priority
           = task.priority
         td
-          - task.labels.each do |label|
+          - Label.joins(:tasks_labels).where('task_id = ?', task.id).each do |label|
             .badge.badge-pill.badge-warning.mr-1
               = label.name
-
