@@ -98,7 +98,6 @@ RSpec.describe "Tasks", type: :system do
           find('.fa.fa-trash').click
           page.driver.browser.switch_to.alert.accept
           expect(page).not_to have_content("hoge")
-          expect(page).to have_selector '.notice', text: "Deleted the task"
           expect(login_user.tasks.count).to eq 0
         end
       end
