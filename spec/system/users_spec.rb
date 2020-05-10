@@ -176,7 +176,6 @@ RSpec.describe "Users", type: :system do
             first('.fa.fa-trash').click
             page.driver.browser.switch_to.alert.accept
             expect(current_path).to eq admin_users_path
-            expect(page).to have_selector '.notice', text: "を削除しました。"
           end
         end
       end
