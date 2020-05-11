@@ -1,3 +1,4 @@
+== render 'shared/focus_task'
 h1 Tasks Table
 table.table.table-hover.table-sm
   tr.task_category.bg-white
@@ -21,8 +22,8 @@ table.table.table-hover.table-sm
       td.task_name
         = task.name
       td = simple_format(task.memo)
-        = link_to task
-      td.task_end_time
+        = link_to
+      td class= "task_end_time #{end_time_color(task)}"
         = l task.end_time, format: :short
       td.task_status
         = task.status
