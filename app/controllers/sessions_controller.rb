@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to tasks_path, notice: 'ログインしました'
     else
-      flash.now[:alert] = "ログイン失敗"
+      flash.now.alert = "ログイン失敗"
       render :new
     end
   end
