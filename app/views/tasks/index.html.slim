@@ -1,19 +1,26 @@
 == render 'shared/focus_task'
 h1 Tasks Table
+.d-flex.justify-content-around
+  .create_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
+    = created_at_sub
+  .end_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
+    = end_time_sub
+  .priority_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
+    = priority_sub
+  .status_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "status")}"' role="link"
+    = status_sub
+table.table.table-hover.table-sm
 table.table.table-hover.table-sm
   tr.task_category.bg-white
     th ID
     th = Task.human_attribute_name(:name)
     th = Task.human_attribute_name(:memo)
-    th.end_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
-      = end_time_sub
+    th = Task.human_attribute_name(:end_time)
     th = Task.human_attribute_name(:status)
-    th.priority_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
-      = priority_sub
+    th = Task.human_attribute_name(:priority)
     th = Task.human_attribute_name(:label)
     th 編集/削除
-    th.create_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
-      = created_at_sub
+    th DONE?
   - @tasks.each do |task|
     tr.task_category.shadow-sm.rounded
       td.task_id

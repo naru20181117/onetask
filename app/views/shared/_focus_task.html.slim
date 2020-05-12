@@ -17,7 +17,7 @@ h1 Focus Table
           td.task_id
             = link_to task do
               = task.id
-          td = simple_format(task.memo)
+          td = task.name
           td.task_end_time
             = l task.end_time, format: :short
           td.task_status
@@ -41,7 +41,7 @@ h1 Focus Table
           td.task_id
             = link_to task do
               = task.id
-          td = simple_format(task.memo)
+          td = task.name
           td.task_end_time
             = l task.end_time, format: :short
           td.task_status
