@@ -20,13 +20,13 @@ module TasksHelper
   def end_time_color(task)
     time = task.end_time
     if task.status == 'done'
-      "bg-secondary"
+      "bg-0"
     elsif time <= Time.zone.today + 3.days || (time <= Time.zone.today + 5.days && task.priority == "high")
-      "bg-danger"
+      "bg-1"
     elsif time <= Time.zone.today + 5.days || (time <= Time.zone.today + 8.days && task.priority == "high")
-      "bg-warning"
+      "bg-2"
     elsif task.status == 'wip'
-      "bg-info"
+      "bg-3"
     end
   end
 

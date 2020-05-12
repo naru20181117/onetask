@@ -5,10 +5,10 @@ h1 Tasks Table
     = created_at_sub
   .end_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
     = end_time_sub
-  .priority_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
-    = priority_sub
   .status_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "status")}"' role="link"
     = status_sub
+  .priority_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
+    = priority_sub
 table.table.table-hover.table-sm
 table.table.table-hover.table-sm
   tr.task_category.bg-white
@@ -47,3 +47,4 @@ table.table.table-hover.table-sm
           i.fa.fa-trash.fa-2x
       td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
 = paginate @tasks
+

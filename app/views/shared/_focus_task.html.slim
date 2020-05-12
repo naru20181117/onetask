@@ -6,46 +6,38 @@ h1 Focus Table
       i.fa.fa-fire
       | Task on fire
     table.table.table-hover.table-sm
-      tr.task_category.bg-white
+      tr.bg-white
         th ID
         th = Task.human_attribute_name(:name)
         th = Task.human_attribute_name(:end_time)
         th = Task.human_attribute_name(:status)
         th = Task.human_attribute_name(:priority)
       - current_user.tasks.order(end_time: :asc).each do |task|
-        tr class= "task_category shadow-sm rounded bg-warning #{hidden_fire(task)}"
-          td.task_id
-            = link_to task do
-              = task.id
+        tr class= "task_category shadow-sm rounded bg-3 #{hidden_fire(task)}"
+          td = link_to task do
+            = task.id
           td = task.name
-          td.task_end_time
-            = l task.end_time, format: :short
-          td.task_status
-            = task.status
-          td.task_priority
-            = task.priority
+          td = l task.end_time, format: :short
+          td = task.status
+          td = task.priority
 
   .col-xl-6.col-md-12
     h2
       i.fa.fa-star
       | Primary Task
     table.table.table-hover.table-sm
-      tr.task_category.bg-white
+      tr.bg-white
         th ID
         th = Task.human_attribute_name(:name)
         th = Task.human_attribute_name(:end_time)
         th = Task.human_attribute_name(:status)
         th = Task.human_attribute_name(:priority)
       - current_user.tasks.order(end_time: :asc).each do |task|
-        tr class= "task_category shadow-sm rounded bg-info #{hidden_primary(task)}"
-          td.task_id
-            = link_to task do
-              = task.id
+        tr class= "task_category shadow-sm rounded bg-4 #{hidden_primary(task)}"
+          td = link_to task do
+            = task.id
           td = task.name
-          td.task_end_time
-            = l task.end_time, format: :short
-          td.task_status
-            = task.status
-          td.task_priority
-            = task.priority
+          td = l task.end_time, format: :short
+          td = task.status
+          td = task.priority
 
