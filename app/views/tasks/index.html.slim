@@ -48,3 +48,29 @@ table.table.table-hover.table-sm
       td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
 = paginate @tasks
 
+.btn.btn-outline-secondary#done_btn
+  | Done Task
+
+#done_group
+  h2
+    i.fa.fa-fire
+    | Task on fire
+  table.table.table-hover.table-sm
+    tr.bg-white
+      th ID
+      th = Task.human_attribute_name(:name)
+      th = Task.human_attribute_name(:end_time)
+      th = Task.human_attribute_name(:status)
+      th = Task.human_attribute_name(:priority)
+    - current_user.tasks.order(end_time: :asc).each do |task|
+      tr class= "task_category shadow-sm rounded bg-3 #{hidden_fire(task)}"
+        td = link_to task do
+          = task.id
+        td = task.name
+        td = l task.end_time, format: :short
+        td = task.status
+        td = task.priority
+
+/ #new fai
+/ javascript:
+/   $("#new").css("color","red")
