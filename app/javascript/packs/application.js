@@ -20,3 +20,6 @@ require("jquery");
 // const imagePath = (name) => images(name, true)
 
 import "../stylesheets/application";
+
+require("trix")
+require("@rails/actiontext")
