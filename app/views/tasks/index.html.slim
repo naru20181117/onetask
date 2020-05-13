@@ -21,7 +21,7 @@ table.table.table-hover.table-sm
     th = Task.human_attribute_name(:label)
     th 編集/削除
     th DONE?
-  - @tasks.each do |task|
+  - @tasks.where.not(status: "done").each do |task|
     tr.task_category.shadow-sm.rounded
       td.task_id
         = link_to task do
@@ -49,12 +49,12 @@ table.table.table-hover.table-sm
 = paginate @tasks
 
 .btn.btn-outline-secondary#done_btn
-  | Done Task
+  |  Done Task
 
 #done_group
   h2
-    i.fa.fa-fire
-    | Task on fire
+    i.fa.fa-check-square
+    | Done Task
   table.table.table-hover.table-sm
     tr.bg-white
       th ID
@@ -62,8 +62,8 @@ table.table.table-hover.table-sm
       th = Task.human_attribute_name(:end_time)
       th = Task.human_attribute_name(:status)
       th = Task.human_attribute_name(:priority)
-    - current_user.tasks.order(end_time: :asc).each do |task|
-      tr class= "task_category shadow-sm rounded bg-3 #{hidden_fire(task)}"
+    - current_user.tasks.where(status: "done").order(created_at: :asc).each do |task|
+      tr class= "task_category shadow-sm rounded bg-0"
         td = link_to task do
           = task.id
         td = task.name
