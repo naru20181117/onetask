@@ -18,6 +18,11 @@ class TasksController < ApplicationController
                    .search_label(label_params)
                    .page(params[:page])
              end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data Task.all.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
+    end
   end
 
   def new
@@ -55,6 +60,11 @@ class TasksController < ApplicationController
   def done
     @task.done!
     redirect_to tasks_path
+  end
+
+  def import
+    current_user.tasks.import(params[:file])
+    redirect_to tasks_url, notice: 'タスクを追加しました'
   end
 
   private

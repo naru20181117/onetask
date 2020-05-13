@@ -48,6 +48,12 @@ table.table.table-hover.table-sm
       td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
 = paginate @tasks
 
+= link_to 'Export', tasks_path(format: :csv), class:"btn btn-lg btn-outline-warning mb-3"
+
+= form_tag import_tasks_path, multipart: true, class: 'mb-3' do
+  = file_field_tag :file
+  = submit_tag 'Import', class: 'btn btn-outline-warning'
+
 .btn.btn-outline-secondary#done_btn
   |  Done Task
 
