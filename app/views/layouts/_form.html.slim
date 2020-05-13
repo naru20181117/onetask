@@ -19,5 +19,8 @@
         = f.select :priority, Task.priorities.keys.to_a, {}, class: 'form-control'
     .form-group.form-check-label
       = f.collection_check_boxes(:label_ids, Label.all, :id, :name)
-    .form-group
-      = f.submit "Submit", class:"btn btn-outline-warning"
+    .field
+      = f.label :content
+        = f.rich_text_area :content
+    .actions
+      == f.submit "Submit", class:"btn btn-outline-warning"

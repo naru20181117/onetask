@@ -27,6 +27,9 @@ table.table.table-striped
       - @task.labels.each do |label|
         .badge.badge-pill.badge-warning.mr-1
           = label.name
+  tr
+    th
+    td == @task.content
 
 .btn-group.d-flex.justify-content-center
   .btn

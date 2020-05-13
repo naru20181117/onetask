@@ -73,3 +73,7 @@ gem 'kaminari'
 gem 'jquery-rails'
 
 gem 'jquery-turbolinks'
+
+gem 'actiontext'
+
+gem 'image_processing', '~> 1.2'
