@@ -58,7 +58,7 @@ class TasksController < ApplicationController
   end
 
   def done
-    @task.done!
+    @task.update_attribute(:status, 'done')
     redirect_to tasks_path
   end
 
