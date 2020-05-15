@@ -74,7 +74,8 @@ table.table.table-hover.table-sm
           = task.id
         td = task.name
         td = l task.end_time, format: :short
-        td = task.status
+        td.task_status
+          = task.status
         td = task.priority
 
 

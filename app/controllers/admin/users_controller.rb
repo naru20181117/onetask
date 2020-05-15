@@ -8,7 +8,9 @@ class Admin::UsersController < ApplicationController
     @users = User.eager_load(:tasks).order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @user_tasks = @user.tasks.page(params[:page])
+  end
 
   def new
     @user = User.new
