@@ -40,7 +40,7 @@ table.table.table-striped
       th = Task.human_attribute_name(:status)
       th = Task.human_attribute_name(:priority)
       th = Task.human_attribute_name(:label)
-    - @user.tasks.each do |task|
+    - @user_tasks.each do |task|
       tr.task_category.shadow-sm.rounded
         td.task_id
           = link_to task do
@@ -58,3 +58,12 @@ table.table.table-striped
           - Label.joins(:tasks_labels).where('task_id = ?', task.id).each do |label|
             .badge.badge-pill.badge-warning.mr-1
               = label.name
+  = paginate @user_tasks
+
+  .top_task.row
+    .col-lg-6.col-md-12.my-4
+      .h3.text-center Status chart
+      = pie_chart ({"Untouched": @user.tasks.where(status: "untouched").count,"WIP": @user.tasks.where(status: "wip").count, "DONE": @user.tasks.where(status: "done").count})
+    .col-lg-6.col-md-12.my-4
+      .h3.text-center Priority chart
+      = pie_chart ({"LOW": @user.tasks.where(priority: "low").count,"MEDIUM": @user.tasks.where(priority: "medium").count, "HIGH": @user.tasks.where(priority: "high").count})

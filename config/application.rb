@@ -18,6 +18,6 @@ module ElTrainingTsukazaki
 
     # Set Japanese timezone.
     config.time_zone = 'Asia/Tokyo'
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
   end
 end

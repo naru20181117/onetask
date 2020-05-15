@@ -182,7 +182,7 @@ RSpec.describe "Tasks", type: :system do
       end
 
       context 'when click the Done button' do
-        it 'change the status Done' do
+        it 'changes the status Done' do
           expect(page).to have_selector '.task_status', text: "untouched"
           click_button "Done"
           expect(current_path).to eq tasks_path
