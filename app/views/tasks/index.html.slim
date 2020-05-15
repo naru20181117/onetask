@@ -1,82 +1,83 @@
 == render 'shared/focus_task'
-h1 Tasks Table
-.d-flex.justify-content-around
-  .create_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
-    = created_at_sub
-  .end_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
-    = end_time_sub
-  .status_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "status")}"' role="link"
-    = status_sub
-  .priority_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
-    = priority_sub
-table.table.table-hover.table-sm
-table.table.table-hover.table-sm
-  tr.task_category.bg-white
-    th ID
-    th = Task.human_attribute_name(:name)
-    th = Task.human_attribute_name(:memo)
-    th = Task.human_attribute_name(:end_time)
-    th = Task.human_attribute_name(:status)
-    th = Task.human_attribute_name(:priority)
-    th = Task.human_attribute_name(:label)
-    th 編集/削除
-    th DONE?
-  - @tasks.where.not(status: "done").each do |task|
-    tr.task_category.shadow-sm.rounded
-      td.task_id
-        = link_to task do
-          = task.id
-      td.task_name
-        = task.name
-      td = simple_format(task.memo)
-        = link_to
-      td class= "task_end_time #{end_time_color(task)}"
-        = l task.end_time, format: :short
-      td.task_status
-        = task.status
-      td.task_priority
-        = task.priority
-      td
-        - task.labels.each do |label|
-          .badge.badge-pill.badge-warning.mr-1
-            = label.name
-      td
-        = link_to edit_task_path(task.id)
-          i.fa.fa-edit.fa-2x
-        span.delete= link_to task, method: :delete, remote: true, data:{ confirm: "Are you sure you wanna delete 【#{task.name}】?"}
-          i.fa.fa-trash.fa-2x
-      td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
-= paginate @tasks
-
-= link_to 'Export', tasks_path(format: :csv), class:"btn btn-lg btn-outline-warning mb-3"
-
-= form_tag import_tasks_path, multipart: true, class: 'mb-5' do
-  = file_field_tag :file
-  = submit_tag 'Import', class: 'btn btn-outline-warning'
-
-.btn.btn-outline-secondary.mb-3#done_btn
-  |  Done Task
-
-#done_group
-  h2
-    i.fa.fa-check-square
-    | Done Task
+.tasks_table
+  h1 Tasks Table
+  .d-flex.justify-content-around
+    .create_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
+      = created_at_sub
+    .end_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
+      = end_time_sub
+    .status_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "status")}"' role="link"
+      = status_sub
+    .priority_pointer.btn.btn-outline-warning onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
+      = priority_sub
   table.table.table-hover.table-sm
-    tr.bg-white
+  table.table.table-hover.table-sm
+    tr.task_category.bg-white
       th ID
       th = Task.human_attribute_name(:name)
+      th = Task.human_attribute_name(:memo)
       th = Task.human_attribute_name(:end_time)
       th = Task.human_attribute_name(:status)
       th = Task.human_attribute_name(:priority)
-    - current_user.tasks.where(status: "done").order(created_at: :asc).each do |task|
-      tr class= "task_category shadow-sm rounded bg-0"
-        td = link_to task do
-          = task.id
-        td = task.name
-        td = l task.end_time, format: :short
+      th = Task.human_attribute_name(:label)
+      th 編集/削除
+      th DONE?
+    - @tasks.where.not(status: "done").each do |task|
+      tr.task_category.shadow-sm.rounded
+        td.task_id
+          = link_to task do
+            = task.id
+        td.task_name
+          = task.name
+        td = simple_format(task.memo)
+          = link_to
+        td class= "task_end_time #{end_time_color(task)}"
+          = l task.end_time, format: :short
         td.task_status
           = task.status
-        td = task.priority
+        td.task_priority
+          = task.priority
+        td
+          - task.labels.each do |label|
+            .badge.badge-pill.badge-warning.mr-1
+              = label.name
+        td
+          = link_to edit_task_path(task.id)
+            i.fa.fa-edit.fa-2x
+          span.delete= link_to task, method: :delete, remote: true, data:{ confirm: "Are you sure you wanna delete 【#{task.name}】?"}
+            i.fa.fa-trash.fa-2x
+        td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
+  = paginate @tasks
+
+  = link_to 'Export', tasks_path(format: :csv), class:"btn btn-lg btn-outline-warning mb-3"
+
+  = form_tag import_tasks_path, multipart: true, class: 'mb-5' do
+    = file_field_tag :file
+    = submit_tag 'Import', class: 'btn btn-outline-warning'
+
+  .btn.btn-outline-secondary.mb-3#done_btn
+    |  Done Task
+
+  #done_group
+    h2
+      i.fa.fa-check-square
+      | Done Task
+    table.table.table-hover.table-sm
+      tr.bg-white
+        th ID
+        th = Task.human_attribute_name(:name)
+        th = Task.human_attribute_name(:end_time)
+        th = Task.human_attribute_name(:status)
+        th = Task.human_attribute_name(:priority)
+      - current_user.tasks.where(status: "done").order(created_at: :asc).each do |task|
+        tr class= "task_category shadow-sm rounded bg-0"
+          td = link_to task do
+            = task.id
+          td = task.name
+          td = l task.end_time, format: :short
+          td.task_status
+            = task.status
+          td = task.priority
 
 
 javascript:

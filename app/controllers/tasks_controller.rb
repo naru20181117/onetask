@@ -58,7 +58,8 @@ class TasksController < ApplicationController
   end
 
   def done
-    @task.update_attribute(:status, 'done')
+    @task.status = 'done'
+    @task.save(validation: false)
     redirect_to tasks_path
   end
 
