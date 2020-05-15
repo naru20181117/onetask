@@ -4,19 +4,19 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
-  .container {
-    margin: 8px 16px;
-
-    h1 {
-      margin-bottom: 2rem;
-    }
-  }
 }
 
 .container {
   h1 {
-    margin: 40px 0;
+    margin: 30px 0;
+  }
+
+  h2 {
+    margin: 20px 0;
+  }
+
+  h3 {
+    margin: 10px 0;
   }
 
   .task_item {
@@ -39,22 +39,22 @@ body {
   justify-content: center;
 }
 
-.pagination>li>a {
+.pagination > li > a {
   border: none;
   color: #696969;
 }
 
-.pagination>.active>a {
+.pagination > .active > a {
   background: #93c9ff;
   border-radius: 15px;
 }
 
-.pagination>li>a:hover {
+.pagination > li > a:hover {
   border-radius: 15px;
 }
 
 .bg-0 {
-  background-color: #B7B3B2;
+  background-color: #b7b3b2;
 }
 
 .bg-1 {

@@ -1,5 +1,5 @@
 .search_form
-  .float-right
+  .float-right.mb-2
     .form-row = form_with url: tasks_path, method: :get, local: true do |f|
       .form-group
         = f.text_field('search[content]', placeholder: "検索")

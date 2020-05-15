@@ -29,7 +29,7 @@ RSpec.describe "Tasks", type: :system do
       before do
         create :task, user: user_a
         visit tasks_path
-        click_link "New"
+        find('.fa.fa-plus-circle').click
       end
       let(:login_user) { user_a }
 
@@ -47,7 +47,7 @@ RSpec.describe "Tasks", type: :system do
       context 'create new task with name nil' do
         it "disable to create any" do
           visit tasks_path
-          click_link "New"
+          find('.fa.fa-plus-circle').click
           fill_in "タスク名", with: ""
           click_button "Submit"
           expect(page).to have_content("タスク名を入力してください")
@@ -127,7 +127,7 @@ RSpec.describe "Tasks", type: :system do
     describe 'validation of end_time' do
       before do
         visit tasks_path
-        click_link "New"
+        find('.fa.fa-plus-circle').click
         fill_in "タスク名", with: "My Task"
       end
       let(:login_user) { user_a }
