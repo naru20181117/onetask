@@ -50,13 +50,19 @@
         td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
   = paginate @tasks
 
-  = link_to 'Export', tasks_path(format: :csv), class:"btn btn-lg btn-outline-warning mb-3"
+  .form.shadow.p-5.rounded.mb-3
+    h3 CSV for Task
+    .form-row
+      .col-4
+        b CSVファイルのダウンロード
+      .col-5
+        = link_to 'Download', tasks_path(format: :csv), class:"btn btn-outline-warning mb-3"
+    b CSVファイルのインポート
+    = form_tag import_tasks_path, multipart: true, class: 'mb-5' do
+      = file_field_tag :file
+      = submit_tag 'Import', class: 'btn btn-outline-warning'
 
-  = form_tag import_tasks_path, multipart: true, class: 'mb-5' do
-    = file_field_tag :file
-    = submit_tag 'Import', class: 'btn btn-outline-warning'
-
-  .btn.btn-outline-secondary.mb-3#done_btn
+  .btn.btn-outline-secondary.my-3#done_btn
     |  Done Task
 
   #done_group
