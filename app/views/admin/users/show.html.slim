@@ -41,10 +41,9 @@ table.table.table-striped
       th = Task.human_attribute_name(:priority)
       th = Task.human_attribute_name(:label)
     - @user_tasks.each do |task|
-      tr.task_category.shadow-sm.rounded
+      tr.task_category.shadow-sm.rounded onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
         td.task_id
-          = link_to task do
-            = task.id
+          = task.id
         td.task_name
           = task.name
         td = simple_format(task.memo)

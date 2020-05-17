@@ -11,9 +11,8 @@ table.table.table-hover.table-sm
     - if current_user.admin?
       th 編集/削除
   - @users.each do |user|
-    tr.user_category.shadow-sm.rounded
-      td = link_to [:admin, user]
-        = user.id
+    tr.user_category.shadow-sm.rounded onclick='window.location="#{'/admin/users/' + user.id.to_s}"' role="link"
+      td = user.id
       td.user_name
         = user.name
       td = user.email
@@ -23,9 +22,8 @@ table.table.table-hover.table-sm
       td.tasks_number
         = user.tasks.size
       - if current_user.admin?
-        td
-          = link_to edit_admin_user_path(user.id)
-            i.fa.fa-edit.fa-2x
+        td = link_to edit_admin_user_path(user.id)
+          i.fa.fa-edit.fa-2x
           span.delete= link_to [:admin, user], method: :delete, remote: true, data:{ confirm: "Are you sure you wanna delete 【#{user.name}】?"}
             i.fa.fa-trash.fa-2x
 

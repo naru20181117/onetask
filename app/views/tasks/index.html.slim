@@ -24,9 +24,9 @@
       th 編集/削除
       th DONE?
     - @tasks.where.not(status: "done").each do |task|
-      tr.task_category.shadow-sm.rounded
-        td.task_id
-          = link_to task do
+      tr.task_category.shadow-sm.rounded onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
+        = link_to task do
+          td.task_id
             = task.id
         td.task_name
           = task.name
@@ -77,9 +77,8 @@
         th = Task.human_attribute_name(:status)
         th = Task.human_attribute_name(:priority)
       - current_user.tasks.where(status: "done").order(created_at: :asc).each do |task|
-        tr class= "task_category shadow-sm rounded bg-0"
-          td = link_to task do
-            = task.id
+        tr class= "task_category shadow-sm rounded bg-0" onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
+          td = task.id
           td = task.name
           td = l task.end_time, format: :short
           td.task_status
