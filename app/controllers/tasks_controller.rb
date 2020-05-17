@@ -23,6 +23,8 @@ class TasksController < ApplicationController
       format.html
       format.csv { send_data current_user.tasks.all.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
     end
+
+    @done_tasks = current_user.tasks.where(status: "done").order(created_at: :asc).page(params[:page])
   end
 
   def new

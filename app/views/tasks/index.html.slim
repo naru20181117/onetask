@@ -76,7 +76,7 @@
         th = Task.human_attribute_name(:end_time)
         th = Task.human_attribute_name(:status)
         th = Task.human_attribute_name(:priority)
-      - current_user.tasks.where(status: "done").order(created_at: :asc).each do |task|
+      - @done_tasks.each do |task|
         tr class= "task_category shadow-sm rounded bg-0" onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
           td = task.id
           td = task.name
@@ -84,7 +84,7 @@
           td.task_status
             = task.status
           td = task.priority
-
+    = paginate @done_tasks
 
 javascript:
   $(function () {
