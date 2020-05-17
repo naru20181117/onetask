@@ -71,3 +71,5 @@ gem 'rails-i18n'
 gem 'kaminari'
 
 gem 'jquery-rails'
+
+gem 'jquery-turbolinks'

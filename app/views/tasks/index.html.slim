@@ -71,6 +71,10 @@ table.table.table-hover.table-sm
         td = task.status
         td = task.priority
 
-/ #new fai
-/ javascript:
-/   $("#new").css("color","red")
+
+javascript:
+  $(function () {
+    $("#done_btn").on("click", () => {
+      $("#done_group").slideToggle();
+    });
+  });
