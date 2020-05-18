@@ -5,15 +5,15 @@
         - if current_user
           li.text-monospace.m-3
             = "#{current_user.name} さん"
-        li= link_to 'タスク状況', root_path
-    li= link_to 'One Task', root_path
+        li.btn.btn-outline-warning= link_to 'タスク状況', each_user_path
+    li.btn.btn-outline-warning.btn-lg= link_to 'One Task', root_path
     li
       ul.login_out_ul
-        li= link_to new_task_path
+        li.btn.btn-outline-warning= link_to new_task_path
           i.fa.fa-plus-circle.fa-2x
         - if current_user&.admin?
-          li.nav-link= link_to 'All User', admin_users_path
-          li.nav-link= link_to 'ログアウト', logout_path
+          li.btn.btn-outline-warning.mx-2.nav-link= link_to 'All User', admin_users_path
+          li.btn.btn-outline-warning.mx-2.nav-link= link_to 'ログアウト', logout_path
         - else
-          li.nav-item= link_to 'ログイン', login_path
+          li.btn.btn-outline-warning.mx-2.nav-item= link_to 'ログイン', login_path
 

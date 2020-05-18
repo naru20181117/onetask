@@ -1,0 +1,28 @@
+h1 = "#{current_user.name} タスク状況"
+
+.form.shadow.p-5.rounded.
+  h2 更新タスク推移
+
+  .my-4= line_chart current_user.tasks.group_by_day(:updated_at, time_zone: "Tokyo").count
+
+h1 タスク内訳
+
+.top_task.row.mt-4
+    .col-lg-6.col-md-12.my-3.px-1.form.shadow.p-5.rounded.
+      .h3.text-center Status 内訳
+      = pie_chart ({"Untouched": current_user.tasks.where(status: "untouched").count,"WIP": current_user.tasks.where(status: "wip").count, "DONE": current_user.tasks.where(status: "done").count})
+    .col-lg-6.col-md-12.my-3.px-1.form.shadow.p-5.rounded.
+      .h3.text-center Priority 内訳
+      = pie_chart ({"LOW": current_user.tasks.where(priority: "low").count,"MEDIUM": current_user.tasks.where(priority: "medium").count, "HIGH": current_user.tasks.where(priority: "high").count})
+
+.form.shadow.p-5.rounded.mb-3
+  h3 CSV for Task
+  .form-row
+    .col-4
+      b CSVファイルのダウンロード
+    .col-5
+      = link_to 'Download', tasks_path(format: :csv), class:"btn btn-outline-warning mb-3"
+  b CSVファイルのインポート
+  = form_tag import_tasks_path, multipart: true, class: 'mb-5' do
+    = file_field_tag :file
+    = submit_tag 'Import', class: 'btn btn-outline-warning'

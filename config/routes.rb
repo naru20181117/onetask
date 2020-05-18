@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post :import, on: :collection
   end
   resources :users
+  get '/each_user', to: 'each_user#index'
   post '/tasks/:id/done' => 'tasks#done', as: 'done'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
