@@ -11,15 +11,16 @@ table.table.table-hover.table-sm
     - if current_user.admin?
       th 編集/削除
   - @users.each do |user|
-    tr.user_category.shadow-sm.rounded onclick='window.location="#{'/admin/users/' + user.id.to_s}"' role="link"
-      td = user.id
-      td.user_name
+    tr.user_category.shadow-sm.rounded
+      td = link_to [:admin, user]
+        = user.id
+      td.user_name = link_to [:admin, user]
         = user.name
-      td = user.email
-      td.user_admin
+      td.none_effect = user.email
+      td.user_admin.none_effect
         = user.admin? ? 'Admin' : 'Not admin'
-      td = l user.created_at, format: :short
-      td.tasks_number
+      td.none_effect = l user.created_at, format: :short
+      td.tasks_number.none_effect
         = user.tasks.size
       - if current_user.admin?
         td = link_to edit_admin_user_path(user.id)

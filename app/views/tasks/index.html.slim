@@ -1,5 +1,5 @@
-== render 'shared/focus_task'
 == render 'shared/search_form'
+
 .tasks_table
   h1 Tasks Table
   .d-flex.justify-content-center
@@ -22,25 +22,26 @@
       th = Task.human_attribute_name(:priority)
       th = Task.human_attribute_name(:label)
       th 編集/削除
-      th DONE?
-    - @tasks.where.not(status: "done").each do |task|
-      tr.task_category.shadow-sm.rounded onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
+      th Done?
+    - @tasks.each do |task|
+      tr.task_category.shadow-sm.rounded
         = link_to task do
           td.task_id
-            = task.id
+            = link_to task
+              = task.id
         td.task_name
-          = task.name
-        td = simple_format(task.memo)
-          = link_to
-        td class= "task_end_time #{end_time_color(task)}"
+          = link_to task
+            = task.name
+        td.none_effect = simple_format(task.memo)
+        td class= "task_end_time none_effect #{end_time_color(task)}"
           = l task.end_time, format: :short
-        td.task_status
+        td.task_status.none_effect
           = task.status
-        td.task_priority
+        td.task_priority.none_effect
           = task.priority
-        td
+        td.none_effect
           - task.labels.each do |label|
-            .badge.badge-pill.badge-warning.mr-1
+            .badge.badge-pill.mr-1
               = label.name
         td
           = link_to edit_task_path(task.id)
@@ -50,29 +51,34 @@
         td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
   = paginate @tasks
 
-  .btn.btn-outline-secondary.my-3#done_btn
-    |  Done Task
+hr
+== render 'shared/focus_task'
 
-  #done_group
-    h2
-      i.fa.fa-check-square
-      | Done Task
-    table.table.table-hover.table-sm
-      tr.bg-white
-        th ID
-        th = Task.human_attribute_name(:name)
-        th = Task.human_attribute_name(:end_time)
-        th = Task.human_attribute_name(:status)
-        th = Task.human_attribute_name(:priority)
-      - @done_tasks.each do |task|
-        tr class= "task_category shadow-sm rounded bg-0" onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
-          td = task.id
-          td = task.name
-          td = l task.end_time, format: :short
-          td.task_status
-            = task.status
-          td = task.priority
-    = paginate @done_tasks
+hr
+
+.btn.btn-outline-secondary.my-3#done_btn
+  |  Done Task
+
+#done_group
+  h2
+    i.fa.fa-check-square
+    | Done Task
+  table.table.table-hover.table-sm
+    tr.bg-white
+      th ID
+      th = Task.human_attribute_name(:name)
+      th = Task.human_attribute_name(:end_time)
+      th = Task.human_attribute_name(:status)
+      th = Task.human_attribute_name(:priority)
+    - @done_tasks.each do |task|
+      tr class= "task_category shadow-sm rounded bg-0" onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
+        td = task.id
+        td = task.name
+        td = l task.end_time, format: :short
+        td.task_status
+          = task.status
+        td = task.priority
+  = paginate @done_tasks
 
 javascript:
   $(function () {
