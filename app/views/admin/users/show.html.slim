@@ -7,22 +7,22 @@
       tbody
         tr
           th= User.human_attribute_name(:id)
-          td= @user.id
+          td.none_effect= @user.id
         tr
           th= User.human_attribute_name(:name)
-          td= @user.name
+          td.none_effect= @user.name
         tr
           th= User.human_attribute_name(:email)
-          td= @user.email
+          td.none_effect= @user.email
         tr
           th= User.human_attribute_name(:admin)
-          td= @user.admin? ? 'Admin' : 'Not admin'
+          td.none_effect= @user.admin? ? 'Admin' : 'Not admin'
         tr
           th= User.human_attribute_name(:created_at)
-          td= l @user.created_at
+          td.none_effect= l @user.created_at
         tr
           th= User.human_attribute_name(:updated_at)
-          td= l @user.updated_at
+          td.none_effect= l @user.updated_at
     - if current_user.admin?
       .nav.nav-pills.d-flex.justify-content-center
         = link_to edit_admin_user_path(@user)
@@ -57,7 +57,7 @@
               = task.priority
             td
               - Label.joins(:tasks_labels).where('task_id = ?', task.id).each do |label|
-                .badge.badge-pill.badge-warning.mr-1
+                .badge.badge-pill.mr-1
                   = label.name
       = paginate @user_tasks
 
@@ -65,7 +65,7 @@
   .top_task.row.mt-4
     .col-lg-6.col-md-12.my-4
       .h3.text-center Status chart
-      = pie_chart ({"Untouched": @user.tasks.where(status: "untouched").count,"WIP": @user.tasks.where(status: "wip").count, "DONE": @user.tasks.where(status: "done").count})
+      = pie_chart ({"Untouched": @user.tasks.where(status: "untouched").count,"WIP": @user.tasks.where(status: "wip").count, "DONE": @user.tasks.where(status: "done").count}), colors: ["#ef7a29", "#f8ab22", "#b7b3b2"]
     .col-lg-6.col-md-12.my-4
       .h3.text-center Priority chart
-      = pie_chart ({"LOW": @user.tasks.where(priority: "low").count,"MEDIUM": @user.tasks.where(priority: "medium").count, "HIGH": @user.tasks.where(priority: "high").count})
+      = pie_chart ({"HIGH": @user.tasks.where(priority: "high").count,"MEDIUM": @user.tasks.where(priority: "medium").count, "LOW": @user.tasks.where(priority: "low").count}), colors: ["#ef7a29", "#f8ab22", "#fbc695"]

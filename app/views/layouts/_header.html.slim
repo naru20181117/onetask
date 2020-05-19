@@ -4,7 +4,7 @@
       ul
         - if current_user
           li.text-monospace.m-3
-            = "#{current_user.name} さん"
+            = "#{current_user.name}さん"
         li.btn.btn-outline-warning= link_to 'タスク状況', each_user_path
     li.btn.btn-outline-warning.btn-lg= link_to 'One Task', root_path
     li

@@ -1,12 +1,8 @@
 .search_form {
-  margin-top: 10px;
-  margin-right: 30px;
-    .form-group{
-      margin: 3px;
-      text-align: right;
+  .form-group {
+    text-align: right;
+    .form-control-sm {
+      margin-bottom: 5px;
     }
   }
-
-form .btn{
-  margin-top: 5px;
 }

@@ -1,11 +1,10 @@
 .search_form
   .float-right.mb-2
-    .form-row = form_with url: tasks_path, method: :get, local: true do |f|
-      .form-group
-        = f.text_field('search[content]', placeholder: "検索")
-      .form-group
-        = f.select('search[status]', Task.statuses, { prompt: "- Choose Status -" })
-      .form-group
-        = f.select('search[label]', Label.pluck(:name, :id), { prompt: "- Choose Label -" })
+    .form-group = form_with url: tasks_path, method: :get, local: true do |f|
+      = f.text_field('search[content]', placeholder: "検索", class:"form-control-sm")
+      <br/>
+      = f.select('search[status]', Task.statuses, { prompt: "- Choose Status -" }, class:"form-control-sm")
+      <br/>
+      = f.select('search[label]', Label.pluck(:name, :id), { prompt: "- Choose Label -" }, class:"form-control-sm")
       .form-group
         = f.submit '検索', class:"btn btn-outline-warning"

@@ -1,3 +1,10 @@
-h2 Number of created Users
+.px-1.form.shadow.p-5.rounded.
+  h2 ユーザー毎のタスク作成数推移
 
-.my-4= line_chart User.group_by_day(:created_at, time_zone: "Tokyo").count
+  .my-4= line_chart User.all.map{ |user| {name: user.name, data: user.tasks.group_by_week(:created_at, time_zone: "Tokyo").count }}
+
+.px-1.form.shadow.p-4.rounded.
+  h2 Number of created Users
+
+  .my-4= line_chart User.group_by_day(:created_at, time_zone: "Tokyo").count, height: "100px"
+

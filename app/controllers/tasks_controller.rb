@@ -7,24 +7,28 @@ class TasksController < ApplicationController
     @tasks = if params["search"].nil?
                Task.preload(:labels)
                    .where(user: current_user)
-                   .select_desc(sort_column)
+                   .select_asc(sort_column)
                    .page(params[:page])
+                   .where.not(status: "done")
              else
                Task.preload(:labels)
                    .where(user: current_user)
-                   .select_desc(sort_column)
+                   .select_asc(sort_column)
                    .search_task(content_params)
                    .search_status(status_params)
                    .search_label(label_params)
                    .page(params[:page])
+                   .where.not(status: "done")
              end
 
     respond_to do |format|
       format.html
-      format.csv { send_data current_user.tasks.all.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
+      format.csv do
+        send_data current_user.tasks.all.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv"
+      end
     end
 
-    @done_tasks = current_user.tasks.where(status: "done").order(created_at: :asc).page(params[:page])
+    @done_tasks = current_user.tasks.where(status: "done").order(updated_at: :desc).page(params[:page])
   end
 
   def new
