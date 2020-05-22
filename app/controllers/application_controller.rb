@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
 
   rescue_from Forbidden, with: :rescue403
 
-  if Rails.env.production?
-    http_basic_authenticate_with name: ENV['BASIC_AUTH_NAME'], password: ENV['BASIC_AUTH_PASSWORD']
-  end
+  # if Rails.env.production?
+  #   http_basic_authenticate_with name: ENV['BASIC_AUTH_NAME'], password: ENV['BASIC_AUTH_PASSWORD']
+  # end
 
   private
 
