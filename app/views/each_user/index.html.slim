@@ -5,11 +5,6 @@ h1 = "#{current_user.name} タスク状況"
 
   .my-4= line_chart current_user.tasks.group_by_day(:updated_at, time_zone: "Tokyo").count , height: "100px"
 
-.form.shadow.p-5.rounded.
-  h2 各タスクの作業期間
-
-  .my-4= timeline Task.pluck(:name, :created_at, :end_time), discrete: true
-
 h1 タスク内訳
 
 .top_task.row.mt-4
