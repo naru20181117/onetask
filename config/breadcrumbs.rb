@@ -1,25 +1,45 @@
 crumb :root do
-  link "Home", root_path
+  link "One Task", root_path
 end
 
-# crumb :projects do
-#   link "Projects", projects_path
-# end
+crumb :tasks do
+  link "One Task", tasks_path
+end
 
-# crumb :project do |project|
-#   link project.name, project_path(project)
-#   parent :projects
-# end
+crumb :mypage do
+  link "タスク状況", each_user_path
+end
 
-# crumb :project_issues do |project|
-#   link "Issues", project_issues_path(project)
-#   parent :project, project
-# end
+crumb :task_show do
+  link "Your Task", task_path
+end
 
-# crumb :issue do |issue|
-#   link issue.title, issue_path(issue)
-#   parent :project_issues, issue.project
-# end
+crumb :task_new do
+  link "Create Your Task", new_task_path
+end
+
+crumb :task_edit do
+  link "Update Your Task", edit_task_path
+end
+
+crumb :admin_user_index do
+  link "Users Table", admin_users_path
+end
+
+crumb :admin_user_show do
+  link "User Page", admin_user_path
+  parent :admin_user_index
+end
+
+crumb :admin_user_new do
+  link "Create User", new_admin_user_path
+  parent :admin_user_index
+end
+
+crumb :admin_user_edit do
+  link "Edit User", edit_admin_user_path
+  parent :admin_user_index
+end
 
 # If you want to split your breadcrumbs configuration over multiple files, you
 # can create a folder named `config/breadcrumbs` and put your configuration

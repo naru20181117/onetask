@@ -1,3 +1,5 @@
+- breadcrumb :root
+
 == render 'shared/search_form'
 
 .tasks_table
@@ -12,7 +14,6 @@
     .priority_pointer.btn.btn-outline-warning.mx-3 onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
       = priority_sub
   table.table.table-hover.table-sm
-  table.table.table-hover.table-sm
     tr.task_category.bg-white
       th ID
       th = Task.human_attribute_name(:name)
@@ -25,10 +26,9 @@
       th Done?
     - @tasks.each do |task|
       tr.task_category.shadow-sm.rounded
-        = link_to task do
-          td.task_id
-            = link_to task
-              = task.id
+        td.task_id
+          = link_to task
+            = task.id
         td.task_name
           = link_to task
             = task.name
