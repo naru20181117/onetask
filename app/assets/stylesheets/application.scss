@@ -1,10 +1,13 @@
 @import "header";
 @import "flash";
 @import "tasks";
+@import "labels";
 @import "custom";
 @import "search_form";
 @import "form";
 @import "admin/users";
+@import "trix/dist/trix.css";
+@import "actiontext";
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files

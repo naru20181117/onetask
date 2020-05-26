@@ -7,17 +7,28 @@ class TasksController < ApplicationController
     @tasks = if params["search"].nil?
                Task.preload(:labels)
                    .where(user: current_user)
-                   .select_desc(sort_column)
+                   .select_asc(sort_column)
                    .page(params[:page])
+                   .where.not(status: "done")
              else
                Task.preload(:labels)
                    .where(user: current_user)
-                   .select_desc(sort_column)
+                   .select_asc(sort_column)
                    .search_task(content_params)
                    .search_status(status_params)
                    .search_label(label_params)
                    .page(params[:page])
+                   .where.not(status: "done")
              end
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data current_user.tasks.all.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv"
+      end
+    end
+
+    @done_tasks = current_user.tasks.where(status: "done").order(updated_at: :desc).page(params[:page])
   end
 
   def new
@@ -49,18 +60,24 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: 'Deleted the task'
+    head :no_content
   end
 
   def done
-    @task.done!
+    @task.status = 'done'
+    @task.save(validation: false)
     redirect_to tasks_path
+  end
+
+  def import
+    current_user.tasks.import(params[:file])
+    redirect_to tasks_url, notice: 'タスクを追加しました'
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:name, :memo, :end_time, :status, :priority, { label_ids: [] })
+    params.require(:task).permit(:name, :memo, :end_time, :status, :priority, { label_ids: [] }, :content)
   end
 
   def search_params
@@ -72,7 +89,7 @@ class TasksController < ApplicationController
   end
 
   def sort_column
-    %w[created_at end_time priority].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
+    %w[created_at end_time status priority].include?(params[:sort_column]) ? params[:sort_column] : "created_at"
   end
 
   def content_params

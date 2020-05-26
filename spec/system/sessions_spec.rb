@@ -10,15 +10,16 @@ RSpec.describe "Sessions", type: :system do
     context 'click the login button' do
       it "enables me to login" do
         expect(current_path).to eq tasks_path
-        expect(page).to have_content("New")
+        expect(page).to have_selector '.login_out_ul', text: "ログアウト"
       end
     end
 
     context 'click the logout button' do
       before { click_link "ログアウト" }
       it "enables me to logout" do
+        sleep 1
         expect(current_path).to eq login_path
-        expect(page).to have_no_content("New")
+        expect(page).not_to have_selector '.login_out_ul', text: "ログアウト"
       end
     end
   end

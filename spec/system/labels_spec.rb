@@ -10,7 +10,7 @@ RSpec.describe "Labels", type: :system do
   end
   describe '#new' do
     before do
-      click_link "New"
+      find('.fa.fa-plus-circle').click
     end
     context "create new task with labels" do
       it "enable to create one" do

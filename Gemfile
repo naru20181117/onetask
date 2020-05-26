@@ -69,3 +69,17 @@ gem 'slim-rails'
 gem 'rails-i18n'
 
 gem 'kaminari'
+
+gem 'jquery-rails'
+
+gem 'jquery-turbolinks'
+
+gem 'actiontext'
+
+gem 'image_processing', '~> 1.2'
+
+gem 'rack-mini-profiler', require: false
+
+gem 'chartkick'
+
+gem 'groupdate'

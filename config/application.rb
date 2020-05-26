@@ -1,5 +1,6 @@
 require_relative 'boot'
 
+require 'csv'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -17,6 +18,6 @@ module ElTrainingTsukazaki
 
     # Set Japanese timezone.
     config.time_zone = 'Asia/Tokyo'
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
   end
 end

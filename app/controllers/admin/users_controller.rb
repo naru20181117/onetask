@@ -8,7 +8,9 @@ class Admin::UsersController < ApplicationController
     @users = User.eager_load(:tasks).order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @user_tasks = @user.tasks.page(params[:page])
+  end
 
   def new
     @user = User.new
@@ -35,12 +37,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
-      flash.notice = "ユーザー【#{@user.name}】を削除しました。"
-    else
+    unless @user.destroy
       flash.alert = @user.errors.full_messages[0]
+      redirect_to admin_users_path
     end
-    redirect_to admin_users_path
   end
 
   private

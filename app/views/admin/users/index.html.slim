@@ -1,5 +1,5 @@
 h1 Users Table
-= link_to '新規登録', new_admin_user_path, class: 'btn btn-outline-warning'
+= link_to '新規登録', new_admin_user_path, class: 'btn btn-outline-warning mb-3'
 table.table.table-hover.table-sm
   tr.user_category.bg-white
     th ID
@@ -14,17 +14,18 @@ table.table.table-hover.table-sm
     tr.user_category.shadow-sm.rounded
       td = link_to [:admin, user]
         = user.id
-      td.user_name
+      td.user_name = link_to [:admin, user]
         = user.name
-      td = user.email
-      td.user_admin
+      td.none_effect = user.email
+      td.user_admin.none_effect
         = user.admin? ? 'Admin' : 'Not admin'
-      td = l user.created_at, format: :short
-      td.tasks_number
+      td.none_effect = l user.created_at, format: :short
+      td.tasks_number.none_effect
         = user.tasks.size
       - if current_user.admin?
-        td
-          = link_to edit_admin_user_path(user.id)
-            i.fa.fa-edit.fa-2x
-          = link_to [:admin, user], method: :delete, data:{ confirm: "Are you sure you wanna delete 【#{user.name}】?"}
+        td = link_to edit_admin_user_path(user.id)
+          i.fa.fa-edit.fa-2x
+          span.delete= link_to [:admin, user], method: :delete, remote: true, data:{ confirm: "Are you sure you wanna delete 【#{user.name}】?"}
             i.fa.fa-trash.fa-2x
+
+== render 'analytics'

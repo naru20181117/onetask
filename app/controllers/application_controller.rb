@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
   before_action :login_required
-  rescue_from StandardError, with: :rescue500
+  # rescue_from StandardError, with: :rescue500
   rescue_from ActiveRecord::RecordNotFound, with: :rescue404
 
   class Forbidden < ActionController::ActionControllerError
@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
 
   rescue_from Forbidden, with: :rescue403
 
-  if Rails.env.production?
-    http_basic_authenticate_with name: ENV['BASIC_AUTH_NAME'], password: ENV['BASIC_AUTH_PASSWORD']
-  end
+  # if Rails.env.production?
+  #   http_basic_authenticate_with name: ENV['BASIC_AUTH_NAME'], password: ENV['BASIC_AUTH_PASSWORD']
+  # end
 
   private
 

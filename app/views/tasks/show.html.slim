@@ -1,32 +1,36 @@
+== render 'shared/search_form'
 h1 Your Task
 table.table.table-striped
   tr
     th = Task.human_attribute_name(:name)
-    td = @task.name
+    td.none_effect = @task.name
   tr
     th = Task.human_attribute_name(:memo)
-    td = simple_format(@task.memo)
+    td.none_effect = simple_format(@task.memo)
   tr
     th = Task.human_attribute_name(:end_time)
-    td = l @task.end_time
+    td.none_effect = l @task.end_time
   tr
     th = Task.human_attribute_name(:created_at)
-    td = l @task.created_at
+    td.none_effect = l @task.created_at
   tr
     th = Task.human_attribute_name(:updated_at)
-    td = l @task.updated_at
+    td.none_effect = l @task.updated_at
   tr
     th = Task.human_attribute_name(:status)
-    td = @task.status
+    td.none_effect = @task.status
   tr
     th = Task.human_attribute_name(:priority)
-    td = @task.priority
+    td.none_effect = @task.priority
   tr
     th = Task.human_attribute_name(:label)
-    td
+    td.none_effect
       - @task.labels.each do |label|
-        .badge.badge-pill.badge-warning.mr-1
+        .badge.badge-pill.mr-1
           = label.name
+  tr
+    th 画像/コンテンツ
+    td.none_effect == @task.content
 
 .btn-group.d-flex.justify-content-center
   .btn

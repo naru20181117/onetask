@@ -1,41 +1,88 @@
-h1 Tasks Table
-table.table.table-hover.table-sm
-  tr.task_category.bg-white
-    th ID
-    th = Task.human_attribute_name(:name)
-    th = Task.human_attribute_name(:memo)
-    th.end_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
-      = end_time_sub
-    th = Task.human_attribute_name(:status)
-    th.priority_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
-      = priority_sub
-    th = Task.human_attribute_name(:label)
-    th 編集/削除
-    th.create_pointer.btn.btn-link onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
+== render 'shared/search_form'
+
+.tasks_table
+  h1 Tasks Table
+  .d-flex.justify-content-center
+    .create_pointer.btn.btn-outline-warning.mx-3 onclick='window.location="#{tasks_path(sort_column: "created_at")}"' role="link"
       = created_at_sub
-  - @tasks.each do |task|
-    tr.task_category.shadow-sm.rounded
-      td.task_id
+    .end_pointer.btn.btn-outline-warning.mx-3 onclick='window.location="#{tasks_path(sort_column: "end_time")}"' role="link"
+      = end_time_sub
+    .status_pointer.btn.btn-outline-warning.mx-3 onclick='window.location="#{tasks_path(sort_column: "status")}"' role="link"
+      = status_sub
+    .priority_pointer.btn.btn-outline-warning.mx-3 onclick='window.location="#{tasks_path(sort_column: "priority")}"' role="link"
+      = priority_sub
+  table.table.table-hover.table-sm
+  table.table.table-hover.table-sm
+    tr.task_category.bg-white
+      th ID
+      th = Task.human_attribute_name(:name)
+      th = Task.human_attribute_name(:memo)
+      th = Task.human_attribute_name(:end_time)
+      th = Task.human_attribute_name(:status)
+      th = Task.human_attribute_name(:priority)
+      th = Task.human_attribute_name(:label)
+      th 編集/削除
+      th Done?
+    - @tasks.each do |task|
+      tr.task_category.shadow-sm.rounded
         = link_to task do
-          = task.id
-      td.task_name
-        = task.name
-      td = simple_format(task.memo)
-        = link_to task
-      td.task_end_time
-        = l task.end_time, format: :short
-      td.task_status
-        = task.status
-      td.task_priority
-        = task.priority
-      td
-        - task.labels.each do |label|
-          .badge.badge-pill.badge-warning.mr-1
-            = label.name
-      td
-        = link_to edit_task_path(task.id)
-          i.fa.fa-edit.fa-2x
-        = link_to task, method: :delete, data:{ confirm: "Are you sure you wanna delete 【#{task.name}】?"}
-          i.fa.fa-trash.fa-2x
-      td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
-= paginate @tasks
+          td.task_id
+            = link_to task
+              = task.id
+        td.task_name
+          = link_to task
+            = task.name
+        td.none_effect = simple_format(task.memo)
+        td class= "task_end_time none_effect #{end_time_color(task)}"
+          = l task.end_time, format: :short
+        td.task_status.none_effect
+          = task.status
+        td.task_priority.none_effect
+          = task.priority
+        td.none_effect
+          - task.labels.each do |label|
+            .badge.badge-pill.mr-1
+              = label.name
+        td
+          = link_to edit_task_path(task.id)
+            i.fa.fa-edit.fa-2x
+          span.delete= link_to task, method: :delete, remote: true, data:{ confirm: "Are you sure you wanna delete 【#{task.name}】?"}
+            i.fa.fa-trash.fa-2x
+        td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
+  = paginate @tasks
+
+hr
+== render 'shared/focus_task'
+
+hr
+
+.btn.btn-outline-secondary.my-3#done_btn
+  |  Done Task
+
+#done_group
+  h2
+    i.fa.fa-check-square
+    | Done Task
+  table.table.table-hover.table-sm
+    tr.bg-white
+      th ID
+      th = Task.human_attribute_name(:name)
+      th = Task.human_attribute_name(:end_time)
+      th = Task.human_attribute_name(:status)
+      th = Task.human_attribute_name(:priority)
+    - @done_tasks.each do |task|
+      tr class= "task_category shadow-sm rounded bg-0" onclick='window.location="#{'/tasks/' + task.id.to_s}"' role="link"
+        td = task.id
+        td = task.name
+        td = l task.end_time, format: :short
+        td.task_status
+          = task.status
+        td = task.priority
+  = paginate @done_tasks
+
+javascript:
+  $(function () {
+    $("#done_btn").on("click", () => {
+      $("#done_group").slideToggle();
+    });
+  });

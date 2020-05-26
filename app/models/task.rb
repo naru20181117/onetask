@@ -9,6 +9,7 @@ class Task < ApplicationRecord
   belongs_to :user
   has_many :tasks_labels, dependent: :destroy
   has_many :labels, through: :tasks_labels
+  has_rich_text :content
 
   def date_not_before_today
     if end_time.nil? || (end_time.present? && end_time < Time.zone.today)
@@ -21,7 +22,7 @@ class Task < ApplicationRecord
   }
 
   enum priority: {
-    low: 0, medium: 1, high: 2
+    high: 0, medium: 1, low: 2
   }
 
   scope :search_task, ->(content) do
@@ -43,4 +44,25 @@ class Task < ApplicationRecord
   end
 
   include Order
+
+  def self.csv_attributes
+    %w[name memo created_at updated_at end_time status priority user_id]
+  end
+
+  def self.generate_csv
+    CSV.generate(headers: true) do |csv|
+      csv << csv_attributes
+      all.find_each do |task|
+        csv << csv_attributes.map { |attr| task.send(attr) }
+      end
+    end
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      task = new
+      task.attributes = row.to_hash.slice(*csv_attributes)
+      task.save!
+    end
+  end
 end
