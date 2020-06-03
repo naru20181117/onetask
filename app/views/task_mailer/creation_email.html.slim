@@ -1,0 +1,24 @@
+| 以下のタスクを作成しました
+
+ul
+  li
+    | #{Task.human_attribute_name(:name)}：
+    = task.name
+  li
+    |　#{Task.human_attribute_name(:memo)}：
+    = simple_format(memo)
+  li
+    |　#{Task.human_attribute_name(:end_time)}：
+    = task.:end_time
+  li
+    |　#{Task.human_attribute_name(:status)}：
+    = task.:status
+  li
+    |　#{Task.human_attribute_name(:priority)}：
+    = task.:priority
+  li
+    |　#{Task.human_attribute_name(:label)}：
+    - task.labels.each do |label|
+            .badge.badge-pill.mr-1
+              = label.name
+
