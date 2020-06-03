@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
-      TaskMailer.creation_email(@task).deliver_later(wait: 1.minutes)
+      TaskMailer.creation_email(@task).deliver_now
       redirect_to @task, flash: { success: "もっとタスクを増やしていこう！" }
     else
       flash.now[:alert] = "Task作成失敗"
