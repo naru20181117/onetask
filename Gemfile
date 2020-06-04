@@ -85,3 +85,5 @@ gem 'chartkick'
 gem 'groupdate'
 
 gem 'gretel'
+
+gem 'sidekiq', '~> 3.3.2'
