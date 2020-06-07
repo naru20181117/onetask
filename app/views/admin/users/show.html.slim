@@ -62,6 +62,7 @@
                 .badge.badge-pill.mr-1
                   = label.name
       = paginate @user_tasks
+      .pagination_helper= page_entries_info @user_tasks
 
 - if @user.tasks.present?
   .top_task.row.mt-4

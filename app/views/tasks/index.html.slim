@@ -50,6 +50,7 @@
             i.fa.fa-trash.fa-2x
         td = button_to 'Done', done_path(task), method: :post, class:"btn btn-outline-warning"
   = paginate @tasks
+  .pagination_helper= page_entries_info @tasks
 
 hr
 == render 'shared/focus_task'
