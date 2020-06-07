@@ -31,7 +31,7 @@ table.table.table-striped
         .badge.badge-pill.mr-1
           = label.name
   tr
-    th 画像/コンテンツ
+    th = Task.human_attribute_name(:content)
     td.none_effect == @task.content
 
 .btn-group.d-flex.justify-content-center

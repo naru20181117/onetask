@@ -22,7 +22,7 @@
       .mb-2
         = f.collection_check_boxes(:label_ids, Label.all, :id, :name)
     .field
-      = f.label "画像/コンテンツ"
+      = f.label :content
       = f.rich_text_area :content
     .actions.mt-4
       == f.submit "Submit", class:"btn btn-outline-warning"

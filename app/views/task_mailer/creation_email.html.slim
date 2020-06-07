@@ -22,6 +22,6 @@ ul
             .badge.badge-pill.mr-1
               = label.name
   li
-    |画像/コンテンツ:
+    |　#{Task.human_attribute_name(:content)}：
     == @task.content
 
