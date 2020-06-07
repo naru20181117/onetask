@@ -39,6 +39,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
     if @task.save
       TaskMailer.creation_email(@task, @current_user).deliver_now
+      SidekiqJob.set(wait_until: @task.end_time - 1.day).perform_later
       redirect_to @task, flash: { success: "もっとタスクを増やしていこう！" }
     else
       flash.now[:alert] = "Task作成失敗"
