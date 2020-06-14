@@ -24,3 +24,4 @@ require("chart.js");
 // const imagePath = (name) => images(name, true)
 
 import "../stylesheets/application";
+import '../custom/hello'
