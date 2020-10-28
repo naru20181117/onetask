@@ -1,5 +1,5 @@
-.search_form
-  .float-right.mb-2
+.search_form.mt-2
+  .float-right
     .form-group = form_with url: tasks_path, method: :get, local: true do |f|
       = f.text_field('search[content]', placeholder: "検索", class:"form-control-sm")
       <br/>

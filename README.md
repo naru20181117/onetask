@@ -1,8 +1,12 @@
-# README
+# Onetask
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## App UI
+[![Image from Gyazo](https://i.gyazo.com/b0726715def42c1c9fc59464e8ac42a9.gif)](https://gyazo.com/b0726715def42c1c9fc59464e8ac42a9)
 
+## Router Tree
+[![Image from Gyazo](https://i.gyazo.com/b65b3c6e502dc9addb080746525c4830.gif)](https://gyazo.com/b65b3c6e502dc9addb080746525c4830)
+
+---
 Things you may want to cover:
 
 * Ruby version

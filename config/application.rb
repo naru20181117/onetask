@@ -19,5 +19,8 @@ module ElTrainingTsukazaki
     # Set Japanese timezone.
     config.time_zone = 'Asia/Tokyo'
     config.active_record.default_timezone = :utc
+
+    # using sidekiq
+    config.active_job.queue_adapter = :sidekiq
   end
 end

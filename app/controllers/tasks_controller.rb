@@ -38,6 +38,8 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
+      TaskMailer.creation_email(@task, @current_user).deliver_now
+      SidekiqJob.set(wait_until: @task.end_time - 1.day).perform_later
       redirect_to @task, flash: { success: "もっとタスクを増やしていこう！" }
     else
       flash.now[:alert] = "Task作成失敗"
@@ -85,7 +87,11 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = current_user.tasks.find(params[:id])
+    @task = if current_user.admin?
+              Task.find(params[:id])
+            else
+              current_user.tasks.find(params[:id])
+            end
   end
 
   def sort_column

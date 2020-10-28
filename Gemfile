@@ -83,3 +83,7 @@ gem 'rack-mini-profiler', require: false
 gem 'chartkick'
 
 gem 'groupdate'
+
+gem 'gretel'
+
+gem 'sidekiq', '~> 3.3.2'
