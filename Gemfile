@@ -86,4 +86,4 @@ gem 'groupdate'
 
 gem 'gretel'
 
-gem 'sidekiq', '~> 6.4.0'
+gem 'sidekiq', '~> 7.0.8'
